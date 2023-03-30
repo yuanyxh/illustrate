@@ -1,7 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-const a = 0;
+
+const a;
+const b = b;
+
 function App() {
   return (
     <div className="App">
