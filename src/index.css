@@ -1,13 +1,153 @@
+@supports (width: stretch) {
+  :root {
+    --stretch: stretch;
+  }
+}
+
+@supports (width: -webkit-fill-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -webkit-fill-available;
+  }
+}
+
+@supports (width: -moz-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -moz-available;
+  }
+}
+
 body {
   margin: 0;
+  /* stylelint-disable-next-line font-family-name-quotes */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  font-size: small;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+table,
+caption,
+ul,
+ol,
+dl,
+form,
+main,
+nav,
+aside,
+header,
+section,
+footer,
+article,
+pre,
+blockquote,
+code,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.8em;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.stretch {
+  width: var(--stretch);
+}
+
+.scroll-x {
+  overflow-x: auto;
+}
+
+.scroll-y {
+  overflow-y: auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oneline-substring {
+  display: inline-block;
+  width: var(--stretch);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+html,
+body,
+div,
+table,
+main,
+aside,
+section,
+article,
+pre,
+code {
+  scrollbar-width: thin;
+  scrollbar-color: #0003 transparent;
+  scrollbar-gutter: stable;
 }
