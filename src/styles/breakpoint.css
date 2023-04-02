@@ -1,0 +1,35 @@
+@media screen and (max-width: 1920px) {
+  :root {
+    --home-wrapper-width: 1560px;
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  :root {
+    --home-wrapper-width: 1240px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  :root {
+    --home-wrapper-width: 1080px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  :root {
+    --home-wrapper-width: 980px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --home-wrapper-width: 768px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --home-wrapper-width: var(--fullwidth);
+  }
+}

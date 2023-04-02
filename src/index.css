@@ -1,22 +1,5 @@
-@supports (width: stretch) {
-  :root {
-    --stretch: stretch;
-  }
-}
-
-@supports (width: -webkit-fill-available) {
-  :root {
-    /* stylelint-disable-next-line value-no-vendor-prefix */
-    --stretch: -webkit-fill-available;
-  }
-}
-
-@supports (width: -moz-available) {
-  :root {
-    /* stylelint-disable-next-line value-no-vendor-prefix */
-    --stretch: -moz-available;
-  }
-}
+@import url('./styles/theme.css');
+@import url('./styles//breakpoint.css');
 
 body {
   margin: 0;
@@ -28,6 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #333;
   font-size: small;
+  background-color: var(--background-color);
 }
 
 code {
@@ -113,10 +97,15 @@ a {
   overflow-y: auto;
 }
 
-.center {
+.flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.margin-center {
+  display: block;
+  margin: 0 auto;
 }
 
 .oneline-substring {
@@ -150,4 +139,46 @@ code {
   scrollbar-width: thin;
   scrollbar-color: #0003 transparent;
   scrollbar-gutter: stable;
+}
+
+::selection {
+  background-color: #d1edc4;
+  color: #fff;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='search'],
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='number'],
+input[type='range'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+[contenteditable],
+textarea {
+  caret-color: #333;
+  caret-shape: underscore;
+}
+
+@supports (width: stretch) {
+  :root {
+    --stretch: stretch;
+  }
+}
+
+@supports (width: -webkit-fill-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -webkit-fill-available;
+  }
+}
+
+@supports (width: -moz-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -moz-available;
+  }
 }
