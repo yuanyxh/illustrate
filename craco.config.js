@@ -1,12 +1,26 @@
-// eslint-disable-next-line no-undef, @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 const path = require('path');
 
-// eslint-disable-next-line no-undef
 module.exports = {
   webpack: {
     alias: {
-      // eslint-disable-next-line no-undef
       '@': path.resolve(__dirname, 'src')
+    },
+    configure(webpackConfig) {
+      // console.log('config', webpackConfig.module.rules);
+
+      const rules = webpackConfig.module.rules;
+
+      rules.push({
+        test: /\.tsx$/,
+        loader: path.resolve(__dirname, './loaders/BundleRoute.js'),
+        options: {
+          paths: path.resolve(__dirname, './src/pages')
+        }
+      });
+
+      return webpackConfig;
     }
   }
 };

@@ -1,21 +1,29 @@
 .edit-area {
-  display: var(--display);
+  display: var(--edit-display);
+  gap: 10px;
+  padding: 10px;
+  min-height: inherit;
 }
 
 .illustrate,
 .code {
-  flex: 1;
-  padding: 10px;
+  flex: 1 0;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
 }
 
 @media screen and (min-width: 640px) {
   .edit-area {
-    --display: flex;
+    --edit-display: flex;
   }
 }
 
 @media screen and (max-width: 640px) {
   .edit-area {
-    --display: block;
+    --edit-display: block;
+  }
+
+  .code {
+    margin-top: 10px;
   }
 }

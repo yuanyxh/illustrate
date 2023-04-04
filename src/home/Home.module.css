@@ -1,14 +1,27 @@
 .home {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   padding: 10px;
 }
 
 .grid {
   margin: 4px 6px;
-  height: 6.303rem;
-  border: 1px solid #ddd;
+  height: 8.613rem;
   box-sizing: inherit;
+}
+
+.media {
+  width: var(--fullwidth);
+  height: 6.3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.title {
+  margin: 5px 0;
+  font-weight: 500;
+  line-height: 1.2em;
 }
 
 @media screen and (max-width: 1920px) {

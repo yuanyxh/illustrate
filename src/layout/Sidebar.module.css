@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   bottom: 0;
+  padding: 20px 5px;
   width: var(--sidebar-width);
   min-width: 256px;
   overflow-y: auto;
@@ -9,9 +10,15 @@
   transition: transform 0.3s ease;
 }
 
-.placeholder {
-  width: var(--sidebar-width);
-  min-width: 256px;
+.link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+.link.active {
+  color: hsl(240deg 50% 70%);
+  background-color: hsla(240deg 80% 50% / 10%);
 }
 
 @media screen and (min-width: 768px) {

@@ -1,23 +1,32 @@
 import React, { lazy } from 'react';
 import { createHashRouter } from 'react-router-dom';
 import Home from '@/home/Home';
-import type { RouteObject } from 'react-router-dom';
-import Test from '@/pages/test/Test';
+import { RouteId } from '@/enum';
+import type { NonIndexRouteObject } from 'react-router-dom';
+import Reversal, { title as ReversalTitle } from '@/pages/reversal/Reversal';
+
+export interface CustomRouteObject extends NonIndexRouteObject {
+  title?: string;
+  children?: CustomRouteObject[];
+}
 
 const Layout = lazy(() => import('@/layout/Layout'));
 
-const routes: RouteObject[] = [
+export const routes: CustomRouteObject[] = [
   {
+    id: RouteId.HOME,
     path: '/',
     element: <Home />
   },
   {
-    path: '/illustrate',
+    id: RouteId.SEQUEL,
+    path: '/sequel',
     element: <Layout />,
     children: [
       {
-        path: 'test',
-        element: <Test />
+        title: ReversalTitle,
+        path: 'reversal',
+        element: <Reversal />
       }
     ]
   }

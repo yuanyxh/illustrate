@@ -1,3 +1,8 @@
+:root {
+  --link-hover: #409eff;
+  --border-color: #ddd;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --background-color: #fff;

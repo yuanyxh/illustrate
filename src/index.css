@@ -57,23 +57,23 @@ img {
 }
 
 h1 {
-  font-size: 1.8em;
-}
-
-h2 {
-  font-size: 1.6em;
-}
-
-h3 {
   font-size: 1.4em;
 }
 
-h4 {
+h2 {
+  font-size: 1.3em;
+}
+
+h3 {
   font-size: 1.2em;
 }
 
+h4 {
+  font-size: 1.1em;
+}
+
 h5 {
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 h6 {
@@ -83,6 +83,10 @@ h6 {
 a {
   text-decoration: none;
   color: #333;
+}
+
+a:hover {
+  color: var(--link-hover);
 }
 
 .stretch {
@@ -103,16 +107,22 @@ a {
   align-items: center;
 }
 
-.margin-center {
-  margin: 0 auto;
-}
-
 .oneline-substring {
   display: inline-block;
   width: var(--stretch);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
+}
+
+.doubleline-substring {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  line-break: anywhere;
 }
 
 html,

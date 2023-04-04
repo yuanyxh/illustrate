@@ -1,1 +1,1 @@
-export const a = { a: 'a' };
+export {};
