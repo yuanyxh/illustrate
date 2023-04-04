@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
-import Home from './home/Home';
 
-export default function App() {
+export default function App(props: Props) {
   return (
     <div className="app">
-      <Home />
+      <Suspense>{props.children}</Suspense>
     </div>
   );
 }

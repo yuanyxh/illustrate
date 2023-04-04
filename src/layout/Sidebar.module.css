@@ -1,0 +1,36 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  min-width: 256px;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%);
+  transition: transform 0.3s ease;
+}
+
+.placeholder {
+  width: var(--sidebar-width);
+  min-width: 256px;
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    --sidebar-width: 11.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    --sidebar-width: 14rem;
+
+    min-width: revert;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .sidebar {
+    transform: translate(-100%);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

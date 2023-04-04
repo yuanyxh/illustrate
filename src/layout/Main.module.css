@@ -1,0 +1,18 @@
+.main {
+  padding-left: var(--padding-left);
+  min-height: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    --padding-left: max(11.5rem, 256px);
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .main {
+    --padding-left: 0;
+
+    transition: padding-left 0.3s ease;
+  }
+}

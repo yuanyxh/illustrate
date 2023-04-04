@@ -1,5 +1,5 @@
 @import url('./styles/theme.css');
-@import url('./styles//breakpoint.css');
+@import url('./styles/breakpoint.css');
 
 body {
   margin: 0;
@@ -104,7 +104,6 @@ a {
 }
 
 .margin-center {
-  display: block;
   margin: 0 auto;
 }
 
@@ -114,16 +113,6 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #0003;
-  border-radius: 10px;
-  transition: all 0.2s ease-in-out;
 }
 
 html,
@@ -139,6 +128,16 @@ code {
   scrollbar-width: thin;
   scrollbar-color: #0003 transparent;
   scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
 ::selection {

@@ -1,35 +1,21 @@
-@media screen and (max-width: 1920px) {
-  :root {
-    --home-wrapper-width: 1560px;
+html {
+  font-size: 16px;
+}
+
+@media screen and (min-width: 375px) {
+  html {
+    font-size: calc(16px + 2 * (100vw - 375px) / 39);
   }
 }
 
-@media screen and (max-width: 1600px) {
-  :root {
-    --home-wrapper-width: 1240px;
+@media screen and (min-width: 414px) {
+  html {
+    font-size: calc(18px + 4 * (100vw - 414px) / 586);
   }
 }
 
-@media screen and (max-width: 1440px) {
-  :root {
-    --home-wrapper-width: 1080px;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  :root {
-    --home-wrapper-width: 980px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  :root {
-    --home-wrapper-width: 768px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  :root {
-    --home-wrapper-width: var(--fullwidth);
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: calc(22px + 5 * (100vw - 1000px) / 1000);
   }
 }
