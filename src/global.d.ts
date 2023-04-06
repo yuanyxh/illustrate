@@ -1,8 +1,4 @@
-// import type { CSSProperties } from 'react';
-
-declare namespace Global {
-  // interface React extends React {}
-}
+declare namespace Global {}
 
 export = Global;
 export as namespace Global;

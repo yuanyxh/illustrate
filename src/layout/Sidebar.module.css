@@ -2,12 +2,33 @@
   position: fixed;
   top: 0;
   bottom: 0;
+  left: 0;
+  z-index: 1;
   padding: 20px 5px;
   width: var(--sidebar-width);
   min-width: 256px;
+  background-color: #fff;
   overflow-y: auto;
   box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%);
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
+}
+
+.visible-side {
+  transform: translateX(0) !important;
+  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%) !important;
+}
+
+.mask {
+  position: fixed;
+  z-index: 0;
+  background-color: hsla(0deg 100% 0% / 50%);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.visible-mask {
+  inset: 0;
+  opacity: 1;
 }
 
 .link {
@@ -22,13 +43,15 @@
 }
 
 @media screen and (min-width: 768px) {
-  .sidebar {
+  .sidebar,
+  .mask {
     --sidebar-width: 11.5rem;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .sidebar {
+  .sidebar,
+  .mask {
     --sidebar-width: 14rem;
 
     min-width: revert;
@@ -36,8 +59,13 @@
 }
 
 @media screen and (max-width: 840px) {
-  .sidebar {
-    transform: translate(-100%);
+  .sidebar,
+  .mask {
+    transform: translateX(-100%);
     box-shadow: 0 0 0 0 transparent;
+  }
+
+  .mask {
+    transform: revert;
   }
 }

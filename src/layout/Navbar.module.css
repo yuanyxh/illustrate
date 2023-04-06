@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 0 10px;
+  width: var(--stretch);
+  height: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #fff;
+}
+
+.menu {
+  width: 1rem;
+  height: 1rem;
+  background: linear-gradient(#666, #666) no-repeat left top / 1rem 3px,
+    linear-gradient(#666, #666) no-repeat left center / 1rem 3px,
+    linear-gradient(#666, #666) no-repeat left bottom / 1rem 3px;
+  cursor: pointer;
+}

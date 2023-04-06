@@ -1,22 +1,21 @@
 import React, { lazy } from 'react';
 import { createHashRouter } from 'react-router-dom';
-import Home from '@/home/Home';
 import { RouteId } from '@/enum';
-import type { NonIndexRouteObject } from 'react-router-dom';
-import Reversal, { title as ReversalTitle } from '@/pages/reversal/Reversal';
-
-export interface CustomRouteObject extends NonIndexRouteObject {
-  title?: string;
-  children?: CustomRouteObject[];
-}
+import Home from '@/home/Home';
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
+import { title as ReversalTitle } from '@/pages/reversal/Reversal';
+import { title as DragTitle } from '@/pages/drag/Drag';
 
 const Layout = lazy(() => import('@/layout/Layout'));
+const Reversal = lazy(() => import('@/pages/reversal/Reversal'));
+const Drag = lazy(() => import('@/pages/drag/Drag'));
 
-export const routes: CustomRouteObject[] = [
+export const routes: Route.CustomRouteObject[] = [
   {
     id: RouteId.HOME,
     path: '/',
-    element: <Home />
+    element: <Home />,
+    errorElement: <ErrorBoundary />
   },
   {
     id: RouteId.SEQUEL,
@@ -24,9 +23,25 @@ export const routes: CustomRouteObject[] = [
     element: <Layout />,
     children: [
       {
-        title: ReversalTitle,
-        path: 'reversal',
-        element: <Reversal />
+        id: RouteId.ERRORBOUNDARY,
+        errorElement: <ErrorBoundary />,
+        children: [
+          {
+            title: ReversalTitle,
+            path: 'reversal',
+            element: <Reversal />
+          },
+          {
+            title: DragTitle,
+            path: 'drag',
+            element: <Drag />
+          },
+          {
+            title: DragTitle,
+            path: 'drop',
+            element: <Drag />
+          }
+        ]
       }
     ]
   }

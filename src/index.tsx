@@ -5,6 +5,7 @@ import 'normalize.css';
 import './index.css';
 import router from '@/router';
 import App from './App';
+import Loading from './components/Loading/Loading';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -14,7 +15,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App>
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        fallbackElement={<Loading appendBody={true} delay={120} />}
+      />
     </App>
   </React.StrictMode>
 );

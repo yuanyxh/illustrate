@@ -1,26 +1,52 @@
 import React from 'react';
-import style from './Sidebar.module.css';
 import { NavLink } from 'react-router-dom';
-import { routes } from '@/router';
-import { RouteId } from '@/enum';
+import { usePages } from '@/hooks';
+import { classnames } from '@/utils';
+import style from './Sidebar.module.css';
 
-const active = `${style.link} ${style.active}`;
+interface SidebarProps extends Props {
+  smallScreen: boolean;
+  visibleSide: boolean;
+  toggle(payload: boolean): void;
+}
 
-export default function Sidebar() {
-  const pages =
-    routes.find((page) => page.id === RouteId.SEQUEL)?.children || [];
+const generateClass = classnames(style);
+const active = generateClass(['link', 'active']);
+
+/**
+ * @description 网站侧边栏
+ */
+export default function Sidebar({
+  visibleSide,
+  smallScreen,
+  toggle
+}: SidebarProps) {
+  const pages = usePages();
+
+  const visible = generateClass({ 'visible-side': visibleSide, sidebar: true });
+  const mask = generateClass({ 'visible-mask': visibleSide, mask: true });
 
   return (
-    <aside className={style.sidebar}>
-      {pages.map((page, i) => (
-        <NavLink
-          key={i}
-          to={`${page.path}`}
-          className={({ isActive }) => (isActive ? active : style.link)}
-        >
-          <span className="doubleline-substring">{page.title}</span>
-        </NavLink>
-      ))}
-    </aside>
+    <>
+      <aside className={visible}>
+        {pages.map((page, i) => (
+          <NavLink
+            key={i}
+            to={`${page.path}`}
+            className={({ isActive }) => (isActive ? active : style.link)}
+            onClick={() => toggle(false)}
+          >
+            <span className="doubleline-substring">{page.title}</span>
+          </NavLink>
+        ))}
+      </aside>
+      {smallScreen && (
+        <div
+          className={mask}
+          onClick={() => toggle(false)}
+          onScroll={(e) => e.stopPropagation()}
+        ></div>
+      )}
+    </>
   );
 }

@@ -1,15 +1,16 @@
 import React from 'react';
-import style from './Home.module.css';
 import { Link } from 'react-router-dom';
-import { routes } from '@/router';
-import { RouteId } from '@/enum';
+import { usePages } from '@/hooks';
+import style from './Home.module.css';
 
 const PREFIX = '/sequel/';
 const title = style.title + ' doubleline-substring';
 
+/**
+ * @description 门户页, 网站首页
+ */
 export default function Home() {
-  const pages =
-    routes.find((page) => page.id === RouteId.SEQUEL)?.children || [];
+  const pages = usePages();
 
   return (
     <div className={style.home}>

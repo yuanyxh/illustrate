@@ -1,4 +1,6 @@
 export enum RouteId {
   HOME = 'HOME',
-  SEQUEL = 'SEQUEL'
+  SEQUEL = 'SEQUEL',
+  NOTFOUND = 'NOTFOUND',
+  ERRORBOUNDARY = 'ERRORBOUNDARY'
 }

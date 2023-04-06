@@ -1,5 +1,5 @@
 @import url('./styles/theme.css');
-@import url('./styles/breakpoint.css');
+@import url('./styles/calcrem.css');
 
 body {
   margin: 0;
@@ -121,6 +121,7 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
+  word-break: break-all;
   word-wrap: break-word;
   line-break: anywhere;
 }
