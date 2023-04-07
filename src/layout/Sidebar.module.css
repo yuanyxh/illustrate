@@ -3,7 +3,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   padding: 20px 5px;
   width: var(--sidebar-width);
   min-width: 256px;
@@ -20,14 +20,20 @@
 
 .mask {
   position: fixed;
-  z-index: 0;
+  inset: 0;
+  z-index: 1;
   background-color: hsla(0deg 100% 0% / 50%);
-  opacity: 0;
-  transition: opacity 0.8s ease;
 }
 
-.visible-mask {
-  inset: 0;
+.mask-enter {
+  opacity: 0;
+}
+
+.mask-active {
+  transition: opacity 0.6s ease;
+}
+
+.mask-to {
   opacity: 1;
 }
 
