@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import 'normalize.css';
 import './index.css';
+import router from '@/router';
 import App from './App';
+import Loading from './components/Loading/Loading';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App>
+      <RouterProvider
+        router={router}
+        fallbackElement={<Loading appendBody={true} delay={120} />}
+      />
+    </App>
   </React.StrictMode>
 );
 

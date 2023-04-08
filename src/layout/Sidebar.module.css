@@ -1,0 +1,77 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 20px 5px;
+  width: var(--sidebar-width);
+  min-width: 256px;
+  background-color: #fff;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%);
+  transition: transform 0.4s ease;
+}
+
+.visible-side {
+  transform: translateX(0) !important;
+  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%) !important;
+}
+
+.mask {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: hsla(0deg 100% 0% / 50%);
+}
+
+.mask-enter {
+  opacity: 0;
+}
+
+.mask-active {
+  transition: opacity 0.6s ease;
+}
+
+.mask-to {
+  opacity: 1;
+}
+
+.link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+.link.active {
+  color: hsl(240deg 50% 70%);
+  background-color: hsla(240deg 80% 50% / 10%);
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar,
+  .mask {
+    --sidebar-width: 11.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar,
+  .mask {
+    --sidebar-width: 14rem;
+
+    min-width: revert;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .sidebar,
+  .mask {
+    transform: translateX(-100%);
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  .mask {
+    transform: revert;
+  }
+}
