@@ -1,0 +1,5 @@
+{
+  "fixedDigits": 3,
+  "rootFontSize": 23.8,
+  "ingores": ["/src/**/*.{ts,tsx,js,md,json}"]
+}
