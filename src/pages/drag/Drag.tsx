@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Transition from '@/components/Transition/Transition';
 import style from './Drag.module.css';
 
-export const title = '文件拖拽上传';
+// --title: 文件拖拽上传--
 
 const enterClass = {
   from: style['enter-from'],

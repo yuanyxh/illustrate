@@ -5,8 +5,7 @@ import Home from '@/home/Home';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const Layout = lazy(() => import('@/layout/Layout'));
-const Drag = lazy(() => import('@/pages/Drag/Drag'));
-const Reversal = lazy(() => import('@/pages/Reversal/Reversal'));
+// --import--
 
 export const routes: Route.CustomRouteObject[] = [
   {
@@ -22,19 +21,8 @@ export const routes: Route.CustomRouteObject[] = [
     children: [
       {
         id: RouteId.ERRORBOUNDARY,
-        errorElement: <ErrorBoundary />,
-        children: [
-          {
-            path: 'drag',
-            title: '文件拖拽上传',
-            element: <Drag />
-          },
-          {
-            path: 'reversal',
-            title: 'HTML & CSS 实现书本翻页效果',
-            element: <Reversal />
-          }
-        ]
+        errorElement: <ErrorBoundary />
+        // --children--
       }
     ]
   }
