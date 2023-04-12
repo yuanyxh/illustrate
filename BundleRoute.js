@@ -142,6 +142,10 @@ function readFiles(way) {
       if (stat.isDirectory()) return readFiles(curr);
       if (!stat.isFile() || !curr.endsWith('.tsx')) return;
 
+      const directory = way.substring(way.lastIndexOf('\\') + 1);
+
+      if (directory !== getPageName(curr)) return;
+
       readFile(curr);
     });
   });

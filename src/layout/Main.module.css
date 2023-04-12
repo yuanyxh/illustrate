@@ -1,6 +1,6 @@
 .main {
   padding-left: var(--padding-left);
-  min-height: inherit;
+  height: inherit;
 }
 
 @media screen and (min-width: 768px) {

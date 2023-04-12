@@ -1,0 +1,50 @@
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  padding-right: 10px;
+}
+
+.file-item:hover {
+  background-color: hsla(240deg 80% 50% / 10%);
+}
+
+.title {
+  font-weight: 500;
+}
+
+.drop-file {
+  margin-top: 15px;
+  width: 60%;
+  height: 5rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 5px;
+  font-size: 2em;
+  text-align: center;
+  color: #999;
+  line-height: 5rem;
+  user-select: none;
+}
+
+.drop-file:hover {
+  border-color: #409eff;
+  cursor: pointer;
+}
+
+.has-file {
+  padding: 5px;
+  font-size: 1em;
+  line-height: revert;
+}
+
+@media screen and (max-width: 580px) {
+  .drop-file {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 580px) {
+  .drop-file {
+    width: 60%;
+  }
+}

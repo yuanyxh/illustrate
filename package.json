@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "newpage": "node ./BundleRoute.js && prettier --write ./src/router/index.tsx && craco start",
+    "newpage": "node ./bundleRoute.js && prettier --write ./src/router/index.tsx && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

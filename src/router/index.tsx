@@ -5,8 +5,11 @@ import Home from '@/home/Home';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const Layout = lazy(() => import('@/layout/Layout'));
-const Drag = lazy(() => import('@/pages/Drag/Drag'));
+const DragUploadFile = lazy(
+  () => import('@/pages/DragUploadFile/DragUploadFile')
+);
 const Reversal = lazy(() => import('@/pages/Reversal/Reversal'));
+const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
 export const routes: Route.CustomRouteObject[] = [
   {
@@ -25,14 +28,19 @@ export const routes: Route.CustomRouteObject[] = [
         errorElement: <ErrorBoundary />,
         children: [
           {
-            path: 'drag',
+            path: 'drag-upload-file',
             title: '文件拖拽上传',
-            element: <Drag />
+            element: <DragUploadFile />
           },
           {
             path: 'reversal',
             title: 'HTML & CSS 实现书本翻页效果',
             element: <Reversal />
+          },
+          {
+            path: 'visual-edit',
+            title: '可视化编辑',
+            element: <VisualEdit />
           }
         ]
       }

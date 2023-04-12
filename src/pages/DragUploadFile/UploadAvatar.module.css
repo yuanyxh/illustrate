@@ -1,0 +1,27 @@
+.title {
+  font-weight: 500;
+}
+
+.drop-avatar {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.uploaded,
+.avatar-item {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 5px;
+}
+
+.avatar-item {
+  border: 1px dashed var(--border-color);
+  background: linear-gradient(#999, #999) no-repeat center / 1.5rem 3px,
+    linear-gradient(#999, #999) no-repeat center / 3px 1.5rem;
+}
+
+.avatar-item:hover {
+  border-color: #409eff;
+}

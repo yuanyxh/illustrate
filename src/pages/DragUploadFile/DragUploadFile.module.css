@@ -1,0 +1,15 @@
+.drag-upload-file {
+  padding: 10px;
+  height: inherit;
+}
+
+.wrapper {
+  height: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.upload {
+  margin: 20px 10px;
+}
