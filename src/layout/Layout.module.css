@@ -1,4 +1,15 @@
 .layout {
-  display: block;
   height: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .layout {
+    --sidebar-width: 11.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    --sidebar-width: 14rem;
+  }
 }

@@ -1,5 +1,5 @@
 .navbar {
-  display: flex;
+  display: none;
   align-items: center;
   position: sticky;
   top: 0;
@@ -17,4 +17,10 @@
     linear-gradient(#666, #666) no-repeat left center / 1rem 3px,
     linear-gradient(#666, #666) no-repeat left bottom / 1rem 3px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 840px) {
+  .navbar {
+    display: flex;
+  }
 }

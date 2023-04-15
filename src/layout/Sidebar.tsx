@@ -5,7 +5,6 @@ import { classnames } from '@/utils';
 import style from './Sidebar.module.css';
 
 interface SidebarProps extends Props {
-  smallScreen: boolean;
   visibleSide: boolean;
   toggle(payload: boolean): void;
 }
@@ -15,15 +14,14 @@ const generateClass = classnames(style);
 /**
  * @description 网站侧边栏
  */
-export default function Sidebar({
-  visibleSide,
-  smallScreen,
-  toggle
-}: SidebarProps) {
+export default function Sidebar({ visibleSide, toggle }: SidebarProps) {
   const pages = usePages();
 
   const active = generateClass(['link', 'active']);
-  const side = generateClass({ 'visible-side': visibleSide, sidebar: true });
+  const side = generateClass(
+    { 'visible-side': visibleSide, sidebar: true },
+    'scroll-y'
+  );
   const mask = generateClass({ 'visible-side': visibleSide, mask: true });
 
   return (
@@ -41,13 +39,11 @@ export default function Sidebar({
         ))}
       </aside>
 
-      {smallScreen && (
-        <div
-          className={mask}
-          onClick={() => toggle(false)}
-          onScroll={(e) => e.stopPropagation()}
-        ></div>
-      )}
+      <div
+        className={mask}
+        onClick={() => toggle(false)}
+        onScroll={(e) => e.stopPropagation()}
+      />
     </>
   );
 }

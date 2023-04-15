@@ -6,9 +6,7 @@
   z-index: 2;
   padding: 20px 5px;
   width: var(--sidebar-width);
-  min-width: 256px;
   background-color: #fff;
-  overflow-y: auto;
   box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%);
   transition: transform 0.4s ease;
 }
@@ -43,22 +41,6 @@
 .link.active {
   color: hsl(240deg 50% 70%);
   background-color: hsla(240deg 80% 50% / 10%);
-}
-
-@media screen and (min-width: 768px) {
-  .sidebar,
-  .mask {
-    --sidebar-width: 11.5rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .sidebar,
-  .mask {
-    --sidebar-width: 14rem;
-
-    min-width: revert;
-  }
 }
 
 @media screen and (max-width: 840px) {

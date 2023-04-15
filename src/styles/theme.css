@@ -4,6 +4,26 @@
   --info-color: #909399;
 }
 
+@supports (width: stretch) {
+  :root {
+    --stretch: stretch;
+  }
+}
+
+@supports (width: -webkit-fill-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -webkit-fill-available;
+  }
+}
+
+@supports (width: -moz-available) {
+  :root {
+    /* stylelint-disable-next-line value-no-vendor-prefix */
+    --stretch: -moz-available;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --background-color: #fff;

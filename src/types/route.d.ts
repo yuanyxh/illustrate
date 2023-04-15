@@ -11,6 +11,10 @@ declare namespace Route {
   interface CustomIndexRouteObject extends IndexRouteObject {
     /** page 标题 */
     title?: string;
+    /** 封面图片 */
+    image?: string;
+    /** hover 动图 */
+    gif?: string;
     children?: undefined;
   }
 
@@ -20,6 +24,10 @@ declare namespace Route {
   interface CustomNonIndexRouteObject extends NonIndexRouteObject {
     /** page 标题 */
     title?: string;
+    /** 封面图片 */
+    image?: string;
+    /** hover 动图 */
+    gif?: string;
     children?: CustomRouteObject[];
   }
 

@@ -8,7 +8,6 @@ const Layout = lazy(() => import('@/layout/Layout'));
 const DragUploadFile = lazy(
   () => import('@/pages/DragUploadFile/DragUploadFile')
 );
-const Reversal = lazy(() => import('@/pages/Reversal/Reversal'));
 const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
 export const routes: Route.CustomRouteObject[] = [
@@ -30,16 +29,15 @@ export const routes: Route.CustomRouteObject[] = [
           {
             path: 'drag-upload-file',
             title: '文件拖拽上传',
+            image: 'http://qkc148.bvimg.com/18470/da4102580106cca1.png',
+            gif: 'http://qkc148.bvimg.com/18470/da4102580106cca1.png',
             element: <DragUploadFile />
-          },
-          {
-            path: 'reversal',
-            title: 'HTML & CSS 实现书本翻页效果',
-            element: <Reversal />
           },
           {
             path: 'visual-edit',
             title: '可视化编辑',
+            image: '',
+            gif: '',
             element: <VisualEdit />
           }
         ]

@@ -1,5 +1,5 @@
-@import url('./styles/theme.css');
 @import url('./styles/calcrem.css');
+@import url('./styles/theme.css');
 
 body {
   margin: 0;
@@ -141,21 +141,6 @@ code {
   scrollbar-gutter: stable;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #0003;
-  border-radius: 10px;
-  transition: all 0.2s ease-in-out;
-}
-
-::selection {
-  background-color: #d1edc4;
-  color: #fff;
-}
-
 input[type='text'],
 input[type='password'],
 input[type='search'],
@@ -173,22 +158,17 @@ textarea {
   caret-shape: underscore;
 }
 
-@supports (width: stretch) {
-  :root {
-    --stretch: stretch;
-  }
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-@supports (width: -webkit-fill-available) {
-  :root {
-    /* stylelint-disable-next-line value-no-vendor-prefix */
-    --stretch: -webkit-fill-available;
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
-@supports (width: -moz-available) {
-  :root {
-    /* stylelint-disable-next-line value-no-vendor-prefix */
-    --stretch: -moz-available;
-  }
+::selection {
+  background-color: #d1edc4;
+  color: #fff;
 }

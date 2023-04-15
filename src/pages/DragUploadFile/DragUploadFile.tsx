@@ -4,6 +4,8 @@ import UploadAvatar from './UploadAvatar';
 import style from './DragUploadFile.module.css';
 
 // --title: 文件拖拽上传--
+// --image: http://qkc148.bvimg.com/18470/da4102580106cca1.png--
+// --gif: http://qkc148.bvimg.com/18470/1693fabe581344ca.gif--
 
 const preventDefault = (e: DragEvent) => e.preventDefault();
 

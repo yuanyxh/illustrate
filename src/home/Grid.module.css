@@ -1,0 +1,49 @@
+.grid {
+  margin: 4px 6px;
+  height: 8.613rem;
+}
+
+.media {
+  width: var(--stretch);
+  height: 6.3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  scrollbar-gutter: revert;
+}
+
+.title {
+  margin: 5px 0;
+  font-weight: 500;
+  line-height: 1.2em;
+}
+
+@media screen and (max-width: 1920px) {
+  .grid {
+    width: calc(100% / 6 - 12px);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .grid {
+    width: calc(100% / 4 - 12px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .grid {
+    width: calc(100% / 3 - 12px);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .grid {
+    width: calc(100% / 2 - 12px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .grid {
+    width: calc(100% / 1 - 12px);
+  }
+}
