@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useCallback } from 'react';
 
 type Options = { delay?: number; deps?: React.DependencyList };
@@ -9,7 +11,7 @@ type Options = { delay?: number; deps?: React.DependencyList };
  * @param options options.delay 节流间隔 options.deps: 依赖
  * @returns 返回一个新函数
  */
-export const useThrottle = <T extends (...anys: unknown[]) => unknown>(
+export const useThrottle = <T extends (...anys: any[]) => any>(
   fn: T,
   options?: Options
 ) => {
@@ -22,7 +24,7 @@ export const useThrottle = <T extends (...anys: unknown[]) => unknown>(
       if (identify) return;
 
       identify = window.setTimeout(() => {
-        fn(...anys);
+        fn.apply(this, anys);
 
         identify = null;
       }, delay);

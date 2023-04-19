@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { ScreenContext } from './Layout';
 import { usePages } from '@/hooks';
 import { classnames } from '@/utils';
 import style from './Sidebar.module.css';
@@ -16,6 +17,7 @@ const generateClass = classnames(style);
  */
 export default function Sidebar({ visibleSide, toggle }: SidebarProps) {
   const pages = usePages();
+  const smallScreen = useContext(ScreenContext);
 
   const active = generateClass(['link', 'active']);
   const side = generateClass(
@@ -39,11 +41,13 @@ export default function Sidebar({ visibleSide, toggle }: SidebarProps) {
         ))}
       </aside>
 
-      <div
-        className={mask}
-        onClick={() => toggle(false)}
-        onScroll={(e) => e.stopPropagation()}
-      />
+      {smallScreen && (
+        <div
+          className={mask}
+          onClick={() => toggle(false)}
+          onScroll={(e) => e.stopPropagation()}
+        />
+      )}
     </>
   );
 }

@@ -8,6 +8,7 @@ const Layout = lazy(() => import('@/layout/Layout'));
 const DragUploadFile = lazy(
   () => import('@/pages/DragUploadFile/DragUploadFile')
 );
+const Test = lazy(() => import('@/pages/Test/Test'));
 const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
 export const routes: Route.CustomRouteObject[] = [
@@ -32,6 +33,13 @@ export const routes: Route.CustomRouteObject[] = [
             image: 'http://qkc148.bvimg.com/18470/da4102580106cca1.png',
             gif: 'http://qkc148.bvimg.com/18470/da4102580106cca1.png',
             element: <DragUploadFile />
+          },
+          {
+            path: 'test',
+            title: '测试页面',
+            image: '',
+            gif: '',
+            element: <Test />
           },
           {
             path: 'visual-edit',

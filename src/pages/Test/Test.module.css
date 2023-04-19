@@ -1,0 +1,26 @@
+.test {
+  position: relative;
+  width: var(--stretch);
+  height: 100%;
+  background-color: #ddd;
+}
+
+.button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  width: 60px;
+  height: 50px;
+  z-index: 3;
+  border: 1px solid #ddd;
+  background-color: yellow;
+}
+
+.show {
+  display: block;
+}

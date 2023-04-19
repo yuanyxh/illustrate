@@ -14,7 +14,7 @@ export default function Grid({ page }: GridProps) {
     <div className={style.grid}>
       <Link to={PREFIX + page.path}>
         <div className={style.media}>
-          {page.image && <img src={page.image} alt="演示封面" />}
+          {page.image && <img src={page.image} loading="lazy" alt="演示封面" />}
         </div>
       </Link>
       <Link to={PREFIX + page.path}>

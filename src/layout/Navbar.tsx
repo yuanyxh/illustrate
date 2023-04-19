@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ScreenContext } from './Layout';
 import style from './Navbar.module.css';
 
 interface NavbarProps {
@@ -9,11 +10,17 @@ interface NavbarProps {
  * @description 导航栏
  */
 export default function Navbar({ toggle }: NavbarProps) {
+  const smallScreen = useContext(ScreenContext);
+
   const onclick = () => toggle(true);
 
   return (
-    <nav className={style.navbar}>
-      <div className={style.menu} onClick={onclick}></div>
-    </nav>
+    <>
+      {smallScreen && (
+        <nav className={style.navbar}>
+          <div className={style.menu} onClick={onclick}></div>
+        </nav>
+      )}
+    </>
   );
 }

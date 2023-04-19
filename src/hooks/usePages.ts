@@ -5,7 +5,7 @@ import { RouteId } from '@/enum';
 /**
  * @description 获取所有 page
  */
-export function usePages() {
+export const usePages = () => {
   const children = routes.find((page) => page.id === RouteId.SEQUEL)?.children;
 
   const [pages] = useState(
@@ -14,4 +14,4 @@ export function usePages() {
   );
 
   return pages;
-}
+};
