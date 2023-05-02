@@ -1,11 +1,16 @@
+declare interface CommonProps {
+  /** css class */
+  readonly className?: string;
+  /** inline style */
+  readonly style?: React.CSSProperties;
+}
+
 /**
  * 公用组件 Props 参数类型定义
  */
-declare interface Props {
-  /** css class */
-  className?: string;
-  /** inline style */
-  style?: React.CSSProperties;
+declare type Props = CommonProps;
+
+declare interface ChildProps extends CommonProps {
   /** function slot */
-  children?: React.ReactNode | React.ReactNode[];
+  readonly children?: React.ReactNode | React.ReactNode[];
 }

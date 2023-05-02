@@ -5,7 +5,7 @@ interface HeaderProps extends Props {
   dragstart: React.DragEventHandler;
 }
 
-export default function Header({ dragstart }: HeaderProps) {
+export default function Header({ dragstart }: Readonly<HeaderProps>) {
   return (
     <div
       draggable="true"

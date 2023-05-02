@@ -14,8 +14,7 @@ const ROOT_PATH = resolve(__dirname, './src/pages');
 
 const REGEXP = {
   title: createCommonRegexp('title'),
-  image: createCommonRegexp('image'),
-  gif: createCommonRegexp('gif')
+  image: createCommonRegexp('image')
 };
 
 let pageCount = 0;
@@ -114,15 +113,6 @@ function getImage(source) {
 
 /**
  *
- * @description 提取 gif 信息, 可选
- * @param {string} source
- */
-function getGif(source) {
-  return match(source, REGEXP.gif);
-}
-
-/**
- *
  * @description 生成 import 导入信息
  * @param {string} pageName
  */
@@ -165,7 +155,6 @@ function createPage(way) {
     const path = getPath(pageName);
     const title = getTitle(data)[0].trim();
     const image = getImage(data)?.[0].trim() || '';
-    const gif = getImage(data)?.[0].trim() || '';
 
     imports.push(generateImport(pageName));
 
@@ -173,7 +162,6 @@ function createPage(way) {
       path: '${path}',
       title: '${title}',
       image: '${image}',
-      gif: '${gif}',
       element: <${pageName} />
     },
     `;

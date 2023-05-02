@@ -5,7 +5,7 @@ interface InputProps extends Props {
   dragstart: React.DragEventHandler;
 }
 
-export default function Input({ dragstart }: InputProps) {
+export default function Input({ dragstart }: Readonly<InputProps>) {
   return (
     <input draggable="true" className={style.input} onDragStart={dragstart} />
   );

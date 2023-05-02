@@ -1,0 +1,136 @@
+.upload-file {
+  display: block;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.content {
+  margin-top: 30px;
+}
+
+.description {
+  margin: 20px 0;
+  font-size: 1.1em;
+  line-height: 1.4em;
+}
+
+.tips {
+  font-size: 0.9em;
+  margin-top: 6px;
+}
+
+.section {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.dragarea {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: var(--stretch);
+  height: 120px;
+  border: 1px dashed var(--border-color);
+  border-radius: 5px;
+}
+
+code {
+  padding: 3px 5px;
+  border-radius: 3px;
+  background-color: rgba(127 127 127 / 12%);
+}
+
+.list {
+  margin: 10px 0;
+  list-style-type: revert;
+  list-style-position: inside;
+}
+
+.list .list {
+  margin-left: 18px;
+}
+
+.list-item {
+  padding: 4px 0;
+  line-height: 1.6em;
+}
+
+.list-content {
+  padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-content span {
+  white-space: nowrap;
+}
+
+.file-list {
+  margin-top: 8px;
+}
+
+.file {
+  padding: 3px 0;
+  padding-left: 3px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.primary {
+  font-size: 1.1em;
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 0;
+  background-color: hsla(240deg 100% 70% / 100%);
+  border-radius: 3px;
+  color: #fff;
+  user-select: none;
+}
+
+.primary:hover {
+  background-color: hsla(240deg 100% 70% / 70%);
+}
+
+.primary:active {
+  background-color: hsla(240deg 100% 50% / 100%);
+}
+
+.file:hover {
+  background-color: hsla(230deg 70% 80% / 30%);
+  color: hsla(240deg 100% 70%);
+}
+
+.error {
+  color: hsla(0deg 100% 50% / 80%);
+  background-color: hsla(0deg 70% 80% / 30%);
+}
+
+.error:hover {
+  color: hsla(0deg 100% 50% / 80%);
+  background-color: hsla(0deg 100% 50% / 30%);
+}
+
+.loading {
+  margin-top: 4px;
+  height: 3px;
+  border-radius: 1.5px;
+  background-color: #ccc;
+}
+
+.inner-loading {
+  height: 100%;
+  border-radius: 1.5px;
+  background-color: hsla(240deg 100% 70%);
+  transition: width 0.2s linear;
+}

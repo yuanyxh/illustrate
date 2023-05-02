@@ -14,9 +14,10 @@ export default function Layout() {
   const [visibleSide, setVisibleSide] = useState(false);
   const isSmallScreen = useScreen();
 
-  const toggle = useCallback((payload: boolean) => {
-    setVisibleSide(() => payload);
-  }, []);
+  const toggle = useCallback(
+    (payload: boolean) => setVisibleSide(() => payload),
+    []
+  );
 
   return (
     <ScreenContext.Provider value={isSmallScreen}>

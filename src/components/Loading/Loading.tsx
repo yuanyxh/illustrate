@@ -22,7 +22,7 @@ let timer: number | null = null;
 /**
  * @description loading 效果
  */
-export default function Loading(props: LoadingProps) {
+export default function Loading(props: Readonly<LoadingProps>) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

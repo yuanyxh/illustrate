@@ -58,7 +58,7 @@ export default function VisualEdit() {
     setShowMenu(false);
   };
 
-  const edit: React.MouseEventHandler = (e) => {
+  const edit: React.MouseEventHandler = () => {
     setIsEdit(true);
   };
 

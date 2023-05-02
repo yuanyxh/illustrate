@@ -9,7 +9,7 @@ interface NavbarProps {
 /**
  * @description 导航栏
  */
-export default function Navbar({ toggle }: NavbarProps) {
+export default function Navbar({ toggle }: Readonly<NavbarProps>) {
   const smallScreen = useContext(ScreenContext);
 
   const onclick = () => toggle(true);

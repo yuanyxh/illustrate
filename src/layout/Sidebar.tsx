@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ScreenContext } from './Layout';
 import { usePages } from '@/hooks';
@@ -15,7 +15,10 @@ const generateClass = classnames(style);
 /**
  * @description 网站侧边栏
  */
-export default function Sidebar({ visibleSide, toggle }: SidebarProps) {
+export default function Sidebar({
+  visibleSide,
+  toggle
+}: Readonly<SidebarProps>) {
   const pages = usePages();
   const smallScreen = useContext(ScreenContext);
 
@@ -25,6 +28,10 @@ export default function Sidebar({ visibleSide, toggle }: SidebarProps) {
     'scroll-y'
   );
   const mask = generateClass({ 'visible-side': visibleSide, mask: true });
+
+  useEffect(() => {
+    if (smallScreen) toggle(false);
+  }, [smallScreen]);
 
   return (
     <>

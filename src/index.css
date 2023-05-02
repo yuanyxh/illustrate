@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
   color: #333;
   font-size: small;
   background-color: var(--background-color);
@@ -129,16 +130,32 @@ a:hover {
 html,
 body,
 div,
-table,
 main,
+nav,
 aside,
+header,
 section,
+footer,
 article,
 pre,
 code {
   scrollbar-width: thin;
   scrollbar-color: #0003 transparent;
-  scrollbar-gutter: stable;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0003;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
 input[type='text'],
@@ -156,16 +173,6 @@ input[type='url'],
 textarea {
   caret-color: #333;
   caret-shape: underscore;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #0003;
-  border-radius: 10px;
-  transition: all 0.2s ease-in-out;
 }
 
 ::selection {

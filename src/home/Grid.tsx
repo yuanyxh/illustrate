@@ -9,7 +9,7 @@ interface GridProps extends Props {
 const PREFIX = '/sequel/';
 const title = style.title + ' doubleline-substring';
 
-export default function Grid({ page }: GridProps) {
+export default function Grid({ page }: Readonly<GridProps>) {
   return (
     <div className={style.grid}>
       <Link to={PREFIX + page.path}>

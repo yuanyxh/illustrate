@@ -13,8 +13,6 @@ declare namespace Route {
     title?: string;
     /** 封面图片 */
     image?: string;
-    /** hover 动图 */
-    gif?: string;
     children?: undefined;
   }
 
@@ -26,8 +24,6 @@ declare namespace Route {
     title?: string;
     /** 封面图片 */
     image?: string;
-    /** hover 动图 */
-    gif?: string;
     children?: CustomRouteObject[];
   }
 

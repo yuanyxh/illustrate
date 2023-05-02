@@ -11,4 +11,9 @@ declare namespace Hooks {
   type UsePosition = <T extends React.RefObject<HTMLElement | null>>(
     el: T
   ) => Offset;
+
+  type UseModel = <T>(data: T) => {
+    value: T;
+    change: React.Dispatch<React.SetStateAction<T>>;
+  };
 }
