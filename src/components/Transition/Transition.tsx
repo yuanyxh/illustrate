@@ -33,7 +33,7 @@ export default function Transition({
   visible,
   enterClass = defaultClass,
   leaveClass = defaultClass
-}: TransitionProps) {
+}: Readonly<TransitionProps>) {
   const wrapper = useRef<HTMLDivElement>(null);
   const [leave, setLeave] = useState(visible);
 
