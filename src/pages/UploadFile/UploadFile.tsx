@@ -63,7 +63,16 @@ export default function UploadFile() {
     <div className={style['upload-file']}>
       <h1 className={style.title}>文件上传</h1>
 
-      <p className={style.description}>文件上传组件效果展示</p>
+      <p className={style.description}>
+        文件上传组件效果展示，案例使用的接口是 node 写的本地接口，有需要可前往{' '}
+        <a
+          href="https://github.com/yuanyxh/services"
+          target="_blank"
+          rel="noreferrer"
+        >
+          services
+        </a>
+      </p>
 
       <div className={style.content}>
         <h2 className={style.subtitle}>普通上传</h2>
@@ -246,7 +255,7 @@ export default function UploadFile() {
         <section className={style.section}>
           <Upload
             {...imageInputUploadModel}
-            action="http://192.168.42.217:8362/upload"
+            action="http://localhost:8362/upload"
             accept={['image/jpeg', 'image/png']}
             capture="user"
             transformResponse={transformResponse}
@@ -292,7 +301,7 @@ export default function UploadFile() {
         <section className={style.section} style={{ marginTop: 10 }}>
           <Upload
             {...audioInputUploadModel}
-            action="http://192.168.42.217:8362/upload"
+            action="http://localhost:8362/upload"
             accept={['audio/*']}
             capture="user"
             transformResponse={transformResponse}
