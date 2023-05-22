@@ -4,6 +4,25 @@
   --info-color: #909399;
 }
 
+.primary {
+  font-size: 1.1em;
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 0;
+  background-color: hsla(240deg 100% 70% / 100%);
+  border-radius: 3px;
+  color: #fff;
+  user-select: none;
+}
+
+.primary:hover {
+  background-color: hsla(240deg 100% 70% / 70%);
+}
+
+.primary:active {
+  background-color: hsla(240deg 100% 50% / 100%);
+}
+
 @supports (width: stretch) {
   :root {
     --stretch: stretch;

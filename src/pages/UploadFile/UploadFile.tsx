@@ -146,7 +146,7 @@ export default function UploadFile() {
             action="http://localhost:8362/upload"
             transformResponse={transformResponse}
           >
-            <button className={style.primary}>upload file</button>
+            <button className="primary">upload file</button>
           </Upload>
           <ul className={style['file-list']}>
             {baseUploadModel.value.map((file) => (
@@ -209,7 +209,7 @@ export default function UploadFile() {
           >
             {{
               default() {
-                return <button className={style.primary}>upload file</button>;
+                return <button className="primary">upload file</button>;
               },
               tips() {
                 return (
@@ -264,7 +264,7 @@ export default function UploadFile() {
           >
             {{
               default() {
-                return <button className={style.primary}>upload file</button>;
+                return <button className="primary">upload file</button>;
               },
               tips() {
                 return (
@@ -309,7 +309,7 @@ export default function UploadFile() {
           >
             {{
               default() {
-                return <button className={style.primary}>upload file</button>;
+                return <button className="primary">upload file</button>;
               },
               tips() {
                 return (
@@ -411,7 +411,7 @@ export default function UploadFile() {
             action="http://localhost:8362/upload"
             transformResponse={transformResponse}
           >
-            <button className={style.primary}>upload file</button>
+            <button className="primary">upload file</button>
           </Upload>
           <ul className={style['file-list']}>
             {retryInputUploadModel.value.map((file) => (

@@ -87,25 +87,6 @@ code {
   border-radius: 3px;
 }
 
-.primary {
-  font-size: 1.1em;
-  padding: 6px 10px;
-  cursor: pointer;
-  border: 0;
-  background-color: hsla(240deg 100% 70% / 100%);
-  border-radius: 3px;
-  color: #fff;
-  user-select: none;
-}
-
-.primary:hover {
-  background-color: hsla(240deg 100% 70% / 70%);
-}
-
-.primary:active {
-  background-color: hsla(240deg 100% 50% / 100%);
-}
-
 .file:hover {
   background-color: hsla(230deg 70% 80% / 30%);
   color: hsla(240deg 100% 70%);
