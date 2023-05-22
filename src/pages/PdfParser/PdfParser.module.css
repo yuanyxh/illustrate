@@ -1,0 +1,16 @@
+.pdf-parser {
+  padding: 10px;
+  height: inherit;
+}
+
+.line {
+  margin-bottom: 20px;
+}
+
+.show-canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}

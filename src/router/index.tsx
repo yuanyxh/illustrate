@@ -5,7 +5,11 @@ import Home from '@/home/Home';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const Layout = lazy(() => import('@/layout/Layout'));
+const FileSystemAccess = lazy(
+  () => import('@/pages/FileSystemAccess/FileSystemAccess')
+);
 const Test = lazy(() => import('@/pages/Test/Test'));
+const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
 const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
 const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
@@ -26,10 +30,22 @@ export const routes: Route.CustomRouteObject[] = [
         errorElement: <ErrorBoundary />,
         children: [
           {
+            path: 'file-system-access',
+            title: '文件系统管理',
+            image: '',
+            element: <FileSystemAccess />
+          },
+          {
             path: 'test',
             title: '测试页面',
             image: '',
             element: <Test />
+          },
+          {
+            path: 'pdf-parser',
+            title: 'PDF 解析',
+            image: '',
+            element: <PdfParser />
           },
           {
             path: 'upload-file',

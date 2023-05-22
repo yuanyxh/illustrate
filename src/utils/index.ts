@@ -26,7 +26,10 @@ export const isString = function (data: unknown): data is string {
  * @description data is number
  */
 export const isNumber = function (data: unknown): data is number {
-  return Object.prototype.toString.call(data) === '[object Number]';
+  return (
+    Object.prototype.toString.call(data) === '[object Number]' &&
+    !Number.isNaN(data)
+  );
 };
 
 /**
