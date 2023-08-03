@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { useModel } from '@/hooks';
 import { classnames } from '@/utils';
-import Upload, { Message, ExposeMethod } from '@/components/Upload/Upload';
+import Upload from '@/components/Upload/Upload';
+import { Message, ExposeMethod } from '@/components/Upload/types';
+import type { UploadProps } from '@/components/Upload/types';
 import style from './UploadFile.module.css';
-import type { UploadProps } from '@/components/Upload/Upload';
 
 interface UploadResult {
   message: string;

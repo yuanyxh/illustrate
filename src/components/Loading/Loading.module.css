@@ -18,7 +18,7 @@
   position: relative;
   width: 15px;
   height: 15px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-circle);
   background-color: hsl(240deg 100% 80%);
   animation: ball-rotate 1s cubic-bezier(0.7, -0.13, 0.22, 0.86) 0s infinite;
   animation-fill-mode: both;
@@ -32,7 +32,7 @@
   width: 15px;
   height: 15px;
   opacity: 0.8;
-  border-radius: 50%;
+  border-radius: var(--border-radius-circle);
 }
 
 .loading::before {

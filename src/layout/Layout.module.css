@@ -13,3 +13,9 @@
     --sidebar-width: 14rem;
   }
 }
+
+@media screen and (max-width: 840px) {
+  .layout {
+    height: calc(100vh - 2.5rem);
+  }
+}

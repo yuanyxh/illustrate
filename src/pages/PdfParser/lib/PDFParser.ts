@@ -242,10 +242,10 @@ export class PDFParser {
 
         /** 解析字符串 */
         case isArrowStart(stream, this.offset):
+          this.forward();
+
           // @ts-ignore
           values.push(toText(this.parseValue(stream, isArrowEnd)));
-
-          this.forward();
 
           break;
 
@@ -533,6 +533,8 @@ export class PDF extends PDFParser {
       /** 标识 */
       this.parseValue(stream);
     }
+
+    console.log(this.xref);
   }
 
   /** 获取 pdf 详细信息 */

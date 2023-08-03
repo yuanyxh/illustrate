@@ -1,0 +1,53 @@
+.stretch {
+  width: var(--stretch);
+}
+
+.scroll-x {
+  overflow-x: auto;
+}
+
+.scroll-y {
+  overflow-y: auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.one-line-substring {
+  display: inline-block;
+  width: var(--stretch);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.double-line-substring {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+  word-wrap: break-word;
+  line-break: anywhere;
+}
+
+.mask {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-color: hsla(0deg 100% 0% / 50%);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.mask.visible {
+  transition-property: opacity;
+  opacity: 1;
+  visibility: visible;
+}

@@ -20,9 +20,16 @@ export const routes: Route.CustomRouteObject[] = [
     element: <Layout />,
     children: [
       {
-        id: RouteId.ERRORBOUNDARY,
-        errorElement: <ErrorBoundary />
-        // --children--
+        id: RouteId.ERROR_BOUNDARY,
+        errorElement: <ErrorBoundary />,
+        children: [
+          // --children--
+          {
+            path: '*',
+            hidden: true,
+            element: <ErrorBoundary />
+          }
+        ]
       }
     ]
   }

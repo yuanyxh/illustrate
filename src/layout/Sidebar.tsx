@@ -27,7 +27,6 @@ export default function Sidebar({
     { 'visible-side': visibleSide, sidebar: true },
     'scroll-y'
   );
-  const mask = generateClass({ 'visible-side': visibleSide, mask: true });
 
   useEffect(() => {
     if (smallScreen) toggle(false);
@@ -50,7 +49,7 @@ export default function Sidebar({
 
       {smallScreen && (
         <div
-          className={mask}
+          className={`mask ${visibleSide ? 'visible' : ''}`}
           onClick={() => toggle(false)}
           onScroll={(e) => e.stopPropagation()}
         />

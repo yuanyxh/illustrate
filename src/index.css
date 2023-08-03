@@ -1,5 +1,7 @@
 @import url('./styles/calcrem.css');
+@import url('./styles/variable.css');
 @import url('./styles/theme.css');
+@import url('./styles/preset.css');
 
 body {
   margin: 0;
@@ -90,43 +92,6 @@ a:hover {
   color: var(--link-hover);
 }
 
-.stretch {
-  width: var(--stretch);
-}
-
-.scroll-x {
-  overflow-x: auto;
-}
-
-.scroll-y {
-  overflow-y: auto;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.oneline-substring {
-  display: inline-block;
-  width: var(--stretch);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow-x: hidden;
-}
-
-.doubleline-substring {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  word-break: break-all;
-  word-wrap: break-word;
-  line-break: anywhere;
-}
-
 html,
 body,
 div,
@@ -173,6 +138,13 @@ input[type='url'],
 textarea {
   caret-color: #333;
   caret-shape: underscore;
+  outline: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+}
+
+input:focus {
+  border-color: hsla(230deg 70% 70% / 100%);
 }
 
 ::selection {

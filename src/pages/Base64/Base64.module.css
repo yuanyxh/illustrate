@@ -1,0 +1,24 @@
+.base64 {
+  padding: 10px;
+  height: inherit;
+}
+
+.wrapper {
+  margin-bottom: 10px;
+  width: 12.605rem;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.wrapper > input[type='text'] {
+  width: var(--stretch);
+  height: calc(100% - 2px);
+  outline: 0;
+  border: 0;
+  border-radius: inherit;
+}
+
+input:disabled {
+  cursor: not-allowed;
+}

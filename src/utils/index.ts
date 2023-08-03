@@ -143,3 +143,5 @@ export function forEach<T extends (...anys: unknown[]) => unknown>(
 export * from './http';
 
 export * from './classnames';
+
+export { default as base64 } from './crypto/base64';
