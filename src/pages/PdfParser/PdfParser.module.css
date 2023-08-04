@@ -1,16 +1,27 @@
 .pdf-parser {
-  padding: 10px;
+  padding: 30px;
   height: inherit;
 }
 
-.line {
-  margin-bottom: 20px;
+.desc {
+  margin: 0.2rem 0 1.2rem;
+  color: var(--color-info);
+  font-size: var(--font-size-extra-small);
 }
 
-.show-canvas {
+.drawing-board {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  row-gap: 5px;
+  padding: 8px;
+  width: 26rem;
+  min-height: calc(100vh - 80px - 60px);
+  border: var(--border);
+  border-radius: var(--border-radius-base);
+}
+
+.page {
+  border: var(--border);
+  border-color: var(--color-danger);
 }

@@ -533,8 +533,6 @@ export class PDF extends PDFParser {
       /** 标识 */
       this.parseValue(stream);
     }
-
-    console.log(this.xref);
   }
 
   /** 获取 pdf 详细信息 */
@@ -1101,7 +1099,7 @@ export class Draw {
 
     if (!pdf.rootpage) return false;
 
-    const offset = pdf.xref[pdf.rootpage.Kids[pageNumber - 1].serial];
+    const offset = pdf.xref[pdf.rootpage.Kids[pageNumber].serial];
 
     if (!isNumber(offset)) return false;
 
@@ -1111,20 +1109,29 @@ export class Draw {
 
     pdf.set(pdf.xref[page.Parent.serial]);
 
-    const rootpage = pdf.parseDictionary<PDF.RootPage>(pdf.bytes);
+    const rootPage = pdf.parseDictionary<PDF.RootPage>(pdf.bytes);
 
-    const mediabox = page.MediaBox || rootpage.MediaBox || [0, 0, 0, 0];
+    const mediaBox = page.MediaBox || rootPage.MediaBox || [0, 0, 0, 0];
 
-    const { canvas, context } = createContext(mediabox[2], mediabox[3]);
+    const { canvas, context } = createContext(mediaBox[2], mediaBox[3]);
 
-    this.drawPage(page, context, canvas);
+    try {
+      this.drawPage(page, context, canvas);
+    } catch (err) {
+      console.error(`error of rendering on page ${pageNumber}`);
+
+      console.error(err);
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillText(String(err), 0, 0);
+    }
 
     return canvas;
   }
 }
 
 /** pdf 解析 */
-async function pdfparser(file: File) {
+async function pdfParser(file: File) {
   const bytes = await getBufferView(file);
 
   if (!isPdf(bytes)) {
@@ -1136,4 +1143,4 @@ async function pdfparser(file: File) {
   return pdf;
 }
 
-export default pdfparser;
+export default pdfParser;

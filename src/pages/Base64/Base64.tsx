@@ -1,6 +1,7 @@
 import React from 'react';
 import { useModel } from '@/hooks';
 import { base64 } from '@/utils';
+import Button from '@/components/Button/Button';
 import style from './Base64.module.css';
 import type { ChangeEventHandler } from 'react';
 
@@ -8,7 +9,7 @@ import type { ChangeEventHandler } from 'react';
 
 export default function Base64() {
   const { value: original, change: changeOriginal } = useModel('');
-  const { value: cipherText, change: changeCiphertext } = useModel('');
+  const { value: cipherText, change: changeCipherText } = useModel('');
   const { value: encrypted, change: changeEncrypt } = useModel('');
   const { value: decrypted, change: changeDecrypt } = useModel('');
 
@@ -21,7 +22,7 @@ export default function Base64() {
   };
 
   const encodeHandler = () => {
-    changeCiphertext(base64.encode(original));
+    changeCipherText(base64.encode(original));
   };
 
   const decodeHandler = () => {
@@ -43,9 +44,9 @@ export default function Base64() {
         <input type="text" placeholder="输出密文" disabled value={cipherText} />
       </div>
 
-      <button className="primary" onClick={encodeHandler}>
+      <Button type="primary" onClick={encodeHandler}>
         base64 编码
-      </button>
+      </Button>
 
       <div className={style.wrapper} style={{ marginTop: 15 }}>
         <input
@@ -60,9 +61,9 @@ export default function Base64() {
         <input type="text" placeholder="输出正文" disabled value={decrypted} />
       </div>
 
-      <button className="primary" onClick={decodeHandler}>
+      <Button type="primary" onClick={decodeHandler}>
         base64 解码
-      </button>
+      </Button>
     </div>
   );
 }

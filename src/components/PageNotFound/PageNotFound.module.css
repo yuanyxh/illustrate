@@ -6,7 +6,8 @@
   font-size: 30px;
 }
 
-p {
+.error,
+.desc {
   margin: 0.63rem 0;
 }
 
