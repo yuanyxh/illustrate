@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { forEach } from '@/utils';
 import pdfParser from './lib/PDFParser';
 import Button from '@/components/Button/Button';
-import Loading from '@/components/Loading/Loading';
+import Text from '@/components/Text/Text';
 import style from './PdfParser.module.css';
 
 // --title: PDF 解析--
@@ -10,7 +10,6 @@ import style from './PdfParser.module.css';
 export default function PdfParser() {
   const inputRef = useRef<HTMLInputElement>(null);
   const drawBoardRef = useRef<HTMLElement>(null);
-  const [loading, setLoading] = useState(false);
   const [pages, setPages] = useState<HTMLCanvasElement[]>([]);
 
   useEffect(() => {
@@ -23,8 +22,6 @@ export default function PdfParser() {
 
       drawBoardRef.current?.appendChild(div);
     });
-
-    setLoading(false);
   }, [pages]);
 
   const clickHandle = () => inputRef.current?.click();
@@ -35,8 +32,6 @@ export default function PdfParser() {
     if (!files) return;
 
     const file = files[0];
-
-    setLoading(true);
 
     parse(file);
   };
@@ -83,13 +78,19 @@ export default function PdfParser() {
           上传解析 PDF
         </Button>
 
-        <Button type="primary" onClick={clearDrawBoard}>
+        <Button style={{ marginLeft: 10 }} onClick={clearDrawBoard}>
           清除画板
         </Button>
 
-        <p className={style['desc']}>
+        <Text
+          className={style['desc']}
+          block
+          truncated
+          type="info"
+          size="small"
+        >
           解析器用于学习交流，仅实现部分功能且兼容度不高，如遇无法解析属于正常情况
-        </p>
+        </Text>
 
         <section
           ref={drawBoardRef}

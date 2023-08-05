@@ -1,24 +1,22 @@
 .base64 {
   padding: 10px;
-  height: inherit;
+  height: calc(100vh - 20px);
 }
 
 .wrapper {
-  margin-bottom: 10px;
-  width: 12.605rem;
-  height: 40px;
-  border: var(--border);
-  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  height: inherit;
 }
 
-.wrapper > input[type='text'] {
-  width: var(--stretch);
-  height: calc(100% - 2px);
-  outline: 0;
-  border: 0;
-  border-radius: inherit;
+.operator {
+  margin: 0 10px;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 8px;
 }
 
-input:disabled {
-  cursor: not-allowed;
+.text {
+  height: 100%;
 }

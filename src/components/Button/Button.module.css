@@ -74,6 +74,10 @@
   outline: none;
 }
 
+.button.is-block {
+  display: flex !important;
+}
+
 .button.is-plain {
   --button-hover-text-color: var(--color-primary);
   --button-hover-bg-color: var(--fill-color-blank);

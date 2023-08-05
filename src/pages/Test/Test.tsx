@@ -1,25 +1,18 @@
 import React from 'react';
-import Button from '@/components/Button/Button';
+import { useModel } from '@/hooks';
+import Input from '@/components/Input/Input';
 
 // --title: 测试页面--
 
-export default function Test() {
+export default function Base64() {
+  const model = useModel('');
+
   return (
-    <div>
-      <Button type="default" size="large">
-        default
-      </Button>
-      <Button type="primary" size="small">
-        primary
-      </Button>
-      <Button type="success">success</Button>
-      <Button type="info" size="large">
-        info
-      </Button>
-      <Button type="warning" size="small">
-        warning
-      </Button>
-      <Button type="danger">danger</Button>
-    </div>
+    <Input
+      {...model}
+      placeholder="please input"
+      size="large"
+      maxLength={20}
+    ></Input>
   );
 }

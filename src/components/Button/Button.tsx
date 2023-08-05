@@ -14,6 +14,7 @@ interface ButtonProps extends ChildProps {
   round?: boolean;
   circle?: boolean;
   disabled?: boolean;
+  block?: boolean;
   link?: boolean;
   size?: Size;
   nativeType?: NativeType;
@@ -31,9 +32,11 @@ export default function Button(props: Readonly<ButtonProps>) {
     round = false,
     circle = false,
     disabled = false,
+    block = false,
     link = false,
     nativeType = 'button',
-    onClick
+    onClick,
+    ...nativeProps
   } = props;
 
   const buttonClass = generateClass([
@@ -46,7 +49,8 @@ export default function Button(props: Readonly<ButtonProps>) {
     'is-plain': plain,
     'is-round': round,
     'is-circle': circle,
-    'is-link': link
+    'is-link': link,
+    'is-block': block
   });
 
   const buttonStatus = generateClass({ 'is-disabled': disabled });
@@ -56,6 +60,7 @@ export default function Button(props: Readonly<ButtonProps>) {
       type={nativeType}
       className={`${buttonClass} ${buttonStyle} ${buttonStatus}`}
       onClick={onClick}
+      {...nativeProps}
     >
       {children}
     </button>

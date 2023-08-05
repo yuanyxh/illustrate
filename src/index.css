@@ -53,19 +53,21 @@ code,
   box-sizing: border-box;
 }
 
-img {
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
+a,
+area,
+button,
+[role='button'],
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
 }
 
-a {
-  text-decoration: none;
-  color: #333;
-}
-
-a:hover {
-  color: var(--link-hover);
+button,
+input {
+  overflow: visible;
 }
 
 html,
@@ -89,6 +91,17 @@ ol {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -97,30 +110,6 @@ ol {
   background-color: #0003;
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
-}
-
-input[type='text'],
-input[type='password'],
-input[type='search'],
-input[type='date'],
-input[type='time'],
-input[type='datetime-local'],
-input[type='number'],
-input[type='range'],
-input[type='email'],
-input[type='tel'],
-input[type='url'],
-[contenteditable],
-textarea {
-  caret-color: #333;
-  caret-shape: underscore;
-  outline: 0;
-  border: var(--border);
-  border-radius: 3px;
-}
-
-input:focus {
-  border-color: hsla(230deg 70% 70% / 100%);
 }
 
 ::selection {

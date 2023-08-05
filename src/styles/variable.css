@@ -52,6 +52,7 @@
   --border-color-extra-light: #f2f6fc;
   --border-color-dark: #d4d7de;
   --border-color-darker: #cdd0d6;
+  --border-color-hover: var(--text-color-disabled);
   --border-radius-base: 4px;
   --border-radius-small: 2px;
   --border-radius-round: 20px;
@@ -69,6 +70,34 @@
   --fill-color-darker: #e6e8eb;
   --fill-color-blank: #fff;
   --disabled-text-color: var(--text-color-placeholder);
+  --disabled-bg-color: var(--fill-color-light);
+  --disabled-border-color: var(--border-color-light);
+  --component-size-large: 40px;
+  --component-size: 32px;
+  --component-size-small: 24px;
+  --transition-duration: 0.3s;
+  --transition-duration-fast: 0.2s;
+  --transition-function-ease-in-out-bezier: cubic-bezier(
+    0.645,
+    0.045,
+    0.355,
+    1
+  );
+  --transition-function-fast-bezier: cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-all: all var(--transition-duration)
+    var(--transition-function-ease-in-out-bezier);
+  --transition-fade: opacity var(--transition-duration)
+    var(--transition-function-fast-bezier);
+  --transition-md-fade: transform var(--transition-duration)
+      var(--transition-function-fast-bezier),
+    opacity var(--transition-duration) var(--transition-function-fast-bezier);
+  --transition-fade-linear: opacity var(--transition-duration-fast) linear;
+  --transition-border: border-color var(--transition-duration-fast)
+    var(--transition-function-ease-in-out-bezier);
+  --transition-box-shadow: box-shadow var(--transition-duration-fast)
+    var(--transition-function-ease-in-out-bezier);
+  --transition-color: color var(--transition-duration-fast)
+    var(--transition-function-ease-in-out-bezier);
 }
 
 @supports (width: stretch) {
