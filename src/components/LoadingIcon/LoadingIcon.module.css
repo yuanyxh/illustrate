@@ -1,0 +1,113 @@
+.loading-icon {
+  --loading-icon-width: 20px;
+  --loading-icon-height: 20px;
+  --loading-icon-line-width: 1px;
+  --loading-icon-line-height: 6px;
+  --loading-icon-offset-top: -3px;
+  --loading-icon-offset-left: -1px;
+
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 0;
+  width: var(--loading-icon-width);
+  height: var(--loading-icon-height);
+}
+
+.loading-icon > i {
+  display: inline-block;
+  position: absolute;
+  width: var(--loading-icon-line-width);
+  height: var(--loading-icon-line-height);
+  margin: 2px;
+  margin-top: var(--loading-icon-offset-top);
+  margin-left: var(--loading-icon-offset-left);
+  border-radius: 0;
+  animation: line-spin-clockwise-fade 1s infinite ease-in-out;
+  background-color: var(--loading-icon-color);
+  border: 0 solid var(--loading-icon-color);
+}
+
+.loading-icon > i:nth-child(1) {
+  top: 15%;
+  left: 50%;
+  transform: rotate(0deg);
+  animation-delay: -0.875s;
+}
+
+.loading-icon > i:nth-child(2) {
+  top: 25.2513%;
+  left: 74.7487%;
+  transform: rotate(45deg);
+  animation-delay: -0.75s;
+}
+
+.loading-icon > i:nth-child(3) {
+  top: 50%;
+  left: 85%;
+  transform: rotate(90deg);
+  animation-delay: -0.625s;
+}
+
+.loading-icon > i:nth-child(4) {
+  top: 74.7487%;
+  left: 74.7487%;
+  transform: rotate(135deg);
+  animation-delay: -0.5s;
+}
+
+.loading-icon > i:nth-child(5) {
+  top: 85%;
+  left: 50%;
+  transform: rotate(180deg);
+  animation-delay: -0.375s;
+}
+
+.loading-icon > i:nth-child(6) {
+  top: 74.7487%;
+  left: 25.2513%;
+  transform: rotate(225deg);
+  animation-delay: -0.25s;
+}
+
+.loading-icon > i:nth-child(7) {
+  top: 50%;
+  left: 15%;
+  transform: rotate(270deg);
+  animation-delay: -0.125s;
+}
+
+.loading-icon > i:nth-child(8) {
+  top: 25.2507%;
+  left: 25.2514%;
+  transform: rotate(315deg);
+  animation-delay: 0s;
+}
+
+.loading-icon.loading-icon-small {
+  --loading-icon-width: 14px;
+  --loading-icon-height: 14px;
+  --loading-icon-line-width: 1px;
+  --loading-icon-line-height: 4px;
+  --loading-icon-offset-top: -2px;
+  --loading-icon-offset-left: -2px;
+}
+
+.loading-icon.loading-icon-large {
+  --loading-icon-width: 32px;
+  --loading-icon-height: 32px;
+  --loading-icon-line-width: 2px;
+  --loading-icon-line-height: 10px;
+  --loading-icon-offset-top: -5px;
+  --loading-icon-offset-left: -1px;
+}
+
+@keyframes line-spin-clockwise-fade {
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

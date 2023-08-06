@@ -11,15 +11,6 @@
   margin: 0.63rem 0;
 }
 
-.error {
-  font-size: 15px;
-}
-
-.desc {
-  font-size: 14px;
-  color: var(--color-info);
-}
-
 .feedback {
   color: var(--color-primary);
 }

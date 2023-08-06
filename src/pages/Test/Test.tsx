@@ -1,18 +1,15 @@
 import React from 'react';
-import { useModel } from '@/hooks';
-import Input from '@/components/Input/Input';
+import Button from '@/components/Button/Button';
+import style from './Test.module.css';
 
 // --title: 测试页面--
 
-export default function Base64() {
-  const model = useModel('');
-
+export default function Test() {
   return (
-    <Input
-      {...model}
-      placeholder="please input"
-      size="large"
-      maxLength={20}
-    ></Input>
+    <div className={style['test']}>
+      <Button type="primary" loading>
+        click me
+      </Button>
+    </div>
   );
 }

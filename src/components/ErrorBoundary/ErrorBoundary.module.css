@@ -5,12 +5,6 @@
   min-height: inherit;
 }
 
-.title {
-  font-size: 2em;
-}
-
 .error {
   margin: 0.3rem 0 0.64rem;
-  font-size: 1.4em;
-  color: var(--color-danger);
 }

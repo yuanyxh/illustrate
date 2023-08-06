@@ -1,5 +1,6 @@
 import React from 'react';
 import { classnames } from '@/utils';
+import LoadingIcon from '@/components/LoadingIcon/LoadingIcon';
 import styles from './Button.module.css';
 
 type Type = 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
@@ -15,6 +16,7 @@ interface ButtonProps extends ChildProps {
   circle?: boolean;
   disabled?: boolean;
   block?: boolean;
+  loading?: boolean;
   link?: boolean;
   size?: Size;
   nativeType?: NativeType;
@@ -31,7 +33,8 @@ export default function Button(props: Readonly<ButtonProps>) {
     plain = false,
     round = false,
     circle = false,
-    disabled = false,
+    loading = false,
+    disabled = loading,
     block = false,
     link = false,
     nativeType = 'button',
@@ -53,7 +56,10 @@ export default function Button(props: Readonly<ButtonProps>) {
     'is-block': block
   });
 
-  const buttonStatus = generateClass({ 'is-disabled': disabled });
+  const buttonStatus = generateClass({
+    'is-disabled': disabled,
+    'is-loading': loading
+  });
 
   return (
     <button
@@ -62,6 +68,9 @@ export default function Button(props: Readonly<ButtonProps>) {
       onClick={onClick}
       {...nativeProps}
     >
+      {loading ? (
+        <LoadingIcon style={{ marginRight: 6 }} size="small" />
+      ) : undefined}
       {children}
     </button>
   );

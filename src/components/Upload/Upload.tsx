@@ -16,15 +16,12 @@ import {
 } from './utils';
 import { Message } from './types';
 import type { Children, Request, UploadFile, UploadProps } from './types';
-import _style from './Upload.module.css';
 
 /**
  * @description 文件上传组件
  */
 export default forwardRef(function Upload(props: Readonly<UploadProps>, ref) {
   const {
-    className,
-    style,
     value,
     action,
     headers = {},
@@ -45,7 +42,8 @@ export default forwardRef(function Upload(props: Readonly<UploadProps>, ref) {
     onMessage = () => {
       /* empty */
     },
-    request: customRequest
+    request: customRequest,
+    ...nativeProps
   } = props;
 
   let defaultSlot: Children, tipsSlot: Children;
@@ -259,11 +257,10 @@ export default forwardRef(function Upload(props: Readonly<UploadProps>, ref) {
       {createElement(
         'div',
         {
-          className: _style.upload + ' ' + className,
-          style,
           onClick: triggerUpload,
           onDragOver: (e) => e.preventDefault(),
-          onDrop: drag ? dropFile : undefined
+          onDrop: drag ? dropFile : undefined,
+          ...nativeProps
         },
         defaultSlot
       )}

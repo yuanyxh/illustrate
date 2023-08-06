@@ -7,6 +7,7 @@ import { ErrorStatus } from './enum';
 import { defaultErrorMessage } from './config';
 import PageNotFound from '@/components/PageNotFound/PageNotFound';
 import Button from '@/components/Button/Button';
+import Text from '@/components/Text/Text';
 import style from './ErrorBoundary.module.css';
 
 /**
@@ -31,9 +32,13 @@ export default function ErrorBoundary() {
 
   const errorElement = (
     <div>
-      <h1 className={style['title']}>An Error!</h1>
+      <h1 className={style['title']}>
+        <Text size="large">An Error!</Text>
+      </h1>
 
-      <p className={style['error']}>{message}</p>
+      <Text className={style['error']} type="danger" block>
+        {message}
+      </Text>
     </div>
   );
 

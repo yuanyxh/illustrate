@@ -20,6 +20,5 @@
 }
 
 .page {
-  border: var(--border);
-  border-color: var(--color-danger);
+  box-shadow: var(--box-shadow-light);
 }
