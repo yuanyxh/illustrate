@@ -1,53 +1,52 @@
-import React, { useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { Upload } from 'antd';
-import { usePosition } from '@/hooks';
-import { classnames } from '@/utils';
+import React from 'react';
+import { useModel } from '@/hooks';
+import Upload from '@/components/Upload/Upload';
+import Button from '@/components/Button/Button';
+import Text from '@/components/Text/Text';
+import type { UploadFile, TransformResponse } from '@/components/Upload/types';
 import style from './Test.module.css';
-import type { UploadProps } from 'antd';
 
 // --title: 测试页面--
 
-const generateClass = classnames(style);
+interface UploadResult {
+  message: string;
+  status: number;
+  result: { name: string; link: string };
+}
 
 export default function Test() {
-  const clickMe = useRef<HTMLButtonElement>(null);
-  const [show, setShow] = useState(false);
+  const filesModel = useModel<UploadFile[]>([]);
 
-  const rect = usePosition(clickMe);
+  const maxSize = 1024 * 1024 * 500;
 
-  const modal = generateClass({ modal: true, show });
-
-  const showModal = () => {
-    setShow(true);
-  };
-
-  const props: UploadProps = {
-    action: 'http://localhost:8362/upload',
-    accept: '.pdf',
-    fileList: [],
-    onChange(info) {
-      console.log(info);
-      return info;
-    }
+  const transformResponse: TransformResponse = (res: UploadResult) => {
+    return {
+      name: res.result.name,
+      url: res.result.link
+    };
   };
 
   return (
-    <>
-      <div className={style.test}>
-        <Upload {...props}>
-          <button>clickMe</button>
-        </Upload>
-
-        <button ref={clickMe} className={style.button} onClick={showModal}>
-          click me
-        </button>
-
-        {createPortal(
-          <div className={modal} style={rect}></div>,
-          document.body
-        )}
-      </div>
-    </>
+    <div className={style['test']}>
+      <Upload
+        {...filesModel}
+        action={'http://127.0.0.1:8362/upload'}
+        transformResponse={transformResponse}
+        beforeUpload={(file) => file.size < maxSize}
+      >
+        {{
+          default() {
+            return <Button type="primary">click into upload</Button>;
+          },
+          tips() {
+            return (
+              <Text type="info" size="small">
+                上传文件不大于500mb
+              </Text>
+            );
+          }
+        }}
+      </Upload>
+    </div>
   );
 }

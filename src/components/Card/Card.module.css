@@ -1,0 +1,32 @@
+.card {
+  --card-border-color: var(--border-color-light);
+  --card-border-radius: var(--border-radius-base);
+  --card-padding: 20px;
+  --card-bg-color: var(--fill-color-blank);
+
+  border-radius: var(--card-border-radius);
+  border: 1px solid var(--card-border-color);
+  background-color: var(--card-bg-color);
+  overflow: hidden;
+  color: var(--text-color-primary);
+  transition: var(--transition-duration);
+}
+
+.card.is-always-shadow {
+  box-shadow: var(--box-shadow-light);
+}
+
+.card.is-hover-shadow:hover,
+.card.is-hover-shadow:focus {
+  box-shadow: var(--box-shadow-light);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-body {
+  padding: var(--card-padding);
+}

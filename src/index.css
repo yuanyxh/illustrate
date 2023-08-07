@@ -1,5 +1,7 @@
 @import url('./styles/calcrem.css');
+@import url('./styles/variable.css');
 @import url('./styles/theme.css');
+@import url('./styles/preset.css');
 
 body {
   margin: 0;
@@ -11,7 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   color: #333;
-  font-size: small;
+  font-size: var(--font-size-base);
   background-color: var(--background-color);
 }
 
@@ -51,80 +53,21 @@ code,
   box-sizing: border-box;
 }
 
-img {
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
+a,
+area,
+button,
+[role='button'],
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
 }
 
-h1 {
-  font-size: 1.4em;
-}
-
-h2 {
-  font-size: 1.3em;
-}
-
-h3 {
-  font-size: 1.2em;
-}
-
-h4 {
-  font-size: 1.1em;
-}
-
-h5 {
-  font-size: 0.9em;
-}
-
-h6 {
-  font-size: 0.8em;
-}
-
-a {
-  text-decoration: none;
-  color: #333;
-}
-
-a:hover {
-  color: var(--link-hover);
-}
-
-.stretch {
-  width: var(--stretch);
-}
-
-.scroll-x {
-  overflow-x: auto;
-}
-
-.scroll-y {
-  overflow-y: auto;
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.oneline-substring {
-  display: inline-block;
-  width: var(--stretch);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow-x: hidden;
-}
-
-.doubleline-substring {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  word-break: break-all;
-  word-wrap: break-word;
-  line-break: anywhere;
+button,
+input {
+  overflow: visible;
 }
 
 html,
@@ -148,6 +91,17 @@ ol {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -156,23 +110,6 @@ ol {
   background-color: #0003;
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
-}
-
-input[type='text'],
-input[type='password'],
-input[type='search'],
-input[type='date'],
-input[type='time'],
-input[type='datetime-local'],
-input[type='number'],
-input[type='range'],
-input[type='email'],
-input[type='tel'],
-input[type='url'],
-[contenteditable],
-textarea {
-  caret-color: #333;
-  caret-shape: underscore;
 }
 
 ::selection {

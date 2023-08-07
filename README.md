@@ -85,7 +85,7 @@
 
 ![image-20230408145712852](http://qkc148.bvimg.com/18470/350820caf5bf6fc5.png)
 
-当添加了一个新案例时可以使用 `npm run newpage` 来生成新的路由表。
+当添加了一个新案例时可以使用 `npm run new` 来生成新的路由表。
 
 ## scripts
 

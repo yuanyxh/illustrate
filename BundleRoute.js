@@ -8,25 +8,40 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * @description 路由配置, 模板路径
+ */
 const TEMPLATE = './src/router/template.tsx';
+/**
+ * @description 路由配置路径
+ */
 const ROUTE_PATH = './src/router/index.tsx';
+/**
+ * @description 演示页面路径
+ */
 const ROOT_PATH = resolve(__dirname, './src/pages');
 
+/**
+ * @description 演示页面 meta 数据, 匹配正则
+ */
 const REGEXP = {
   title: createCommonRegexp('title'),
   image: createCommonRegexp('image')
 };
 
+/**
+ * @description 记录演示页面数量
+ */
 let pageCount = 0;
 
 /**
+ * @description 待拼接路由表配置
  * @type {string}
  */
-let pagesRoute = `,
-      children: [
-    `;
+let pagesRoute = ``;
 
 /**
+ * @description 导入组件数据
  * @type {string[]}
  */
 const imports = [];
@@ -167,7 +182,6 @@ function createPage(way) {
     `;
 
     if (pageCount === 0) {
-      pagesRoute += ']';
       writeRouter(pagesRoute);
     }
   });

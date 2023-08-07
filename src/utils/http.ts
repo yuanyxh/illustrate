@@ -1,5 +1,9 @@
 import { isNumber, forEach } from '@/utils';
 
+/**
+ * @description 自实现 http 请求函数
+ * @param config 请求配置
+ */
 export const request: Http.Request = function request(config) {
   return new Promise((resolve, reject) => {
     const {

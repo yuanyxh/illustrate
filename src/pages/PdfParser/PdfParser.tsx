@@ -1,125 +1,110 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useRef, useState, useEffect } from 'react';
-import { useThrottle } from '@/hooks';
-import pdfparser from './lib/PDFParser';
+import { forEach } from '@/utils';
+import pdfParser from './lib/PDFParser';
+import Button from '@/components/Button/Button';
+import Text from '@/components/Text/Text';
 import style from './PdfParser.module.css';
-import type { MouseEventHandler, ChangeEventHandler } from 'react';
-import type { Draw } from './lib/PDFParser';
 
 // --title: PDF 解析--
 
-let count = 1;
 export default function PdfParser() {
-  const fileRef = useRef<HTMLInputElement>(null);
-  const showRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const drawBoardRef = useRef<HTMLElement>(null);
+  const [pages, setPages] = useState<HTMLCanvasElement[]>([]);
 
-  const [draw, setDraw] = useState<Draw>();
+  useEffect(() => {
+    forEach(pages, (page) => {
+      const div = document.createElement('div');
 
-  const clickHandler: MouseEventHandler<HTMLButtonElement> = async () => {
-    if (!('showOpenFilePicker' in window)) {
-      return fileRef.current?.click();
-    }
+      div.classList.add(style['page']);
 
-    try {
-      // @ts-ignore
-      const [fileHandle] = await window.showOpenFilePicker({
-        types: [
-          { description: 'pdf 文件', accept: { 'application/pdf': ['.pdf'] } }
-        ]
-      });
+      div.appendChild(page);
 
-      const pdf = await pdfparser(await fileHandle.getFile());
+      drawBoardRef.current?.appendChild(div);
+    });
+  }, [pages]);
 
-      if (!pdf) return;
+  const clickHandle = () => inputRef.current?.click();
 
-      const draw = pdf.createDrawPdf();
-
-      const canvas = draw.displayPage(count);
-
-      if (!canvas) return;
-
-      count++;
-
-      showRef.current?.appendChild(canvas);
-
-      setDraw(draw);
-    } catch (err) {
-      console.log(err);
-      /** empty */
-    }
-  };
-
-  const inputHandler: ChangeEventHandler<HTMLInputElement> = async (e) => {
-    const files = e.target.files;
+  const changeHandle: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { files } = e.target;
 
     if (!files) return;
 
     const file = files[0];
 
-    const pdf = await pdfparser(file);
-
-    if (!pdf) return;
-
-    const draw = pdf.createDrawPdf();
-
-    const canvas = draw.displayPage(count);
-
-    count++;
-
-    if (!canvas) return;
-
-    showRef.current?.appendChild(canvas);
-
-    setDraw(draw);
-
-    e.target.value = '';
+    parse(file);
   };
 
-  const scrollHandler = useThrottle(() => {
-    const dcl = document.documentElement;
+  const clearDrawBoard = () => {
+    setPages([]);
 
-    if (dcl.scrollHeight - (dcl.scrollTop + dcl.clientHeight) <= 40) {
-      setDraw((prev) => {
-        const kids = prev?.pdf.rootpage?.Kids;
+    if (drawBoardRef.current) {
+      const children = drawBoardRef.current.children;
 
-        if (!kids) return;
-
-        if (count > kids.length) return;
-
-        const canvas = prev.displayPage(count);
-
-        if (!canvas) return;
-
-        count++;
-
-        showRef.current?.appendChild(canvas);
-
-        return prev;
-      });
+      for (let i = children.length - 1; i >= 0; i--) {
+        if (children[i].classList.contains(style['page'])) {
+          children[i].remove();
+        }
+      }
     }
-  });
+  };
 
-  useEffect(() => {
-    window.addEventListener('scroll', scrollHandler);
-  }, []);
+  const parse = async (pdf: File) => {
+    const parser = await pdfParser(pdf);
+
+    // TODO: 弹出提示，完成 Message 组件
+    if (parser === false) return;
+
+    const draw = parser.createDrawPdf();
+
+    const pages = parser.rootpage?.Kids || [];
+
+    const images: HTMLCanvasElement[] = [];
+
+    forEach(pages, (page, i) => {
+      const image = draw.displayPage(i);
+
+      image !== false && images.push(image);
+    });
+
+    setPages(images);
+  };
 
   return (
-    <div className={style['pdf-parser']}>
-      <div className={style.line}>
-        <button className="primary" onClick={clickHandler}>
-          点击上传 PDF
-        </button>
+    <>
+      <div className={style['pdf-parser']}>
+        <Button type="primary" onClick={clickHandle}>
+          上传解析 PDF
+        </Button>
 
-        <input
-          type="file"
-          style={{ display: 'none' }}
-          accept=".pdf"
-          ref={fileRef}
-          onChange={inputHandler}
-        />
+        <Button style={{ marginLeft: 10 }} onClick={clearDrawBoard}>
+          清除画板
+        </Button>
+
+        <Text
+          className={style['desc']}
+          block
+          truncated
+          type="info"
+          size="small"
+        >
+          解析器用于学习交流，仅实现部分功能且兼容度不高，如遇无法解析属于正常情况
+        </Text>
+
+        <section
+          ref={drawBoardRef}
+          className={style['drawing-board']}
+        ></section>
       </div>
 
-      <div className={style['show-canvas']} ref={showRef}></div>
-    </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept=".pdf"
+        style={{ display: 'none' }}
+        onChange={changeHandle}
+      />
+    </>
   );
 }

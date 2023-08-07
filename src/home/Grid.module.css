@@ -6,15 +6,15 @@
 .media {
   width: var(--stretch);
   height: 6.3rem;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border: var(--border);
+  border-radius: var(--border-radius-base);
   overflow: hidden;
   scrollbar-gutter: revert;
 }
 
 .title {
   margin: 5px 0;
-  font-weight: 500;
+  font-weight: var(--font-weight-primary);
   line-height: 1.2em;
 }
 

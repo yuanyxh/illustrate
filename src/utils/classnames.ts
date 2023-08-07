@@ -1,4 +1,4 @@
-import { isArray } from '.';
+import { isArray, forEach } from '.';
 
 /**
  *
@@ -23,4 +23,19 @@ export const classnames: Classnames['classnames'] = function classnames(style) {
 
     return classnames.concat(names).join(' ');
   };
+};
+
+/**
+ * @description 组合多个类
+ */
+export const composeClass = (...classes: string[]) => {
+  const results: string[] = [];
+
+  forEach(classes, (_class) => {
+    const _classes = _class.split(/\s+/).filter((val) => !!val.trim());
+
+    results.push(..._classes);
+  });
+
+  return results.join(' ');
 };

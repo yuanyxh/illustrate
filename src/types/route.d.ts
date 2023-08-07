@@ -13,6 +13,8 @@ declare namespace Route {
     title?: string;
     /** 封面图片 */
     image?: string;
+    /** 隐藏页面 */
+    hidden?: boolean;
     children?: undefined;
   }
 
@@ -24,6 +26,8 @@ declare namespace Route {
     title?: string;
     /** 封面图片 */
     image?: string;
+    /** 隐藏页面 */
+    hidden?: boolean;
     children?: CustomRouteObject[];
   }
 

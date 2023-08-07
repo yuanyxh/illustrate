@@ -1,52 +1,10 @@
 .error-boundary {
-  margin-top: 3rem;
-  margin-left: 3rem;
+  padding: 3rem;
   width: var(--stretch);
   height: 100%;
   min-height: inherit;
 }
 
-.title {
-  margin-bottom: 10px;
-  font-size: 2em;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.tips,
-.error-message {
-  font-size: 1.1em;
-  line-height: 2em;
-}
-
-.tips {
-  color: var(--info-color);
-}
-
-.issues {
-  font-size: 1em;
-  color: #79bbff;
-}
-
-.error-message {
-  color: hsl(15deg 100% 50%);
-}
-
-.back {
-  margin-top: 15px;
-  padding: 6px 8px;
-  border: none;
-  border-radius: 3px;
-  background-color: hsla(240deg 80% 70% / 100%);
-  font-size: 0.8em;
-  color: #fff;
-  cursor: pointer;
-}
-
-.back:hover {
-  background-color: hsla(240deg 80% 80% / 80%);
-}
-
-.back:active {
-  background-color: hsla(240deg 100% 50% / 100%);
+.error {
+  margin: 0.3rem 0 0.64rem;
 }

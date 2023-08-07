@@ -1,0 +1,16 @@
+.page-not-found {
+  display: block;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.error,
+.desc {
+  margin: 0.63rem 0;
+}
+
+.feedback {
+  color: var(--color-primary);
+}

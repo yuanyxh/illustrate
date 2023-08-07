@@ -5,12 +5,13 @@ import Home from '@/home/Home';
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 const Layout = lazy(() => import('@/layout/Layout'));
+const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
+const Test = lazy(() => import('@/pages/Test/Test'));
+const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
 const FileSystemAccess = lazy(
   () => import('@/pages/FileSystemAccess/FileSystemAccess')
 );
-const Test = lazy(() => import('@/pages/Test/Test'));
-const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
-const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
+const Base64 = lazy(() => import('@/pages/Base64/Base64'));
 const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
 export const routes: Route.CustomRouteObject[] = [
@@ -26,14 +27,14 @@ export const routes: Route.CustomRouteObject[] = [
     element: <Layout />,
     children: [
       {
-        id: RouteId.ERRORBOUNDARY,
+        id: RouteId.ERROR_BOUNDARY,
         errorElement: <ErrorBoundary />,
         children: [
           {
-            path: 'file-system-access',
-            title: '文件系统管理',
+            path: 'pdf-parser',
+            title: 'PDF 解析',
             image: '',
-            element: <FileSystemAccess />
+            element: <PdfParser />
           },
           {
             path: 'test',
@@ -42,22 +43,34 @@ export const routes: Route.CustomRouteObject[] = [
             element: <Test />
           },
           {
-            path: 'pdf-parser',
-            title: 'PDF 解析',
-            image: '',
-            element: <PdfParser />
-          },
-          {
             path: 'upload-file',
             title: '文件上传',
             image: '',
             element: <UploadFile />
           },
           {
+            path: 'file-system-access',
+            title: '文件系统管理',
+            image: '',
+            element: <FileSystemAccess />
+          },
+          {
+            path: 'base64',
+            title: 'base64 编解码',
+            image: '',
+            element: <Base64 />
+          },
+          {
             path: 'visual-edit',
             title: '可视化编辑',
             image: '',
             element: <VisualEdit />
+          },
+
+          {
+            path: '*',
+            hidden: true,
+            element: <ErrorBoundary />
           }
         ]
       }

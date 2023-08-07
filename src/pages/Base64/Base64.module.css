@@ -1,0 +1,22 @@
+.base64 {
+  padding: 10px;
+  height: calc(100vh - 20px);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: inherit;
+}
+
+.operator {
+  margin: 0 10px;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.text {
+  height: 100%;
+}

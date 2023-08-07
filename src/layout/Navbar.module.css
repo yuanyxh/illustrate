@@ -6,8 +6,8 @@
   padding: 0 10px;
   width: var(--stretch);
   height: 2.5rem;
-  border-bottom: 1px solid var(--border-color);
-  background-color: #fff;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-white);
 }
 
 .menu {
