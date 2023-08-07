@@ -1,0 +1,20 @@
+.upload-list {
+  padding: 10px 0;
+}
+
+.list-item {
+  margin: 2px 0;
+  padding: 4px 6px;
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+}
+
+.list-item:hover,
+.list-item:focus {
+  background-color: var(--color-primary-light-9);
+}
+
+.list-item.is-error:hover,
+.list-item.is-error:focus {
+  background-color: var(--color-danger-light-9);
+}

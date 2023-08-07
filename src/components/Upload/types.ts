@@ -1,5 +1,3 @@
-import { strictInspection } from './utils';
-
 export type Children = ChildProps['children'];
 
 export type Default = Children | (() => Children);
@@ -16,9 +14,9 @@ export type ClearFiles = (index?: number) => void;
 
 export type BeforeUpload = (
   /** 待上传的文件列表 */
-  file: File,
+  file: File
   /** 严格检查文件类型的工具函数 */
-  check: typeof strictInspection
+  // check: typeof strictInspection
 ) => unknown;
 
 export type OnMessage = {
@@ -26,7 +24,7 @@ export type OnMessage = {
     /** 通知类型，Overflow：文件个数超出限制、Success：文件上传成功、Fail：文件上传失败 */
     type: Message.Overflow,
     /** 文件列表或具体文件，文件超出限制时为文件列表，否则为具体文件 */
-    files: FileList,
+    files: File[],
     clearFiles: ClearFiles
   ): unknown;
   (type: Message.Success, file: File, clearFiles?: ClearFiles): unknown;

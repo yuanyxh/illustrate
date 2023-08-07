@@ -104,6 +104,11 @@
     var(--transition-function-ease-in-out-bezier);
   --transition-color: color var(--transition-duration-fast)
     var(--transition-function-ease-in-out-bezier);
+  --overlay-color: rgba(0 0 0 / 80%);
+  --overlay-color-light: rgba(0 0 0 / 70%);
+  --overlay-color-lighter: rgba(0 0 0 / 50%);
+  --mask-color: rgba(255 255 255 / 90%);
+  --mask-color-extra-light: rgba(255 255 255 / 30%);
 }
 
 @supports (width: stretch) {
