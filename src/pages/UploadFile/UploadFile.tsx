@@ -91,6 +91,7 @@ export default function UploadFile() {
         <Upload
           {...imageFilesModel}
           action={'http://127.0.0.1:8362/upload'}
+          accept={['.jpg', '.png']}
           transformResponse={transformResponse}
           beforeUpload={(file) => file.size < maxSize}
         >

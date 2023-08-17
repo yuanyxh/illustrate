@@ -9,6 +9,9 @@ interface LoadingIcon extends Props {
 
 const generateClass = classnames(style);
 
+/**
+ * @description 加载图标
+ */
 export default function LoadingIcon(props: LoadingIcon) {
   const {
     size = 'default',

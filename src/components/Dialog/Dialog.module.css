@@ -1,0 +1,140 @@
+.overlay {
+  display: none;
+}
+
+.overlay-enter-active {
+  animation: overlay-fade-in var(--transition-duration);
+}
+
+.overlay-leave-active {
+  animation: overlay-fade-out var(--transition-duration);
+}
+
+.dialog-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  overflow: auto;
+}
+
+.dialog-overlay-enter-active {
+  animation: dialog-overlay-fade-in var(--transition-duration);
+}
+
+.dialog-overlay-leave-active {
+  animation: dialog-overlay-fade-out var(--transition-duration);
+}
+
+.dialog {
+  --dialog-width: 50%;
+  --dialog-margin-top: 15vh;
+  --dialog-bg-color: var(--color-white);
+  --dialog-box-shadow: var(--box-shadow);
+  --dialog-title-font-size: var(--font-size-large);
+  --dialog-content-font-size: 14px;
+  --dialog-font-line-height: var(--font-line-height-primary);
+  --dialog-padding-primary: 20px;
+  --dialog-border-radius: var(--border-radius-small);
+
+  position: relative;
+  margin: var(--dialog-margin-top, 15vh) auto 50px;
+  background: var(--dialog-bg-color);
+  border-radius: var(--dialog-border-radius);
+  box-shadow: var(--dialog-box-shadow);
+  box-sizing: border-box;
+  width: var(--dialog-width, 50%);
+}
+
+.dialog-header {
+  padding: var(--dialog-padding-primary);
+  padding-bottom: 10px;
+  margin-right: 16px;
+}
+
+.dialog-header-title {
+  line-height: var(--dialog-font-line-height);
+  font-size: var(--dialog-title-font-size);
+  color: var(--text-color-primary);
+}
+
+.dialog-header-close {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  padding: 0;
+  width: 54px;
+  height: 54px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dialog-header-icon {
+  color: var(--color-info);
+  font-size: inherit;
+}
+
+.dialog-header-close:hover > .dialog-header-icon,
+.dialog-header-close:focus > .dialog-header-icon {
+  color: var(--color-primary);
+}
+
+.dialog-body {
+  padding: calc(var(--dialog-padding-primary) + 10px)
+    var(--dialog-padding-primary);
+  color: var(--text-color-regular);
+  font-size: var(--dialog-content-font-size);
+}
+
+.dialog-footer {
+  padding: var(--dialog-padding-primary);
+  padding-top: 10px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+@keyframes overlay-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes overlay-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-overlay-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-overlay-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+}

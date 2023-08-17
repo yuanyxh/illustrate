@@ -1,3 +1,45 @@
 .test {
   padding: 10px;
 }
+
+.div-init {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background-color: var(--overlay-color-lighter);
+  z-index: 999;
+}
+
+.show {
+  display: revert;
+}
+
+.div-enter-active {
+  display: revert;
+  animation: fade-in var(--transition-duration);
+}
+
+.div-leave-active {
+  display: revert;
+  animation: fade-out var(--transition-duration);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

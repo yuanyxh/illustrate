@@ -18,3 +18,9 @@ declare interface Classnames {
     readonly [key: string]: string;
   }): Classnames['generateClass'];
 }
+
+declare interface TransitionClass {
+  active: string;
+  from?: string;
+  to?: string;
+}

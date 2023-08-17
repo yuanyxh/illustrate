@@ -1,5 +1,5 @@
 import React from 'react';
-import { classnames } from '@/utils';
+import { classnames, isRenderElement } from '@/utils';
 import style from './UploadImage.module.css';
 
 interface UploadImageProps extends Props {
@@ -31,7 +31,7 @@ export default function UploadImage(props: UploadImageProps) {
       className={uploadImageClass}
       style={{ marginRight: 10, marginBottom: 5 }}
     >
-      {url ? imageElement : undefined}
+      {isRenderElement(url) && imageElement}
     </div>
   );
 }

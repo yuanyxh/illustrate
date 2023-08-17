@@ -1,0 +1,27 @@
+.body-content {
+  position: relative;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.body-content:has(> [data-display='thumbnail']) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 8px;
+}
+
+.frame {
+  position: absolute;
+  border: var(--file-system-hover-border);
+  background-color: var(--file-system-hover-bg-color);
+  opacity: 0.6;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { classnames, composeClass } from '@/utils';
+import { classnames, composeClass, isRenderElement } from '@/utils';
 import style from './Progress.module.css';
 
 interface ProgressProps extends ChildProps {
@@ -16,6 +16,9 @@ interface ProgressProps extends ChildProps {
 
 const generateClass = classnames(style);
 
+/**
+ * @description 进度条
+ */
 export default function Progress(props: ProgressProps) {
   const {
     status,
@@ -66,20 +69,20 @@ export default function Progress(props: ProgressProps) {
               backgroundColor: color
             }}
           >
-            {textInside ? (
+            {isRenderElement(textInside) && (
               <div className={style['progress-bar-inner-text']}>
                 <span>{showText}</span>
               </div>
-            ) : undefined}
+            )}
           </div>
         </div>
       </div>
 
-      {!textInside ? (
+      {isRenderElement(!textInside) && (
         <div className={style['progress-text']}>
           <span>{showText}</span>
         </div>
-      ) : undefined}
+      )}
     </div>
   );
 }

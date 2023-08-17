@@ -13,7 +13,8 @@ import {
   hasData,
   forEach,
   request,
-  composeClass
+  composeClass,
+  isRenderElement
 } from '@/utils';
 import { stopPropagation, generateId, isNameSlot } from './utils';
 import { Message } from './types';
@@ -257,7 +258,7 @@ export default function Upload(props: Readonly<UploadProps>) {
         defaultSlot
       )}
 
-      {tipsSlot ? <p className={style['tips']}>{tipsSlot}</p> : undefined}
+      {isRenderElement(tipsSlot) && <p className={style['tips']}>{tipsSlot}</p>}
 
       {createElement('input', {
         style: {

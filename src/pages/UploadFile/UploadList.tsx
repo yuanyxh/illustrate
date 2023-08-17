@@ -1,5 +1,5 @@
 import React from 'react';
-import { classnames } from '@/utils';
+import { classnames, isRenderElement } from '@/utils';
 import Text from '@/components/Text/Text';
 import Progress from '@/components/Progress/Progress';
 import UploadImage from './UploadImage';
@@ -33,9 +33,9 @@ function ListItem(props: ListItemProps) {
         </Text>
       </div>
 
-      {file.status === 'loading' ? (
+      {isRenderElement(file.status === 'loading') && (
         <Progress percentage={file.percent} strokeWidth={3}></Progress>
-      ) : undefined}
+      )}
     </>
   );
 }

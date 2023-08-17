@@ -1,5 +1,5 @@
 import React from 'react';
-import { classnames } from '@/utils';
+import { classnames, composeClass, isRenderElement } from '@/utils';
 import LoadingIcon from '@/components/LoadingIcon/LoadingIcon';
 import styles from './Button.module.css';
 
@@ -25,6 +25,9 @@ interface ButtonProps extends ChildProps {
 
 const generateClass = classnames(styles);
 
+/**
+ * @description 基础组件 button
+ */
 export default function Button(props: Readonly<ButtonProps>) {
   const {
     children,
@@ -64,13 +67,18 @@ export default function Button(props: Readonly<ButtonProps>) {
   return (
     <button
       type={nativeType}
-      className={`${buttonClass} ${buttonStyle} ${buttonStatus}`}
+      className={composeClass(
+        buttonClass,
+        buttonStyle,
+        buttonStatus,
+        nativeProps.className || ''
+      )}
+      style={nativeProps.style}
       onClick={onClick}
-      {...nativeProps}
     >
-      {loading ? (
+      {isRenderElement(loading) && (
         <LoadingIcon style={{ marginRight: 6 }} size="small" />
-      ) : undefined}
+      )}
       {children}
     </button>
   );

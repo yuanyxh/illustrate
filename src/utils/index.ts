@@ -140,8 +140,21 @@ export function forEach<T extends (...anys: unknown[]) => unknown>(
   }
 }
 
+/** @description 字符检查工具 */
+export const checkCharacter = (reg: RegExp) => (s: string) => reg.test(s);
+
+/**
+ * @description 判断是否可以渲染，同时返回一个无意义字符串通过 react 的检查
+ */
+export const isRenderElement = (condition: unknown) =>
+  condition ? 'render' : undefined;
+
 export * from './http';
 
 export * from './classnames';
+
+export * from './elements';
+
+export * from './events';
 
 export { default as base64 } from './crypto/base64';
