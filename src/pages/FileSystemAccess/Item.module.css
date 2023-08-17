@@ -11,6 +11,10 @@
   background-color: var(--file-system-hover-bg-color);
 }
 
+.item.is-cut {
+  opacity: 0.7;
+}
+
 .item > i {
   color: #c8be77;
 }

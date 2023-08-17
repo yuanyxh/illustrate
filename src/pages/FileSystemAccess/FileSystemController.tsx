@@ -1,7 +1,17 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useState, useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  createContext,
+  useMemo
+} from 'react';
 import { composeClass, forEach, isRenderElement } from '@/utils';
-import { addDirectory, isCreate } from './utils';
+import {
+  addDirectory,
+  isCreate,
+  FileSystemHistory,
+  FileSystemClipboard
+} from './utils';
 import Card from '@/components/Card/Card';
 import Text from '@/components/Text/Text';
 import Header from './Header';
@@ -9,10 +19,12 @@ import Body from './Body';
 import Location from './Location';
 import type {
   DirectoryChildren,
+  EntityHandle,
   DirectoryHandle,
   FileHandle,
   NodeType,
-  DisplayType
+  DisplayType,
+  FileSystemContext
 } from './types';
 import style from './FileSystemController.module.css';
 
@@ -23,6 +35,11 @@ interface FileSystemControllerProps extends Props {
 
 // const generateClass = classnames(style);
 
+export const ControllerContext = createContext<FileSystemContext>({
+  history: null,
+  clipboard: null
+});
+
 export default function FileSystemController(props: FileSystemControllerProps) {
   const { root, canCrateRootDirectory = false, ...nativeProps } = props;
 
@@ -31,8 +48,14 @@ export default function FileSystemController(props: FileSystemControllerProps) {
   >(root);
 
   const [directoryList, setDirectoryList] = useState<DirectoryChildren[]>([]);
-  const [select, setSelect] = useState<DirectoryChildren[]>([]);
+  const [select, setSelect] = useState<EntityHandle[]>([]);
+  const [, setClipList] = useState<EntityHandle[]>([]);
   const [display, setDisplay] = useState<DisplayType>('list');
+
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  const history = useMemo(() => root && new FileSystemHistory(root), [root]);
+  const clipboard = useMemo(() => new FileSystemClipboard(setClipList), []);
 
   useEffect(() => {
     if (!root) return;
@@ -84,6 +107,13 @@ export default function FileSystemController(props: FileSystemControllerProps) {
 
   const nodeClick = (type: NodeType) => {
     switch (type) {
+      case 'copy':
+        clipboard.copy(select);
+        break;
+
+      case 'cut':
+        clipboard.cut(select);
+        break;
       case 'create':
         setDirectoryList(addDirectory(directoryList));
 
@@ -108,59 +138,66 @@ export default function FileSystemController(props: FileSystemControllerProps) {
   };
 
   return (
-    <Card
-      bodyStyle={{ padding: 0, paddingBottom: 15 }}
-      className={composeClass(
-        style['file-system-controller'],
-        nativeProps.className || ''
-      )}
-      style={Object.assign(
-        { position: 'relative', userSelect: 'none' },
-        nativeProps.style || {}
-      )}
+    <ControllerContext.Provider
+      value={{ history: history as FileSystemHistory, clipboard }}
     >
-      {{
-        header() {
-          return (
-            <Header nodeClick={nodeClick} select={select} display={display} />
-          );
-        },
-        body() {
-          return (
-            <>
-              <section className={style['file-system-controller-body']}>
-                <Location
-                  root={root}
-                  currentDirectory={currentDirectory}
-                  setCurrentDirectroy={setCurrentDirectroy}
-                />
+      <Card
+        bodyStyle={{ padding: 0, paddingBottom: 15 }}
+        className={composeClass(
+          style['file-system-controller'],
+          nativeProps.className || ''
+        )}
+        style={Object.assign(
+          { position: 'relative', userSelect: 'none' },
+          nativeProps.style || {}
+        )}
+        onClick={() => bodyRef.current?.focus()}
+      >
+        {{
+          header() {
+            return (
+              <Header nodeClick={nodeClick} select={select} display={display} />
+            );
+          },
+          body() {
+            return (
+              <>
+                <section className={style['file-system-controller-body']}>
+                  <Location
+                    root={root}
+                    directoryList={directoryList}
+                    currentDirectory={currentDirectory}
+                    setCurrentDirectroy={setCurrentDirectroy}
+                  />
 
-                <Body
-                  root={root}
-                  currentDirectory={currentDirectory}
-                  setCurrentDirectroy={setCurrentDirectroy}
-                  directoryList={directoryList}
-                  setDirectoryList={setDirectoryList}
-                  select={select}
-                  setSelect={setSelect}
-                  display={display}
-                />
-              </section>
+                  <Body
+                    ref={bodyRef}
+                    root={root}
+                    currentDirectory={currentDirectory}
+                    setCurrentDirectroy={setCurrentDirectroy}
+                    directoryList={directoryList}
+                    setDirectoryList={setDirectoryList}
+                    select={select}
+                    setSelect={setSelect}
+                    display={display}
+                  />
+                </section>
 
-              {isRenderElement(!canCrateRootDirectory && !root) && (
-                <div className={style['locked']}>
-                  <i
-                    className="iconfont icon-lock"
-                    style={{ fontSize: 60, marginBottom: 8 }}
-                  ></i>
+                {isRenderElement(!canCrateRootDirectory && !root) && (
+                  <div className={style['locked']}>
+                    <i
+                      className="iconfont icon-lock"
+                      style={{ fontSize: 60, marginBottom: 8 }}
+                    ></i>
 
-                  <Text type="info">请先选择本地文件</Text>
-                </div>
-              )}
-            </>
-          );
-        }
-      }}
-    </Card>
+                    <Text type="info">请先选择本地文件</Text>
+                  </div>
+                )}
+              </>
+            );
+          }
+        }}
+      </Card>
+    </ControllerContext.Provider>
   );
 }

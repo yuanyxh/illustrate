@@ -17,7 +17,6 @@
   outline: none;
   background-color: transparent;
   cursor: pointer;
-  color: var(--color-info);
 }
 
 .location-history-forward {
@@ -29,6 +28,12 @@
 .location-history-forward:hover,
 .location-history-forward:active {
   color: var(--color-primary);
+}
+
+.location-history-back.is-disabled,
+.location-history-forward.is-disabled {
+  color: var(--color-info);
+  cursor: not-allowed;
 }
 
 .location-path {

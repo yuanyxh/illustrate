@@ -1,3 +1,5 @@
+import type { FileSystemHistory, FileSystemClipboard } from './utils';
+
 export interface DirectoryItem {
   type: 'file' | 'directory' | 'create';
 }
@@ -32,6 +34,11 @@ export interface FileIndex extends Node {
 export interface DirectoryIndex extends Node {
   type: 'directory';
   children: TreeIndex[];
+}
+
+export interface FileSystemContext {
+  history: FileSystemHistory | null;
+  clipboard: FileSystemClipboard | null;
 }
 
 export type TreeIndex = DirectoryIndex | FileIndex;

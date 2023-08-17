@@ -14,6 +14,7 @@ interface CardProps extends Props {
   shadow?: 'always' | 'hover' | 'never';
   bodyClassName?: string;
   bodyStyle?: React.CSSProperties;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 function isSlots(eles: unknown): eles is Slots {
@@ -35,6 +36,7 @@ export default function Card(props: CardProps) {
     shadow = 'always',
     bodyClassName = '',
     bodyStyle,
+    onClick,
     className = '',
     style: _style
   } = props;
@@ -46,7 +48,11 @@ export default function Card(props: CardProps) {
   const cardClass = generateClass(['card', `is-${shadow}-shadow`]);
 
   return (
-    <div className={composeClass(cardClass, className)} style={_style}>
+    <div
+      className={composeClass(cardClass, className)}
+      style={_style}
+      onClick={onClick}
+    >
       {header ? <div className={style['card-header']}>{header}</div> : header}
 
       <div

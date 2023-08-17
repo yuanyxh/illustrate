@@ -2,6 +2,10 @@
   position: relative;
   height: 300px;
   overflow-y: auto;
+  border: none;
+  outline: none;
+  cursor: default;
+  caret-color: transparent;
 }
 
 .body-content:has(> [data-display='thumbnail']) {
@@ -9,6 +13,16 @@
   flex-wrap: wrap;
   align-items: flex-start;
   column-gap: 8px;
+}
+
+.focus-ele {
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  outline: none;
+  opacity: 0;
 }
 
 .frame {

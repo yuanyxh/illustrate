@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { createPort } from '@/utils';
-import { Rectangle, isRenderElement } from '@/utils';
+import React, { forwardRef, useRef, useEffect, useContext } from 'react';
+import { createPort, Rectangle, isRenderElement } from '@/utils';
+import { ControllerContext } from './FileSystemController';
 import Text from '@/components/Text/Text';
 import Item from './Item';
 import { itemStyle } from './Item';
@@ -15,12 +15,15 @@ interface BodyProps extends Props {
   >;
   directoryList: DirectoryChildren[];
   setDirectoryList: React.Dispatch<React.SetStateAction<DirectoryChildren[]>>;
-  select: DirectoryChildren[];
-  setSelect: React.Dispatch<React.SetStateAction<DirectoryChildren[]>>;
+  select: EntityHandle[];
+  setSelect: React.Dispatch<React.SetStateAction<EntityHandle[]>>;
   display: DisplayType;
 }
 
-export default function Body(props: BodyProps) {
+export default forwardRef(function Body(
+  props: BodyProps,
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
   const {
     root,
     currentDirectory,
@@ -32,10 +35,19 @@ export default function Body(props: BodyProps) {
     display = 'list'
   } = props;
 
+  const { history, clipboard } = useContext(ControllerContext);
+
   const frameRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    $input.exec((ele) => {
+      ele.focus();
+    });
+  }, [select]);
 
   const $frame = createPort(frameRef);
+  const $input = createPort(inputRef);
 
   let tempSelect: string[] = [];
   let isFrameSelection = false;
@@ -116,7 +128,7 @@ export default function Body(props: BodyProps) {
 
     tempSelect = [];
 
-    setSelect(result);
+    setSelect(result as unknown as EntityHandle[]);
 
     $frame.hide();
     $frame.css('width', 0);
@@ -128,20 +140,33 @@ export default function Body(props: BodyProps) {
     endY = 0;
   };
 
+  const copyOrCut = (type: 'copy' | 'cut') => {
+    type === 'copy' ? clipboard?.copy(select) : clipboard?.cut(select);
+  };
+
+  const paste = () => {
+    /*  */
+  };
+
   const enter = (handle: EntityHandle) => {
     if (handle.type === 'directory') {
       setCurrentDirectroy(handle.handle);
+      history?.push(handle.handle);
     }
   };
 
   return (
     <div
-      ref={contentRef}
+      ref={ref}
       className={style['body-content']}
+      contentEditable={true}
       onMouseDown={startSelect}
       onMouseUp={() => cacheSelect()}
       onMouseLeave={() => cacheSelect()}
       onMouseMove={frameSelection}
+      onCopy={() => copyOrCut('copy')}
+      onCut={() => copyOrCut('cut')}
+      onPaste={paste}
     >
       {directoryList.map((item) =>
         item.type === 'create' ? (
@@ -153,6 +178,7 @@ export default function Body(props: BodyProps) {
             select={select}
             display={display}
             isSelect={select.includes(item)}
+            isCut={clipboard?.datatransfer.includes(item) || false}
             setSelect={setSelect}
             onEnter={enter}
           />
@@ -170,4 +196,4 @@ export default function Body(props: BodyProps) {
       <div ref={frameRef} className={style['frame']}></div>
     </div>
   );
-}
+});

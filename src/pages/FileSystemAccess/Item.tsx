@@ -1,10 +1,11 @@
 import React from 'react';
 import { classnames, composeClass } from '@/utils';
 import { getIconName } from './utils';
+
 import Text from '@/components/Text/Text';
 import type {
-  DirectoryChildren,
   DirectoryHandle,
+  EntityHandle,
   FileHandle,
   DisplayType
 } from './types';
@@ -12,10 +13,11 @@ import style from './Item.module.css';
 
 interface ItemProps extends Props {
   item: DirectoryHandle | FileHandle;
-  select: DirectoryChildren[];
+  select: EntityHandle[];
   isSelect: boolean;
+  isCut: boolean;
   display: DisplayType;
-  setSelect: React.Dispatch<React.SetStateAction<DirectoryChildren[]>>;
+  setSelect: React.Dispatch<React.SetStateAction<EntityHandle[]>>;
   onEnter(item: DirectoryHandle | FileHandle): void;
 }
 
@@ -24,7 +26,7 @@ const generateClass = classnames(style);
 export const itemStyle = style;
 
 export default function Item(props: ItemProps) {
-  const { item, isSelect, display, setSelect, onEnter } = props;
+  const { item, isSelect, isCut, display, setSelect, onEnter } = props;
 
   // const { value, change } = useModel('');
 
@@ -45,11 +47,11 @@ export default function Item(props: ItemProps) {
   // }, [directoryList]);
 
   const itemClass = generateClass(['item', `item-${display}`]);
-  const itemStyle = generateClass({ 'is-select': isSelect });
+  const itemStyle = generateClass({ 'is-select': isSelect, 'is-cut': isCut });
 
   // let name = value;
 
-  const itemClickHandle = (item: DirectoryChildren, ctrlKey: boolean) => {
+  const itemClickHandle = (item: EntityHandle, ctrlKey: boolean) => {
     if (ctrlKey) {
       setSelect((prev) => {
         return prev.includes(item) ? prev : [...prev, item];
