@@ -27,7 +27,7 @@ export default function FileSystemAccess() {
         >
           打开新文件夹
         </Button>
-        <Button style={{ marginLeft: 10 }} disabled>
+        <Button style={{ marginLeft: 10 }} onClick={() => setRoot(null)}>
           关闭当前文件夹
         </Button>
 

@@ -142,19 +142,34 @@ export const create: Create = (handle, { name, type }) => {
   return handle.getFileHandle(name, { create: true });
 };
 
-export const _move = async (
-  target: FileSystemDirectoryHandle,
-  value: EntityHandle
-) => {
+export const _move: Move = async function (
+  target,
+  value,
+  options = { discard: false }
+) {
   const handle = await create(target, value);
+  const { discard } = options;
 
   if (value.type === 'directory' && handle.kind === 'directory') {
     for await (const [key, val] of value.handle.entries()) {
-      move(handle, {
-        type: val.kind,
-        name: key,
-        handle: val
-      } as EntityHandle);
+      if (discard) {
+        await move.call(
+          this,
+          handle,
+          {
+            type: val.kind,
+            name: key,
+            handle: val
+          } as EntityHandle,
+          { discard }
+        );
+      } else {
+        await move.call(this, handle, {
+          type: val.kind,
+          name: key,
+          handle: val
+        } as EntityHandle);
+      }
     }
   } else {
     if (value.handle.kind !== 'file' || handle.kind !== 'file') return;
@@ -167,20 +182,20 @@ export const _move = async (
   }
 };
 
-export const move: Move = async (
+export const move: Move = async function (
   target,
   value,
   options = { discard: false }
-) => {
+) {
   const { discard } = options;
 
   if (discard === false) {
-    return _move(target, value);
+    return _move.call(this, target, value, options);
   }
 
-  await _move(target, value);
+  await _move.call(this, target, value, options);
 
-  return options.origin.removeEntry(value.name, { recursive: true });
+  // return this.removeEntry(value.name, { recursive: true });
 };
 
 export class FileSystemHistory {
@@ -207,9 +222,10 @@ export class FileSystemHistory {
 
     const last = this.forwardStack[this.forwardStack.length - 1];
 
-    if (this.forwardStack.length === 0 && back) {
-      this.forwardStack.push(back);
-    } else if (back && last.isSameEntry(back)) {
+    if (
+      (this.forwardStack.length === 0 && back) ||
+      (back && last.isSameEntry(back))
+    ) {
       this.forwardStack.push(back);
     }
 

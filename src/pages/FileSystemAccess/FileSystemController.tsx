@@ -63,7 +63,14 @@ export default function FileSystemController(props: FileSystemControllerProps) {
   const clipboard = useMemo(() => new FileSystemClipboard(setClipList), []);
 
   useEffect(() => {
-    if (!root) return;
+    if (!root) {
+      setCurrentDirectroy(null);
+      setDirectoryList([]);
+      setSelect([]);
+      setDisplay('list');
+      setShow(false);
+      clipboard.paste();
+    }
 
     setCurrentDirectroy(root);
   }, [root]);
@@ -133,22 +140,29 @@ export default function FileSystemController(props: FileSystemControllerProps) {
 
     const update = () => {
       count--;
+
       count === 0 && clipboard.paste();
     };
 
     forEach(datatransfer, async (value) => {
       if (state === 'copy') {
         count++;
-        move(currentDirectory, value).finally(update);
+
+        move.call(root, currentDirectory, value).finally(update);
       } else {
+        count++;
+
         const parent = await getParent(root, value);
 
         if (parent) {
-          count++;
-          move(currentDirectory, value, {
-            discard: true,
-            origin: parent
-          }).finally(update);
+          move
+            .call(parent, currentDirectory, value, {
+              discard: true
+            })
+            .finally(() => {
+              update();
+              parent.removeEntry(value.name, { recursive: true });
+            });
         }
       }
     });

@@ -47,11 +47,10 @@ export type Create = (
 ) => Promise<FileSystemDirectoryHandle | FileSystemFileHandle>;
 
 export type Move = (
+  this: FileSystemDirectoryHandle,
   target: FileSystemDirectoryHandle,
   value: EntityHandle,
-  options?:
-    | { discard: true; origin: FileSystemDirectoryHandle }
-    | { discard: false }
+  options?: { discard: boolean }
 ) => Promise<void>;
 
 export type TreeIndex = DirectoryIndex | FileIndex;
