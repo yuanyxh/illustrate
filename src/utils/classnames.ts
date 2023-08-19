@@ -39,3 +39,10 @@ export const composeClass = (...classes: string[]) => {
 
   return results.join(' ');
 };
+
+/**
+ * @description 创建过渡、动画所需类
+ */
+export const createClass = (active: string, from?: string, to?: string) => {
+  return { active, from, to };
+};

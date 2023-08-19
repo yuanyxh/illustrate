@@ -1,0 +1,25 @@
+.catalog {
+  margin-top: 8vh;
+  width: 25%;
+  border: var(--border);
+  border-color: rgba(0 0 0 / 40%);
+}
+
+.directory-select {
+  margin-top: 20px;
+  height: 280px;
+  border: var(--border);
+}
+
+.operate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.resolve {
+  flex: 1;
+}
+
+.resolve > button:last-child {
+  margin-left: 8px;
+}

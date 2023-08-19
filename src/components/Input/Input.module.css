@@ -111,6 +111,35 @@
   cursor: not-allowed;
 }
 
+.input-prefix,
+.input-suffix {
+  display: inline-flex;
+  white-space: nowrap;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  height: 100%;
+  text-align: center;
+  color: var(--input-icon-color, var(--text-color-placeholder));
+  transition: all var(--transition-duration);
+  pointer-events: none;
+}
+
+.input-prefix {
+  margin-right: 6px;
+}
+
+.input-suffix {
+  margin-left: 6px;
+}
+
+.input-prefix-inner,
+.input-suffix-inner {
+  pointer-events: all;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .textarea {
   --input-text-color: var(--text-color-regular);
   --input-border: var(--border);

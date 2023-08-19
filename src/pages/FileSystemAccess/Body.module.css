@@ -1,0 +1,41 @@
+.body-content {
+  position: relative;
+  height: 300px;
+  overflow-y: auto;
+  border: none;
+  outline: none;
+  cursor: default;
+  caret-color: transparent;
+}
+
+.body-content:has(> [data-display='thumbnail']) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 8px;
+}
+
+.file-clipboard {
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  outline: none;
+  opacity: 0;
+}
+
+.frame {
+  position: absolute;
+  border: var(--file-system-hover-border);
+  background-color: var(--file-system-hover-bg-color);
+  opacity: 0.6;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}

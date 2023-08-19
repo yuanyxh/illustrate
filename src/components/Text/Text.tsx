@@ -11,6 +11,9 @@ interface TextProps extends ChildProps {
 
 const generateClass = classnames(style);
 
+/**
+ * @description 文本
+ */
 export default function Text(props: TextProps) {
   const {
     children,

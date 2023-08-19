@@ -1,5 +1,5 @@
 import React from 'react';
-import { isArray, classnames, composeClass } from '@/utils';
+import { isArray, classnames, composeClass, isRenderElement } from '@/utils';
 import style from './Card.module.css';
 
 type ReactElement = React.ReactNode | React.ReactNode[];
@@ -12,6 +12,9 @@ type Slots = {
 interface CardProps extends Props {
   readonly children: ReactElement | Slots;
   shadow?: 'always' | 'hover' | 'never';
+  bodyClassName?: string;
+  bodyStyle?: React.CSSProperties;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 function isSlots(eles: unknown): eles is Slots {
@@ -24,20 +27,40 @@ function isSlots(eles: unknown): eles is Slots {
 
 const generateClass = classnames(style);
 
+/**
+ * @description card 卡片组件
+ */
 export default function Card(props: CardProps) {
-  const { children, shadow = 'always', className = '', style: _style } = props;
+  const {
+    children,
+    shadow = 'always',
+    bodyClassName = '',
+    bodyStyle,
+    onClick,
+    className = '',
+    style: _style
+  } = props;
 
   const _isSlots = isSlots(children);
-  const header = _isSlots ? children.header() : undefined;
+  const header = isRenderElement(_isSlots) && (children as Slots).header?.();
   const body = _isSlots ? children.body() : children;
 
   const cardClass = generateClass(['card', `is-${shadow}-shadow`]);
 
   return (
-    <div className={composeClass(cardClass, className)} style={_style}>
+    <div
+      className={composeClass(cardClass, className)}
+      style={_style}
+      onClick={onClick}
+    >
       {header ? <div className={style['card-header']}>{header}</div> : header}
 
-      <div className={style['card-body']}>{body}</div>
+      <div
+        className={composeClass(bodyClassName, style['card-body'])}
+        style={bodyStyle}
+      >
+        {body}
+      </div>
     </div>
   );
 }

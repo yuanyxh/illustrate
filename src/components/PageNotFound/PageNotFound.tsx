@@ -4,6 +4,9 @@ import { FEEDBACK_ADDRESS } from '@/config';
 import Text from '@/components/Text/Text';
 import style from './PageNotFound.module.css';
 
+/**
+ * @description 404 page not found
+ */
 export default function PageNotFound() {
   return (
     <div className={style['page-not-found']}>
