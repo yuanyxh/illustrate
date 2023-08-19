@@ -41,6 +41,19 @@ export interface FileSystemContext {
   clipboard: FileSystemClipboard | null;
 }
 
+export type Create = (
+  handle: FileSystemDirectoryHandle,
+  options: { name: string; type: 'file' | 'directory' }
+) => Promise<FileSystemDirectoryHandle | FileSystemFileHandle>;
+
+export type Move = (
+  target: FileSystemDirectoryHandle,
+  value: EntityHandle,
+  options?:
+    | { discard: true; origin: FileSystemDirectoryHandle }
+    | { discard: false }
+) => Promise<void>;
+
 export type TreeIndex = DirectoryIndex | FileIndex;
 
 export type EntityHandle = DirectoryHandle | FileHandle;

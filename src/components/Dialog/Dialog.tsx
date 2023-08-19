@@ -27,6 +27,7 @@ interface DialogProps extends Props {
   modal?: boolean;
   title?: string;
   closeOnClickModal?: boolean;
+  lockScroll?: boolean;
 }
 
 function isDialogSlots(data: unknown): data is DialogSlots {
@@ -83,7 +84,7 @@ export default function Dialog(props: DialogProps) {
         role="dialog"
         aria-modal={true}
         aria-label={title}
-        className={style['dialog-overlay']}
+        className={composeClass(style['dialog-overlay'])}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onClick={onClick}

@@ -110,3 +110,16 @@ export const MessageBoxConfig = {
     FOLDER_RENAME: '指定的文件夹和已有的某个文件重名，请指定其他名称。'
   }
 };
+
+export const CatalogConfig = {
+  move: {
+    TITLE: '移动项目',
+    DESC: '选择你要将文件移动到的地方，然后单击移动按钮。',
+    BUTTON_TEXT: '移动'
+  },
+  copy: {
+    TITLE: '复制项目',
+    DESC: '选择你要将文件复制到的地方，然后单击复制按钮。',
+    BUTTON_TEXT: '复制'
+  }
+};

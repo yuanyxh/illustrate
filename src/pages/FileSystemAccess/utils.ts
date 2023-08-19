@@ -1,10 +1,12 @@
-import { checkCharacter, forEach, classnames } from '@/utils';
+import { checkCharacter, forEach } from '@/utils';
 import { Icon, New } from './config';
 import type {
   DirectoryChildren,
   CreateHandle,
   EntityHandle,
-  TreeIndex
+  TreeIndex,
+  Create,
+  Move
 } from './types';
 
 export const addDirectory = (list: DirectoryChildren[]) => {
@@ -110,6 +112,75 @@ export const getParentName = (path: string) => {
   const strs = path.split('/');
 
   return strs[strs.length - 2];
+};
+
+export const getParent = async (
+  root: FileSystemDirectoryHandle,
+  value: EntityHandle
+) => {
+  const paths = await root.resolve(value.handle);
+
+  if (!paths) return;
+
+  paths.pop();
+
+  let parent = root;
+  let name;
+
+  while ((name = paths.shift())) {
+    parent = await parent.getDirectoryHandle(name);
+  }
+
+  return parent;
+};
+
+export const create: Create = (handle, { name, type }) => {
+  if (type === 'directory') {
+    return handle.getDirectoryHandle(name, { create: true });
+  }
+
+  return handle.getFileHandle(name, { create: true });
+};
+
+export const _move = async (
+  target: FileSystemDirectoryHandle,
+  value: EntityHandle
+) => {
+  const handle = await create(target, value);
+
+  if (value.type === 'directory' && handle.kind === 'directory') {
+    for await (const [key, val] of value.handle.entries()) {
+      move(handle, {
+        type: val.kind,
+        name: key,
+        handle: val
+      } as EntityHandle);
+    }
+  } else {
+    if (value.handle.kind !== 'file' || handle.kind !== 'file') return;
+
+    const file = await value.handle.getFile();
+    const writable = await handle.createWritable();
+
+    await writable.write(new Blob([file]));
+    await writable.close();
+  }
+};
+
+export const move: Move = async (
+  target,
+  value,
+  options = { discard: false }
+) => {
+  const { discard } = options;
+
+  if (discard === false) {
+    return _move(target, value);
+  }
+
+  await _move(target, value);
+
+  return options.origin.removeEntry(value.name, { recursive: true });
 };
 
 export class FileSystemHistory {

@@ -2,6 +2,7 @@ import React, { forwardRef, useRef, useEffect, useContext } from 'react';
 import { createPort, Rectangle, isRenderElement } from '@/utils';
 import { ControllerContext } from './FileSystemController';
 import Text from '@/components/Text/Text';
+import NewHandle from './NewHandle';
 import Item from './Item';
 import { itemStyle } from './Item';
 import type { DirectoryChildren, EntityHandle, DisplayType } from './types';
@@ -18,11 +19,12 @@ interface BodyProps extends Props {
   select: EntityHandle[];
   setSelect: React.Dispatch<React.SetStateAction<EntityHandle[]>>;
   display: DisplayType;
+  onClipboard(type: 'copy' | 'cut' | 'paste'): void;
 }
 
 export default forwardRef(function Body(
   props: BodyProps,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLInputElement>
 ) {
   const {
     root,
@@ -32,22 +34,23 @@ export default forwardRef(function Body(
     setDirectoryList,
     select,
     setSelect,
-    display = 'list'
+    display = 'list',
+    onClipboard
   } = props;
 
   const { history, clipboard } = useContext(ControllerContext);
 
   const frameRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    $input.exec((ele) => {
-      ele.focus();
-    });
-  }, [select]);
+    (
+      window.document.querySelector(
+        '.' + style['file-clipboard']
+      ) as HTMLInputElement
+    )?.focus();
+  }, [select, root, currentDirectory, directoryList, display]);
 
   const $frame = createPort(frameRef);
-  const $input = createPort(inputRef);
 
   let tempSelect: string[] = [];
   let isFrameSelection = false;
@@ -140,14 +143,6 @@ export default forwardRef(function Body(
     endY = 0;
   };
 
-  const copyOrCut = (type: 'copy' | 'cut') => {
-    type === 'copy' ? clipboard?.copy(select) : clipboard?.cut(select);
-  };
-
-  const paste = () => {
-    /*  */
-  };
-
   const enter = (handle: EntityHandle) => {
     if (handle.type === 'directory') {
       setCurrentDirectroy(handle.handle);
@@ -156,44 +151,59 @@ export default forwardRef(function Body(
   };
 
   return (
-    <div
-      ref={ref}
-      className={style['body-content']}
-      contentEditable={true}
-      onMouseDown={startSelect}
-      onMouseUp={() => cacheSelect()}
-      onMouseLeave={() => cacheSelect()}
-      onMouseMove={frameSelection}
-      onCopy={() => copyOrCut('copy')}
-      onCut={() => copyOrCut('cut')}
-      onPaste={paste}
-    >
-      {directoryList.map((item) =>
-        item.type === 'create' ? (
-          ''
-        ) : (
-          <Item
-            key={item.name}
-            item={item}
-            select={select}
-            display={display}
-            isSelect={select.includes(item)}
-            isCut={clipboard?.datatransfer.includes(item) || false}
-            setSelect={setSelect}
-            onEnter={enter}
+    <>
+      <div
+        className={style['body-content']}
+        onMouseDown={startSelect}
+        onMouseUp={() => cacheSelect()}
+        onMouseLeave={() => cacheSelect()}
+        onMouseMove={frameSelection}
+      >
+        {directoryList.map((item) =>
+          item.type === 'create' ? (
+            <NewHandle
+              key={item.name}
+              item={item}
+              currentDirectory={currentDirectory}
+              directoryList={directoryList}
+              setDirectoryList={setDirectoryList}
+              select={select}
+              setSelect={setSelect}
+            />
+          ) : (
+            <Item
+              key={item.name}
+              item={item}
+              select={select}
+              display={display}
+              isSelect={select.includes(item)}
+              isCut={clipboard?.datatransfer.includes(item) || false}
+              setSelect={setSelect}
+              onEnter={enter}
+            />
+          )
+        )}
+
+        {isRenderElement(directoryList.length === 0) && (
+          <div className={style['empty']}>
+            <i className="iconfont icon-kongbaiye" style={{ fontSize: 60 }}></i>
+
+            <Text type="info">此文件夹为空</Text>
+          </div>
+        )}
+
+        <>
+          <div ref={frameRef} className={style['frame']}></div>
+          <input
+            ref={ref}
+            type="text"
+            className={style['file-clipboard']}
+            onCopy={() => onClipboard('copy')}
+            onCut={() => onClipboard('cut')}
+            onPaste={() => onClipboard('paste')}
           />
-        )
-      )}
-
-      {isRenderElement(directoryList.length === 0) && (
-        <div className={style['empty']}>
-          <i className="iconfont icon-kongbaiye" style={{ fontSize: 60 }}></i>
-
-          <Text type="info">此文件夹为空</Text>
-        </div>
-      )}
-
-      <div ref={frameRef} className={style['frame']}></div>
-    </div>
+        </>
+      </div>
+    </>
   );
 });

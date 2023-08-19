@@ -5,18 +5,21 @@ import React, {
   createContext,
   useMemo
 } from 'react';
+import { CatalogConfig } from './config';
 import { composeClass, forEach, isRenderElement } from '@/utils';
 import {
   addDirectory,
-  isCreate,
   FileSystemHistory,
-  FileSystemClipboard
+  FileSystemClipboard,
+  move,
+  getParent
 } from './utils';
 import Card from '@/components/Card/Card';
 import Text from '@/components/Text/Text';
 import Header from './Header';
 import Body from './Body';
 import Location from './Location';
+import Catalog from './Catalog';
 import type {
   DirectoryChildren,
   EntityHandle,
@@ -49,10 +52,12 @@ export default function FileSystemController(props: FileSystemControllerProps) {
 
   const [directoryList, setDirectoryList] = useState<DirectoryChildren[]>([]);
   const [select, setSelect] = useState<EntityHandle[]>([]);
-  const [, setClipList] = useState<EntityHandle[]>([]);
+  const [clipList, setClipList] = useState<EntityHandle[]>([]);
   const [display, setDisplay] = useState<DisplayType>('list');
+  const [show, setShow] = useState(false);
+  const [catalogConf, setCatalogConf] = useState(CatalogConfig.copy);
 
-  const bodyRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLInputElement>(null);
 
   const history = useMemo(() => root && new FileSystemHistory(root), [root]);
   const clipboard = useMemo(() => new FileSystemClipboard(setClipList), []);
@@ -84,14 +89,14 @@ export default function FileSystemController(props: FileSystemControllerProps) {
 
       setDirectoryList([...directorys, ...files]);
     })();
-  }, [currentDirectory]);
+  }, [currentDirectory, clipList]);
 
-  const remove = () => {
+  const remove = async () => {
     if (!currentDirectory) return;
 
-    forEach(select, async (handle) => {
-      if (isCreate(handle)) return;
+    let handle: EntityHandle | undefined;
 
+    while ((handle = select.shift())) {
       const name = handle.name;
       const i = directoryList.findIndex((curr) => curr === handle);
 
@@ -100,8 +105,52 @@ export default function FileSystemController(props: FileSystemControllerProps) {
       await currentDirectory.removeEntry(name, { recursive: true });
 
       directoryList.splice(i, 1);
+    }
 
-      setDirectoryList([...directoryList]);
+    setSelect([]);
+    setDirectoryList([...directoryList]);
+  };
+
+  const onClipboard = (type: 'copy' | 'cut' | 'paste') => {
+    if (type === 'copy') {
+      clipboard.copy(select);
+    }
+
+    if (type === 'cut') {
+      clipboard.cut(select);
+    }
+
+    if (type === 'paste') {
+      onPaste();
+    }
+  };
+
+  const onPaste = () => {
+    if (!root || !currentDirectory) return;
+
+    let count = 0;
+    const { datatransfer, state } = clipboard;
+
+    const update = () => {
+      count--;
+      count === 0 && clipboard.paste();
+    };
+
+    forEach(datatransfer, async (value) => {
+      if (state === 'copy') {
+        count++;
+        move(currentDirectory, value).finally(update);
+      } else {
+        const parent = await getParent(root, value);
+
+        if (parent) {
+          count++;
+          move(currentDirectory, value, {
+            discard: true,
+            origin: parent
+          }).finally(update);
+        }
+      }
     });
   };
 
@@ -117,6 +166,22 @@ export default function FileSystemController(props: FileSystemControllerProps) {
       case 'create':
         setDirectoryList(addDirectory(directoryList));
 
+        break;
+      case 'paste':
+        onPaste();
+
+        break;
+
+      case 'move-to':
+        setShow(true);
+
+        setCatalogConf(CatalogConfig.move);
+        break;
+
+      case 'copy-to':
+        setShow(true);
+
+        setCatalogConf(CatalogConfig.copy);
         break;
 
       case 'remove':
@@ -138,66 +203,75 @@ export default function FileSystemController(props: FileSystemControllerProps) {
   };
 
   return (
-    <ControllerContext.Provider
-      value={{ history: history as FileSystemHistory, clipboard }}
-    >
-      <Card
-        bodyStyle={{ padding: 0, paddingBottom: 15 }}
-        className={composeClass(
-          style['file-system-controller'],
-          nativeProps.className || ''
-        )}
-        style={Object.assign(
-          { position: 'relative', userSelect: 'none' },
-          nativeProps.style || {}
-        )}
-        onClick={() => bodyRef.current?.focus()}
+    <>
+      <ControllerContext.Provider
+        value={{ history: history as FileSystemHistory, clipboard }}
       >
-        {{
-          header() {
-            return (
-              <Header nodeClick={nodeClick} select={select} display={display} />
-            );
-          },
-          body() {
-            return (
-              <>
-                <section className={style['file-system-controller-body']}>
-                  <Location
-                    root={root}
-                    directoryList={directoryList}
-                    currentDirectory={currentDirectory}
-                    setCurrentDirectroy={setCurrentDirectroy}
-                  />
+        <Card
+          bodyStyle={{ padding: 0, paddingBottom: 15 }}
+          className={composeClass(
+            style['file-system-controller'],
+            nativeProps.className || ''
+          )}
+          style={Object.assign(
+            { position: 'relative', userSelect: 'none' },
+            nativeProps.style || {}
+          )}
+          onClick={() => bodyRef.current?.focus()}
+        >
+          {{
+            header() {
+              return (
+                <Header
+                  nodeClick={nodeClick}
+                  select={select}
+                  display={display}
+                />
+              );
+            },
+            body() {
+              return (
+                <>
+                  <section className={style['file-system-controller-body']}>
+                    <Location
+                      root={root}
+                      directoryList={directoryList}
+                      currentDirectory={currentDirectory}
+                      setCurrentDirectroy={setCurrentDirectroy}
+                    />
 
-                  <Body
-                    ref={bodyRef}
-                    root={root}
-                    currentDirectory={currentDirectory}
-                    setCurrentDirectroy={setCurrentDirectroy}
-                    directoryList={directoryList}
-                    setDirectoryList={setDirectoryList}
-                    select={select}
-                    setSelect={setSelect}
-                    display={display}
-                  />
-                </section>
+                    <Body
+                      ref={bodyRef}
+                      root={root}
+                      currentDirectory={currentDirectory}
+                      setCurrentDirectroy={setCurrentDirectroy}
+                      directoryList={directoryList}
+                      setDirectoryList={setDirectoryList}
+                      select={select}
+                      setSelect={setSelect}
+                      display={display}
+                      onClipboard={onClipboard}
+                    />
+                  </section>
 
-                {isRenderElement(!canCrateRootDirectory && !root) && (
-                  <div className={style['locked']}>
-                    <i
-                      className="iconfont icon-lock"
-                      style={{ fontSize: 60, marginBottom: 8 }}
-                    ></i>
+                  {isRenderElement(!canCrateRootDirectory && !root) && (
+                    <div className={style['locked']}>
+                      <i
+                        className="iconfont icon-lock"
+                        style={{ fontSize: 60, marginBottom: 8 }}
+                      ></i>
 
-                    <Text type="info">请先选择本地文件</Text>
-                  </div>
-                )}
-              </>
-            );
-          }
-        }}
-      </Card>
-    </ControllerContext.Provider>
+                      <Text type="info">请先选择本地文件</Text>
+                    </div>
+                  )}
+                </>
+              );
+            }
+          }}
+        </Card>
+      </ControllerContext.Provider>
+
+      <Catalog show={show} change={setShow} config={catalogConf}></Catalog>
+    </>
   );
 }

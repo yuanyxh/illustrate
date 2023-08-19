@@ -28,28 +28,8 @@ export const itemStyle = style;
 export default function Item(props: ItemProps) {
   const { item, isSelect, isCut, display, setSelect, onEnter } = props;
 
-  // const { value, change } = useModel('');
-
-  // TODO: 应该放到 filesystem body
-  // useEffect(() => {
-  //   const hasCreate = directoryList.find((item) => item.type === 'create');
-
-  //   if (hasCreate) {
-  //     change(
-  //       resolveName(
-  //         directoryList,
-  //         hasCreate.name === 'directory' ? New.DIRECTORY : New.FILE
-  //       )
-  //     );
-
-  //     setSelect([]);
-  //   }
-  // }, [directoryList]);
-
   const itemClass = generateClass(['item', `item-${display}`]);
   const itemStyle = generateClass({ 'is-select': isSelect, 'is-cut': isCut });
-
-  // let name = value;
 
   const itemClickHandle = (item: EntityHandle, ctrlKey: boolean) => {
     if (ctrlKey) {
@@ -60,66 +40,6 @@ export default function Item(props: ItemProps) {
       setSelect([item]);
     }
   };
-
-  // const createHandle = () => {
-  //   if (!currentDirectory || item.type !== 'create') return;
-
-  //   if (!name.trim()) {
-  //     name = isCreateDirectory ? New.DIRECTORY : New.FILE;
-  //   }
-
-  //   name = resolveName(directoryList, name);
-
-  //   const i = directoryList.findIndex((curr) => item === curr);
-
-  //   const isSome = directoryList.find(
-  //     (item, index) => index !== i && item.name === name
-  //   );
-
-  //   if (isSome) {
-  //     return;
-  //   }
-
-  //   (async () => {
-  //     const handle = await currentDirectory[
-  //       isCreateDirectory ? 'getDirectoryHandle' : 'getFileHandle'
-  //     ](name, { create: true });
-
-  //     directoryList[i] = {
-  //       name: name,
-  //       type: isCreateDirectory ? 'directory' : 'file',
-  //       handle: handle
-  //     } as DirectoryChildren;
-
-  //     setDirectoryList([...directoryList]);
-  //   })();
-
-  //   change('');
-  // };
-
-  // const create = (createItem: CreateHandle) => (
-  //   <div
-  //     className={composeClass(itemClass)}
-  //     onMouseDown={(e) => e.stopPropagation()}
-  //     data-display={display}
-  //   >
-  //     <i className={composeClass('iconfont', getIconName(createItem))}></i>
-
-  //     <div className={style['item-name']}>
-  //       <Input
-  //         value={value}
-  //         change={(e) => {
-  //           isValidFileName(e) && change(e);
-  //         }}
-  //         autofocus
-  //         selectInFocus
-  //         size="small"
-  //         blur={() => createHandle()}
-  //         enter={() => createHandle()}
-  //       ></Input>
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div
