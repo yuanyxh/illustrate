@@ -1,0 +1,78 @@
+.input-number {
+  --input-number-width: 150px;
+  --input-number-line-height: 30px;
+  --input-number-btn-width: 32px;
+  --input-number-btn-font-size: 13px;
+
+  position: relative;
+  display: inline-flex;
+  width: var(--input-number-width);
+  line-height: var(--input-number-line-height);
+}
+
+.input-number-large {
+  --input-number-width: 180px;
+  --input-number-line-height: 38px;
+  --input-number-btn-width: 40px;
+  --input-number-btn-font-size: 14px;
+}
+
+.input-number-small {
+  --input-number-width: 120px;
+  --input-number-line-height: 22px;
+  --input-number-btn-width: 24px;
+  --input-number-btn-font-size: 12px;
+}
+
+.input-number-increase {
+  right: 1px;
+  border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
+  border-left: var(--border);
+}
+
+.input-number-increase,
+.input-number-decrease {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  bottom: 1px;
+  width: var(--input-number-btn-width);
+  background: var(--fill-color-light);
+  color: var(--text-color-regular);
+  cursor: pointer;
+  font-size: var(--input-number-btn-font-size);
+  user-select: none;
+}
+
+.input-number-decrease {
+  left: 1px;
+  border-radius: var(--border-radius-base) 0 0 var(--border-radius-base);
+  border-right: var(--border);
+}
+
+.input-number-decrease.is-disabled,
+.input-number-increase.is-disabled {
+  color: var(--disabled-text-color);
+  cursor: not-allowed;
+}
+
+.input-number.is-disabled .input-number-increase,
+.input-number.is-disabled .input-number-decrease {
+  border-color: var(--disabled-border-color);
+  color: var(--disabled-border-color);
+  cursor: not-allowed;
+}
+
+.input-number-wrapper {
+  padding-inline: 42px;
+}
+
+.input-number-wrapper > input {
+  appearance: none;
+  text-align: center;
+  line-height: 1;
+}

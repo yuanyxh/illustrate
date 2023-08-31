@@ -19,7 +19,8 @@ export default forwardRef(function Overlay(
     onClick,
     children,
     className = '',
-    style: _style
+    style: _style,
+    ...nativeProps
   } = props;
 
   const {
@@ -36,6 +37,7 @@ export default forwardRef(function Overlay(
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={click}
+      {...nativeProps}
     >
       {children}
     </div>

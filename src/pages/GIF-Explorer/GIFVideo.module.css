@@ -1,0 +1,36 @@
+.gif-transfer {
+  display: flex;
+}
+
+.gif-video-container {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 5px;
+  width: 40%;
+  border: var(--border);
+  border-color: var(--color-primary);
+  border-radius: var(--border-radius-base);
+}
+
+.gif-video {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gif-transfer-form {
+  margin-left: 30px;
+}
+
+.gif-transfer-form-item {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+  margin-bottom: 20px;
+}
+
+.gif-transfer-form-item > label {
+  flex-shrink: 0;
+  font-weight: 600;
+  width: 100px;
+  white-space: nowrap;
+}

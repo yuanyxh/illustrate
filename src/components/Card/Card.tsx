@@ -38,7 +38,8 @@ export default function Card(props: CardProps) {
     bodyStyle,
     onClick,
     className = '',
-    style: _style
+    style: _style,
+    ...nativeProps
   } = props;
 
   const _isSlots = isSlots(children);
@@ -52,6 +53,7 @@ export default function Card(props: CardProps) {
       className={composeClass(cardClass, className)}
       style={_style}
       onClick={onClick}
+      {...nativeProps}
     >
       {header ? <div className={style['card-header']}>{header}</div> : header}
 

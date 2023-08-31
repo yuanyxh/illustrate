@@ -253,7 +253,8 @@ export default function Upload(props: Readonly<UploadProps>) {
           style: nativeProps.style,
           onClick: triggerUpload,
           onDragOver: (e) => e.preventDefault(),
-          onDrop: drag ? dropFile : undefined
+          onDrop: drag ? dropFile : undefined,
+          ...nativeProps
         },
         defaultSlot
       )}

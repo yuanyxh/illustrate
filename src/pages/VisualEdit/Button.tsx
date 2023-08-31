@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Button.module.css';
 
-interface ButtonProps extends ChildProps {
+interface ButtonProps extends ButtonChildProps {
   dragstart: React.DragEventHandler;
 }
 

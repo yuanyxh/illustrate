@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import style from './Loading.module.css';
 import { classnames } from '@/utils';
 
-interface LoadingProps {
+interface LoadingProps extends Props {
   /** 是否将对应的元素添加至 body 中 */
   appendBody?: boolean;
   /**
@@ -23,6 +23,8 @@ let timer: number | null = null;
  * @description loading 效果
  */
 export default function Loading(props: Readonly<LoadingProps>) {
+  const { appendBody, delay, ...nativeProps } = props;
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -36,8 +38,6 @@ export default function Loading(props: Readonly<LoadingProps>) {
     };
   }, []);
 
-  const { appendBody, delay } = props;
-
   const element = (
     <div
       className={generateClass({
@@ -45,6 +45,7 @@ export default function Loading(props: Readonly<LoadingProps>) {
         'loading-wrapper': true
       })}
       onClick={stopPropagation}
+      {...nativeProps}
     >
       <div className={style.loading} onClick={stopPropagation}></div>
     </div>

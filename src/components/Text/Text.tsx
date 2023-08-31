@@ -2,7 +2,7 @@ import React from 'react';
 import { classnames, composeClass } from '@/utils';
 import style from './Text.module.css';
 
-interface TextProps extends ChildProps {
+interface TextProps extends ChildProps<HTMLSpanElement> {
   type?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger';
   size?: 'default' | 'small' | 'large';
   block?: boolean;
@@ -22,7 +22,8 @@ export default function Text(props: TextProps) {
     type = 'default',
     size = 'default',
     block = false,
-    truncated = false
+    truncated = false,
+    ...nativeProps
   } = props;
 
   const textType = generateClass(['text', `text-${type}`, `text-${size}`]);
@@ -36,6 +37,7 @@ export default function Text(props: TextProps) {
     <span
       className={composeClass(textType, textStyle, className)}
       style={style}
+      {...nativeProps}
     >
       {children}
     </span>
