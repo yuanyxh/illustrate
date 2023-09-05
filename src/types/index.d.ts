@@ -15,3 +15,17 @@ declare interface ChildProps<T = HTMLElement> extends CommonProps<T> {
   /** function slot */
   readonly children?: React.ReactNode | React.ReactNode[];
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare type Fn = (...args: unknown[]) => any;
+
+declare module '*.worker.ts' {
+  // You need to change `Worker`, if you specified a different value for the `workerType` option
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+
+  // Uncomment this if you set the `esModule` option to `false`
+  // export = WebpackWorker;
+  export default WebpackWorker;
+}

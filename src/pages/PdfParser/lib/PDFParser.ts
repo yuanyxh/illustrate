@@ -634,8 +634,6 @@ export class Draw {
 
     // pdf.set(xref[DescendantFonts[0].serial]);
 
-    // console.log(pdf.parseDictionary<PDF.DescendantFont>(stream));
-
     pdf.set(xref[ToUnicode.serial]);
 
     const { Filter } = pdf.parseDictionary<PDF.ToUnicode>(stream);
@@ -710,6 +708,7 @@ export class Draw {
     const xref = pdf.xref;
 
     /** 操作栈 */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const operations: any[] = [];
 
     /** 解析完成 */
@@ -801,8 +800,6 @@ export class Draw {
           if (!gs) throw Error('quote does not exist');
 
           pdf.set(xref[gs.serial]);
-
-          // console.log(pdf.parseDictionary<PDF.ExtGState>(pdf.bytes));
 
           break;
 

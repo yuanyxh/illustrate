@@ -149,6 +149,38 @@ export const checkCharacter = (reg: RegExp) => (s: string) => reg.test(s);
 export const isRenderElement = (condition: unknown) =>
   condition ? 'render' : undefined;
 
+export const assign = (obj: OrdinaryObject, ...args: OrdinaryObject[]) => {
+  for (let i = 0; i < args.length; i++) {
+    const curr = args[i];
+    const _names = Object.getOwnPropertyNames(args[i]);
+    const _symbols = Object.getOwnPropertySymbols(args[i]);
+
+    for (let j = 0; j < _names.length; j++) {
+      if (
+        typeof curr[_names[j]] === 'undefined' &&
+        typeof obj[_names[j]] !== 'undefined'
+      ) {
+        continue;
+      }
+
+      obj[_names[j]] = curr[_names[j]];
+    }
+
+    for (let j = 0; j < _symbols.length; j++) {
+      if (
+        typeof curr[_symbols[j]] === 'undefined' &&
+        typeof obj[_symbols[j]] !== 'undefined'
+      ) {
+        continue;
+      }
+
+      obj[_symbols[j]] = curr[_symbols[j]];
+    }
+  }
+
+  return obj;
+};
+
 export * from './http';
 
 export * from './classnames';
@@ -156,5 +188,7 @@ export * from './classnames';
 export * from './elements';
 
 export * from './events';
+
+export * from './polling';
 
 export { default as base64 } from './crypto/base64';

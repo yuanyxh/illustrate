@@ -10,8 +10,8 @@ const FileSystemAccess = lazy(
   () => import('@/pages/FileSystemAccess/FileSystemAccess')
 );
 const GIFExplorer = lazy(() => import('@/pages/GIF-Explorer/GIF-Explorer'));
-const Test = lazy(() => import('@/pages/Test/Test'));
 const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
+const Test = lazy(() => import('@/pages/Test/Test'));
 const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
 const VisualEdit = lazy(() => import('@/pages/VisualEdit/VisualEdit'));
 
@@ -50,16 +50,16 @@ export const routes: Route.CustomRouteObject[] = [
             element: <GIFExplorer />
           },
           {
-            path: 'test',
-            title: '测试页面',
-            image: '',
-            element: <Test />
-          },
-          {
             path: 'pdf-parser',
             title: 'PDF 解析',
             image: '',
             element: <PdfParser />
+          },
+          {
+            path: 'test',
+            title: '测试页面',
+            image: '',
+            element: <Test />
           },
           {
             path: 'upload-file',

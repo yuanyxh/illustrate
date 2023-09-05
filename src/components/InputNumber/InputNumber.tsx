@@ -4,8 +4,8 @@ import Input from '@/components/Input/Input';
 import style from './InputNumber.module.css';
 
 interface InputNumberProps extends InputProps {
-  value: number | string;
-  change: React.Dispatch<React.SetStateAction<number | string>>;
+  value: number;
+  change: React.Dispatch<React.SetStateAction<number>>;
   size?: 'large' | 'default' | 'small';
   disabled?: boolean;
   step?: number;
@@ -31,7 +31,7 @@ export default function InputNumber(props: InputNumberProps) {
   } = props;
 
   const _change = (e: string) => {
-    if (e.trim() === '') return change(e);
+    if (e.trim() === '') return change(e as unknown as number);
 
     if (/\d+/.test(e)) {
       let num = window.parseInt(e);
@@ -44,28 +44,34 @@ export default function InputNumber(props: InputNumberProps) {
 
       if (num < min || num > max) return;
 
-      change(isNumber(precision) ? num : num.toFixed(precision));
+      change(
+        isNumber(precision) ? Number(num) : Number(num.toFixed(precision))
+      );
     }
   };
 
   const decrease = () => {
     const num = isNumber(value)
       ? value
-      : window.parseInt(value.trim() === '' ? '0' : value);
+      : window.parseInt((value as string).trim() === '' ? '0' : value);
 
     if (num <= min) return;
 
-    change(isNumber(precision) ? (num - step).toFixed(precision) : num - step);
+    change(
+      isNumber(precision) ? Number((num - step).toFixed(precision)) : num - step
+    );
   };
 
   const increase = () => {
     const num = isNumber(value)
       ? value
-      : window.parseInt(value.trim() === '' ? '0' : value);
+      : window.parseInt((value as string).trim() === '' ? '0' : value);
 
     if (num >= max) return;
 
-    change(isNumber(precision) ? (num + step).toFixed(precision) : num + step);
+    change(
+      isNumber(precision) ? Number((num + step).toFixed(precision)) : num + step
+    );
   };
 
   const inputNumberClass = generateClass([`input-number-${size}`]);

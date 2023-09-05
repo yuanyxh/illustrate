@@ -172,8 +172,6 @@ export default function Upload(props: Readonly<UploadProps>) {
 
           if (index < 0) return prev;
 
-          console.log(prev[index].percent);
-
           prev[index] = {
             ...prev[index],
             status: 'error',

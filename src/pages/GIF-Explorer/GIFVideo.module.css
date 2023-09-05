@@ -1,15 +1,29 @@
 .gif-transfer {
   display: flex;
+  align-items: flex-start;
 }
 
 .gif-video-container {
   position: relative;
   margin-bottom: 20px;
+  min-height: 200px;
   padding: 5px;
   width: 40%;
   border: var(--border);
   border-color: var(--color-primary);
   border-radius: var(--border-radius-base);
+  cursor: pointer;
+}
+
+.gif-video-upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-upload {
+  font-size: 50px;
 }
 
 .gif-video {
@@ -31,6 +45,6 @@
 .gif-transfer-form-item > label {
   flex-shrink: 0;
   font-weight: 600;
-  width: 100px;
+  width: 105px;
   white-space: nowrap;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { useTransition } from '@/hooks';
 import { classnames } from '@/utils';
