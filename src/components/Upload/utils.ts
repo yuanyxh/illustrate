@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { hasData } from '@/utils';
 import type { NameSlot } from './types';
 
@@ -15,7 +16,11 @@ export function generateId() {
 
 /** 是否是命名插槽 */
 export function isNameSlot(data: unknown): data is NameSlot {
-  return hasData(data) && hasData((data as NameSlot).default);
+  return (
+    hasData(data) &&
+    (typeof (data as NameSlot).default === 'function' ||
+      isValidElement((data as NameSlot).default))
+  );
 }
 
 /** 获取最大字节长度 */

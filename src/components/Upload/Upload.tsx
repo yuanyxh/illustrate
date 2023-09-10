@@ -172,8 +172,6 @@ export default function Upload(props: Readonly<UploadProps>) {
 
           if (index < 0) return prev;
 
-          console.log(prev[index].percent);
-
           prev[index] = {
             ...prev[index],
             status: 'error',
@@ -195,7 +193,9 @@ export default function Upload(props: Readonly<UploadProps>) {
 
   let defaultSlot: Children, tipsSlot: Children;
 
-  if (isArray(children) || isValidElement(children)) defaultSlot = children;
+  if (isArray(children) || isValidElement(children)) {
+    defaultSlot = children;
+  }
 
   if (isNameSlot(children)) {
     const { default: defaultElement, tips } = children;
@@ -253,7 +253,8 @@ export default function Upload(props: Readonly<UploadProps>) {
           style: nativeProps.style,
           onClick: triggerUpload,
           onDragOver: (e) => e.preventDefault(),
-          onDrop: drag ? dropFile : undefined
+          onDrop: drag ? dropFile : undefined,
+          ...nativeProps
         },
         defaultSlot
       )}

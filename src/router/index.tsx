@@ -9,6 +9,7 @@ const Base64 = lazy(() => import('@/pages/Base64/Base64'));
 const FileSystemAccess = lazy(
   () => import('@/pages/FileSystemAccess/FileSystemAccess')
 );
+const GIFExplorer = lazy(() => import('@/pages/GIF-Explorer/GIF-Explorer'));
 const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
 const Test = lazy(() => import('@/pages/Test/Test'));
 const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
@@ -41,6 +42,12 @@ export const routes: Route.CustomRouteObject[] = [
             title: '文件系统管理',
             image: '',
             element: <FileSystemAccess />
+          },
+          {
+            path: 'gif-explorer',
+            title: 'GIF 编解码',
+            image: '',
+            element: <GIFExplorer />
           },
           {
             path: 'pdf-parser',

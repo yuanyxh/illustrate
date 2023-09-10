@@ -1,7 +1,7 @@
 .visual-edit {
   display: flex;
   padding: 10px;
-  height: inherit;
+  height: calc(100vh - 10px);
 }
 
 .visual,

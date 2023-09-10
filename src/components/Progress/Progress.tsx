@@ -31,7 +31,8 @@ export default function Progress(props: ProgressProps) {
     duration = 3,
     className = '',
     style: _style,
-    format
+    format,
+    ...nativeProps
   } = props;
 
   const value = (Math.abs(percentage) + 100) % 100;
@@ -55,6 +56,7 @@ export default function Progress(props: ProgressProps) {
       aria-valuemax={100}
       className={composeClass(progressClass, className)}
       style={_style}
+      {...nativeProps}
     >
       <div className={style['progress-bar']}>
         <div

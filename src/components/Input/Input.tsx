@@ -1,17 +1,19 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { classnames, composeClass, isNumber, isRenderElement } from '@/utils';
 import style from './Input.module.css';
+
+type Props = InputProps & TextAreaProps;
 
 export interface InputExpose {
   select(): void;
 }
 
-type InputSlots = {
+interface InputSlots {
   prefix?(): React.ReactNode | React.ReactNode[];
   suffix?(): React.ReactNode | React.ReactNode[];
-};
+}
 
-interface InputProps extends Props {
+interface _InputProps extends Props {
   change: (val: string) => void;
   focus?:
     | React.FocusEventHandler<HTMLInputElement>
@@ -25,6 +27,7 @@ interface InputProps extends Props {
   type?: React.HTMLInputTypeAttribute;
   name?: string;
   size?: 'default' | 'large' | 'small';
+  id?: string;
   readonly?: boolean;
   placeholder?: string;
   disabled?: boolean;
@@ -46,8 +49,8 @@ const generateClass = classnames(style);
  * @description input 表单输入
  */
 export default forwardRef(function Input(
-  props: InputProps,
-  ref: React.ForwardedRef<InputExpose>
+  props: _InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
 ) {
   const {
     value = '',
@@ -61,6 +64,7 @@ export default forwardRef(function Input(
     disabled = false,
     autofocus = false,
     tabIndex = 0,
+    id,
     readonly = false,
     selectInFocus = false,
     name,
@@ -72,20 +76,9 @@ export default forwardRef(function Input(
     form,
     children,
     style,
-    className = ''
+    className = '',
+    ...nativeProps
   } = props;
-
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      select() {
-        inputRef.current?.select();
-      }
-    }),
-    []
-  );
 
   const inputClass = generateClass(['input', `input-${size}`]);
 
@@ -107,8 +100,6 @@ export default forwardRef(function Input(
 
   const clickHandle: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
-
-    inputRef.current?.focus();
   };
 
   const enterHandle: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -118,11 +109,12 @@ export default forwardRef(function Input(
   };
 
   const input = (
-    <div onClick={clickHandle} className={composeClass(inputClass, inputStyle)}>
+    <div className={composeClass(inputClass, inputStyle)}>
       <div
         style={style}
         className={composeClass(inputWrapperClass, className)}
         tabIndex={-1}
+        onClick={clickHandle}
       >
         {isRenderElement(prefix) && (
           <span className={generateClass(['input-prefix'])}>
@@ -133,7 +125,8 @@ export default forwardRef(function Input(
         )}
 
         <input
-          ref={inputRef}
+          ref={ref}
+          id={id}
           className={inputInnerClass}
           type={type}
           name={name}
@@ -157,6 +150,7 @@ export default forwardRef(function Input(
           }}
           onBlur={blur as React.FocusEventHandler<HTMLInputElement>}
           onKeyUp={enterHandle}
+          {...nativeProps}
         />
 
         {isRenderElement(suffix) && (
@@ -178,6 +172,7 @@ export default forwardRef(function Input(
           textareaInnerStyle,
           className
         )}
+        id={id}
         style={style}
         form={form}
         name={name}
@@ -198,6 +193,7 @@ export default forwardRef(function Input(
         }}
         onFocus={focus as React.FocusEventHandler<HTMLTextAreaElement>}
         onBlur={blur as React.FocusEventHandler<HTMLTextAreaElement>}
+        {...nativeProps}
       ></textarea>
     </div>
   );

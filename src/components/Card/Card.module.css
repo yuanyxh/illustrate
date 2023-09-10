@@ -7,7 +7,6 @@
   border-radius: var(--card-border-radius);
   border: 1px solid var(--card-border-color);
   background-color: var(--card-bg-color);
-  overflow: hidden;
   color: var(--text-color-primary);
   transition: var(--transition-duration);
 }

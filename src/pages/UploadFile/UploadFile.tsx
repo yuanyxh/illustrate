@@ -1,6 +1,5 @@
 import React from 'react';
 import { useModel } from '@/hooks';
-// import { classnames } from '@/utils';
 import Upload from '@/components/Upload/Upload';
 import Button from '@/components/Button/Button';
 import Text from '@/components/Text/Text';
@@ -71,7 +70,6 @@ export default function UploadFile() {
         >
           <section className={style['upload-drag']}>
             <p>
-              {' '}
               Drop file here or{' '}
               <Text type="primary" size="large">
                 click to upload

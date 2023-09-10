@@ -17,7 +17,8 @@ export default function LoadingIcon(props: LoadingIcon) {
     size = 'default',
     color = '#fff',
     className = '',
-    style = {}
+    style = {},
+    ...nativeProps
   } = props;
 
   const loadingIconClass = generateClass([
@@ -31,6 +32,7 @@ export default function LoadingIcon(props: LoadingIcon) {
     <div
       className={composeClass(loadingIconClass, className)}
       style={Object.assign(custom, style)}
+      {...nativeProps}
     >
       <i></i>
       <i></i>

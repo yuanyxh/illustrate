@@ -54,8 +54,12 @@ export function _MessageBox(props: _MessageBoxProps) {
     distinguishCancelAndClose = false,
     beforeClose,
     inputValidator,
-    onAction
+    onAction,
+    appendTo,
+    ...nativeProps
   } = props;
+
+  appendTo;
 
   const [init, setInit] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -192,6 +196,7 @@ export function _MessageBox(props: _MessageBoxProps) {
           className={messageBoxClass}
           tabIndex={-1}
           onClick={stopPropagation}
+          {...nativeProps}
         >
           {isRenderElement(title) && (
             <div className={style['message-box-header']}>

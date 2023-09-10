@@ -1,0 +1,24 @@
+.title {
+  font-size: var(--font-size-extra-large);
+  font-weight: var(--font-weight-primary);
+}
+
+.gif-player-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+  padding: 20px 10px;
+  min-height: 300px;
+  line-height: 0;
+  background-color: #272b30;
+  cursor: pointer;
+}
+
+.operator {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  margin-top: 20px;
+}

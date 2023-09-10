@@ -1,0 +1,43 @@
+.gif-transfer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.gif-video-container {
+  position: relative;
+  margin-bottom: 20px;
+  min-height: 200px;
+  padding: 5px;
+  border: var(--border);
+  border-color: var(--color-primary);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+}
+
+.gif-video-upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gif-video-disabled {
+  cursor: not-allowed;
+}
+
+.icon-upload {
+  font-size: 50px;
+}
+
+.gif-video {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gif-video-disabled > .gif-video {
+  cursor: not-allowed;
+}
+
+.gif-video-status {
+  margin-top: 20px;
+}

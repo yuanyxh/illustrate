@@ -72,7 +72,11 @@ export const isFun = function <T extends (...any: unknown[]) => unknown>(
 /**
  * @description data is not undefined and null
  */
-export const hasData = (data: unknown) => data != null;
+export const hasData = (data: unknown) => data !== null || data !== undefined;
+
+export function isEmpty(data: unknown): data is undefined | null {
+  return data === null || data === undefined;
+}
 
 /**
  * @description data is basic type
@@ -149,6 +153,64 @@ export const checkCharacter = (reg: RegExp) => (s: string) => reg.test(s);
 export const isRenderElement = (condition: unknown) =>
   condition ? 'render' : undefined;
 
+export const assign = <T>(
+  obj: OrdinaryObject,
+  ...args: OrdinaryObject[]
+): T => {
+  for (let i = 0; i < args.length; i++) {
+    const curr = args[i];
+    const _names = Object.getOwnPropertyNames(args[i]);
+    const _symbols = Object.getOwnPropertySymbols(args[i]);
+
+    for (let j = 0; j < _names.length; j++) {
+      if (
+        typeof curr[_names[j]] === 'undefined' &&
+        typeof obj[_names[j]] !== 'undefined'
+      ) {
+        continue;
+      }
+
+      obj[_names[j]] = curr[_names[j]];
+    }
+
+    for (let j = 0; j < _symbols.length; j++) {
+      if (
+        typeof curr[_symbols[j]] === 'undefined' &&
+        typeof obj[_symbols[j]] !== 'undefined'
+      ) {
+        continue;
+      }
+
+      obj[_symbols[j]] = curr[_symbols[j]];
+    }
+  }
+
+  return obj as T;
+};
+
+/**
+ *
+ * @param width canvas 宽
+ * @param height canvas 高
+ * @returns canvas 及对应上下文
+ */
+export const createCanvasContext: CreateCanvasContext = (options) => {
+  const _canvas = window.document.createElement('canvas');
+  const context = _canvas.getContext('2d', {
+    willReadFrequently: options?.willReadFrequently
+  });
+
+  if (options?.width) {
+    _canvas.width = options.width;
+  }
+  if (options?.height) {
+    _canvas.height = options.height;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return { canvas: _canvas, context: context! };
+};
+
 export * from './http';
 
 export * from './classnames';
@@ -156,5 +218,7 @@ export * from './classnames';
 export * from './elements';
 
 export * from './events';
+
+export * from './polling';
 
 export { default as base64 } from './crypto/base64';

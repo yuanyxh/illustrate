@@ -48,7 +48,8 @@ export default function Dialog(props: DialogProps) {
     showClose = true,
     closeOnClickModal = true,
     className = '',
-    style: _style
+    style: _style,
+    ...nativeProps
   } = props;
 
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -92,6 +93,7 @@ export default function Dialog(props: DialogProps) {
         <div
           className={composeClass(style['dialog'], className)}
           style={_style}
+          {...nativeProps}
         >
           <header className={style['dialog-header']}>
             {isDialogSlots(children) && children.header ? (

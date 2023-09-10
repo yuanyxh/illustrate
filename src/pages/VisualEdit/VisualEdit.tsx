@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
-import Button from './Button';
+import Button from '@/components/Button/Button';
 import Wrapper from './Wrapper';
-import Input from './Input';
+import Input from '@/components/Input/Input';
 import style from './VisualEdit.module.css';
 
 // --title: 可视化编辑--
@@ -163,11 +163,17 @@ export default function VisualEdit() {
             </div>
             <div className={style.row}>
               <span className={style.name}>输入框</span>
-              <Input dragstart={dragstart}></Input>
+              <Input
+                value=""
+                change={() => {
+                  /*  */
+                }}
+                onDragStart={dragstart}
+              ></Input>
             </div>
             <div className={style.row}>
               <span className={style.name}>按钮</span>
-              <Button dragstart={dragstart}></Button>
+              <Button onDragStart={dragstart}>default</Button>
             </div>
           </div>
         )}

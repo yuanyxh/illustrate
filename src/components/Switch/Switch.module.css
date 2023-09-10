@@ -1,0 +1,92 @@
+.switch {
+  --switch-on-color: var(--color-primary);
+  --switch-off-color: var(--border-color);
+  --switch-font-size: 14px;
+  --switch-line-height: 20px;
+  --switch-height: 32px;
+  --switch-core-min-width: 40px;
+  --switch-core-height: 20px;
+  --switch-core-border-radius: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: var(--switch-font-size);
+  line-height: var(--switch-line-height);
+  height: var(--switch-height);
+  vertical-align: middle;
+}
+
+.switch.is-disabled {
+  opacity: 0.6;
+}
+
+.switch-large {
+  --switch-font-size: 14px;
+  --switch-line-height: 24px;
+  --switch-height: 40px;
+  --switch-core-min-width: 50px;
+  --switch-core-height: 24px;
+  --switch-core-border-radius: 12px;
+}
+
+.switch-small {
+  --switch-font-size: 12px;
+  --switch-line-height: 16px;
+  --switch-height: 24px;
+  --switch-core-min-width: 30px;
+  --switch-core-height: 16px;
+  --switch-core-border-radius: 8px;
+}
+
+.switch-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+.switch-core {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  min-width: var(--switch-core-min-width);
+  height: var(--switch-core-height);
+  border: 1px solid var(--switch-border-color, var(--switch-off-color));
+  outline: none;
+  border-radius: var(--switch-core-border-radius);
+  box-sizing: border-box;
+  background: var(--switch-off-color);
+  cursor: pointer;
+  transition: border-color var(--transition-duration),
+    background-color var(--transition-duration);
+}
+
+.switch.is-checked .switch-core {
+  border-color: var(--switch-border-color, var(--switch-on-color));
+  background-color: var(--switch-on-color);
+}
+
+.switch.is-disabled .switch-core {
+  cursor: not-allowed;
+}
+
+.switch-core .switch-action {
+  position: absolute;
+  left: 1px;
+  border-radius: var(--border-radius-circle);
+  transition: all var(--transition-duration);
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--switch-off-color);
+}
+
+.switch.is-checked .switch-core .switch-action {
+  left: calc(100% - 17px);
+  color: var(--switch-on-color);
+}

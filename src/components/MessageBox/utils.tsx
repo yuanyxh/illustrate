@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { MessageBoxEncapsulate } from './config';

@@ -58,6 +58,20 @@ function resolve(...paths) {
 
 /**
  *
+ * @description 转换名字
+ * @param {string} name
+ * @returns
+ */
+function transformPageName(name) {
+  if (name.includes('-')) {
+    name = name.replace(/-/g, '');
+  }
+
+  return name;
+}
+
+/**
+ *
  * @description Array.prototype.forEach 别名
  * @param {Array<string>} target
  * @param {(name: string, index: number, self: Array<string>) => void} callback
@@ -91,6 +105,8 @@ function getPageName(way) {
  * @param {string} pageName
  */
 function getPath(pageName) {
+  if (pageName.includes('-')) return pageName.toLocaleLowerCase();
+
   return pageName.replace(/[A-Z]/g, (char, index) => {
     if (index === 0) return char.toLowerCase();
 
@@ -132,7 +148,9 @@ function getImage(source) {
  * @param {string} pageName
  */
 function generateImport(pageName) {
-  return `const ${pageName} = lazy(() => import('@/pages/${pageName}/${pageName}'));`;
+  let variable = transformPageName(pageName);
+
+  return `const ${variable} = lazy(() => import('@/pages/${pageName}/${pageName}'));`;
 }
 
 /**
@@ -166,7 +184,7 @@ function createPage(way) {
 
     pageCount--;
 
-    const pageName = getPageName(way);
+    let pageName = getPageName(way);
     const path = getPath(pageName);
     const title = getTitle(data)[0].trim();
     const image = getImage(data)?.[0].trim() || '';
@@ -177,7 +195,7 @@ function createPage(way) {
       path: '${path}',
       title: '${title}',
       image: '${image}',
-      element: <${pageName} />
+      element: <${transformPageName(pageName)} />
     },
     `;
 

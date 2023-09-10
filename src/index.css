@@ -2,7 +2,8 @@
 @import url('./styles/variable.css');
 @import url('./styles/theme.css');
 @import url('./styles/preset.css');
-@import url('//at.alicdn.com/t/c/font_3329662_ynwd12yh07k.css');
+@import url('./styles//animation.css');
+@import url('//at.alicdn.com/t/c/font_3329662_ezmhfqkr8te.css');
 
 body {
   margin: 0;
@@ -12,7 +13,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
   color: #333;
   font-size: var(--font-size-base);
   background-color: var(--background-color);

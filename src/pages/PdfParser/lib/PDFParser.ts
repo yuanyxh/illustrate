@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import pako from 'pako';
-import { isNumber, isArray, isUndef } from '@/utils';
+import { isNumber, isArray, isUndef, createCanvasContext } from '@/utils';
 import {
   Flag,
   Feature,
@@ -16,7 +16,6 @@ import {
   getBufferView,
   toText,
   isTypeOf,
-  createContext,
   /* 标识函数 */
   isPdf,
   isQuote,
@@ -634,8 +633,6 @@ export class Draw {
 
     // pdf.set(xref[DescendantFonts[0].serial]);
 
-    // console.log(pdf.parseDictionary<PDF.DescendantFont>(stream));
-
     pdf.set(xref[ToUnicode.serial]);
 
     const { Filter } = pdf.parseDictionary<PDF.ToUnicode>(stream);
@@ -710,6 +707,7 @@ export class Draw {
     const xref = pdf.xref;
 
     /** 操作栈 */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const operations: any[] = [];
 
     /** 解析完成 */
@@ -801,8 +799,6 @@ export class Draw {
           if (!gs) throw Error('quote does not exist');
 
           pdf.set(xref[gs.serial]);
-
-          // console.log(pdf.parseDictionary<PDF.ExtGState>(pdf.bytes));
 
           break;
 
@@ -1113,7 +1109,10 @@ export class Draw {
 
     const mediaBox = page.MediaBox || rootPage.MediaBox || [0, 0, 0, 0];
 
-    const { canvas, context } = createContext(mediaBox[2], mediaBox[3]);
+    const { canvas, context } = createCanvasContext({
+      width: mediaBox[2],
+      height: mediaBox[3]
+    });
 
     try {
       this.drawPage(page, context, canvas);

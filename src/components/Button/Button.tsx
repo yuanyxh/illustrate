@@ -9,7 +9,7 @@ type NativeType = 'button' | 'submit' | 'reset';
 
 type Size = 'default' | 'large' | 'small';
 
-interface ButtonProps extends ChildProps {
+interface ButtonProps extends ButtonChildProps {
   type?: Type;
   plain?: boolean;
   round?: boolean;
@@ -41,6 +41,7 @@ export default function Button(props: Readonly<ButtonProps>) {
     block = false,
     link = false,
     nativeType = 'button',
+    className = '',
     onClick,
     ...nativeProps
   } = props;
@@ -71,10 +72,11 @@ export default function Button(props: Readonly<ButtonProps>) {
         buttonClass,
         buttonStyle,
         buttonStatus,
-        nativeProps.className || ''
+        className
       )}
       style={nativeProps.style}
       onClick={onClick}
+      {...nativeProps}
     >
       {isRenderElement(loading) && (
         <LoadingIcon style={{ marginRight: 6 }} size="small" />

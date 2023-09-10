@@ -1,0 +1,18 @@
+.gif-picture {
+  display: flex;
+}
+
+.drawing-board-container {
+  margin-right: 20px;
+}
+
+.drawing-board {
+  touch-action: none;
+}
+
+.opterator {
+  display: flex;
+  column-gap: 10px;
+  margin-top: 40px;
+  margin-left: 30px;
+}

@@ -52,15 +52,22 @@ export const useTransition = <T extends HTMLElement>(
       const active = getClass(state ? enter : leave, 'active', 'to');
 
       from && ele.classList.remove(from);
-      active && ele.classList.add(active);
+
+      const values = (active || '').split(' ');
+
+      values.length && ele.classList.add(...values);
     });
   }, [state]);
 
   useEffect(() => {
     const end = () => {
       port.exec((ele) => {
-        ele.classList.remove(getClass(enter, 'active', 'from', 'to'));
-        ele.classList.remove(getClass(leave, 'active', 'from', 'to'));
+        ele.classList.remove(
+          ...getClass(enter, 'active', 'from', 'to').split(' ')
+        );
+        ele.classList.remove(
+          ...getClass(leave, 'active', 'from', 'to').split(' ')
+        );
 
         state ? port.show() : port.hide();
       });
