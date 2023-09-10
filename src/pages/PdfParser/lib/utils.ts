@@ -1,18 +1,5 @@
 import { Flag, Feature, InvisibleChar, Graphic } from './enum';
 
-/** 创建 canvas */
-export const createContext = (w: number, h: number) => {
-  const canvas = document.createElement('canvas');
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const context = canvas.getContext('2d')!;
-
-  canvas.width = w;
-  canvas.height = h;
-
-  return { canvas, context };
-};
-
 /** point to px */
 export const getCurrentPixel = (pt: number, scale = 1) =>
   ((pt * (window.devicePixelRatio * 96)) / 72) * scale;

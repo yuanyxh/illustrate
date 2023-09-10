@@ -1,6 +1,5 @@
 .main {
   padding-left: var(--sidebar-width);
-  height: inherit;
 }
 
 @media screen and (max-width: 840px) {

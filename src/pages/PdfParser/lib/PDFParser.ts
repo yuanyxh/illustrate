@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import pako from 'pako';
-import { isNumber, isArray, isUndef } from '@/utils';
+import { isNumber, isArray, isUndef, createCanvasContext } from '@/utils';
 import {
   Flag,
   Feature,
@@ -16,7 +16,6 @@ import {
   getBufferView,
   toText,
   isTypeOf,
-  createContext,
   /* 标识函数 */
   isPdf,
   isQuote,
@@ -1110,7 +1109,10 @@ export class Draw {
 
     const mediaBox = page.MediaBox || rootPage.MediaBox || [0, 0, 0, 0];
 
-    const { canvas, context } = createContext(mediaBox[2], mediaBox[3]);
+    const { canvas, context } = createCanvasContext({
+      width: mediaBox[2],
+      height: mediaBox[3]
+    });
 
     try {
       this.drawPage(page, context, canvas);

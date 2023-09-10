@@ -1,24 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { classnames, polling } from '@/utils';
-import { useModel } from '@/hooks';
+import {
+  classnames,
+  isRenderElement,
+  polling,
+  createCanvasContext
+} from '@/utils';
 import GIF from './gif/GIF';
 import Card from '@/components/Card/Card';
 import Button from '@/components/Button/Button';
 import MessageBox from '@/components/MessageBox/MessageBox';
-import InputNumber from '@/components/InputNumber/InputNumber';
-import Select from '@/components/Select/Select';
-import Switch from '@/components/Switch/Switch';
+import Progress from '@/components/Progress/Progress';
 import Text from '@/components/Text/Text';
-import TimePicker from './component/TimePicker';
-import type { Transparency, UserInput, DisposalMethod } from './types';
+import Configuration from './component/Configuration';
+import type { Options } from './component/Configuration';
+import type { ProgressParams } from './types';
 import style from './GIFVideo.module.css';
-
-const instructOptions = [
-  { label: '不处理', value: 0 },
-  { label: '下一帧覆盖当前帧', value: 4 },
-  { label: '恢复到背景颜色', value: 8 },
-  { label: '恢复到渲染当前帧之前', value: 12 }
-];
 
 const generateClass = classnames(style);
 
@@ -26,23 +22,23 @@ export default function GIFVideo() {
   const inputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const configurationRef = useRef<Options>(null);
+
+  const [disabled, setDisabled] = useState(false);
+
+  const [collect, setCollect] = useState(false);
+
+  const [progress, setProgress] = useState<ProgressParams>({
+    loaded: 0,
+    total: 0,
+    activeWorkers: 0,
+    duration: 0,
+    surplus: 0,
+    percentage: 0
+  });
+
   const [blobObject, setBlobObject] = useState('');
-
-  const timeModel = useModel('00 : 00 : 05');
-
-  const delay = useModel(40);
-
-  const disposalMethod = useModel<DisposalMethod>(4);
-
-  const userInputModel = useModel<UserInput>(0);
-
-  const transparencyModel = useModel<Transparency>(0);
-
-  const transparencyIndexModel = useModel(0);
-
-  const cyclesModel = useModel(0);
-
-  const scalingModel = useModel(3);
+  const [download, setDownload] = useState<Blob | null>(null);
 
   useEffect(() => {
     window.document.addEventListener('dragover', stopPropagation);
@@ -59,7 +55,7 @@ export default function GIFVideo() {
   }, []);
 
   const videoContinerClass = generateClass(
-    { 'gif-video-upload': !blobObject },
+    { 'gif-video-upload': !blobObject, 'gif-video-disabled': disabled },
     style['gif-video-container']
   );
   const iconClass = generateClass(['icon-upload'], 'iconfont', 'icon-upload');
@@ -69,9 +65,11 @@ export default function GIFVideo() {
     e.preventDefault();
   };
 
-  const handleSelect = () => inputRef.current?.click();
+  const handleSelect = () => disabled || inputRef.current?.click();
 
   const handleDrop: React.DragEventHandler<HTMLDivElement> = (e) => {
+    if (disabled) return;
+
     const { files } = e.dataTransfer;
 
     if (files === null || files.length === 0) return;
@@ -122,21 +120,32 @@ export default function GIFVideo() {
 
     videoRef.current.load();
 
+    setDisabled(true);
+    setCollect(true);
+    setDownload(null);
+
     polling(() => {
       if (videoRef.current === null || videoRef.current.videoWidth === 0) {
         return false;
       }
 
-      const time = +timeModel.value.split(':')[2].trim();
+      const {
+        time = 5,
+        scaling = 3,
+        cycles = 0,
+        delay = 40,
+        disposalMethod = 4,
+        userInput = 0
+      } = configurationRef.current?.getOptions() || {};
 
       const width = videoRef.current.videoWidth;
       const height = videoRef.current.videoHeight;
 
-      const _canvas = window.document.createElement('canvas');
-      const context = _canvas.getContext('2d', { willReadFrequently: true });
-
-      _canvas.width = Math.round(width / scalingModel.value);
-      _canvas.height = Math.round(height / scalingModel.value);
+      const { canvas: _canvas, context } = createCanvasContext({
+        width: Math.round(width / scaling),
+        height: Math.round(height / scaling),
+        willReadFrequently: true
+      });
 
       const gif = new GIF({
         width: _canvas.width,
@@ -144,17 +153,27 @@ export default function GIFVideo() {
         workers: 2
       });
 
-      gif.setCycles(cyclesModel.value);
-      gif.setDelay(delay.value);
-      gif.setDisposalMethod(disposalMethod.value);
-      gif.setUserInput(userInputModel.value);
+      gif.setCycles(cycles);
+      gif.setDelay(delay);
+      gif.setDisposalMethod(disposalMethod);
+      gif.setUserInput(userInput);
+
+      gif.on('progress', (e) => {
+        setProgress(e);
+      });
+
+      gif.on('finished', (e) => {
+        setDisabled(false);
+
+        setDownload(e);
+      });
 
       const timer = window.setInterval(() => {
         if (videoRef.current === null) return;
 
         if (videoRef.current.currentTime > time) {
+          setCollect(false);
           gif.render();
-
           return window.clearInterval(timer);
         }
 
@@ -178,124 +197,133 @@ export default function GIFVideo() {
     });
   };
 
+  const handleDownload = async () => {
+    if (download === null) return;
+
+    if (typeof window.showSaveFilePicker === 'function') {
+      const fileHandle = await window.showSaveFilePicker({
+        excludeAcceptAllOption: true,
+        suggestedName: 'illustrate.gif',
+        types: [
+          { description: '图像文件 gif', accept: { 'image/gif': ['.gif'] } }
+        ]
+      });
+
+      const writeable = await fileHandle.createWritable();
+
+      const write = writeable.getWriter();
+      await write.write(download);
+      await write.close();
+    } else {
+      const a = window.document.createElement('a');
+      const url = window.URL.createObjectURL(download);
+      a.href = url;
+      a.download = 'illustrate.gif';
+      window.document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    }
+  };
+
   return (
     <>
       <Card shadow="never">
         <div className={style['gif-transfer']}>
-          <div
-            className={videoContinerClass}
-            onDragOver={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-            }}
-            onDrop={handleDrop}
-            onClick={handleSelect}
-          >
-            {blobObject ? (
-              <video
-                ref={videoRef}
-                className={style['gif-video']}
-                src={blobObject}
-                muted
-                loop
-                autoPlay
-                onError={handleError}
-              ></video>
-            ) : (
-              <>
-                <i className={iconClass}></i>
-                <p style={{ marginTop: 5 }}>
-                  <Text type="info">点击或拖拽上传视频文件</Text>
-                </p>
-              </>
+          <div style={{ width: '40%' }}>
+            <div
+              className={videoContinerClass}
+              onDragOver={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onDrop={handleDrop}
+              onClick={handleSelect}
+            >
+              {blobObject ? (
+                <video
+                  ref={videoRef}
+                  className={style['gif-video']}
+                  src={blobObject}
+                  muted
+                  loop
+                  autoPlay
+                  onError={handleError}
+                ></video>
+              ) : (
+                <>
+                  <i className={iconClass}></i>
+                  <p style={{ marginTop: 5 }}>
+                    <Text type="info">点击或拖拽上传视频文件</Text>
+                  </p>
+                </>
+              )}
+            </div>
+
+            {isRenderElement(collect) && (
+              <Text block type="primary" style={{ marginBottom: 15 }}>
+                正在收集视频帧，稍后开始编译。。。
+              </Text>
             )}
-          </div>
 
-          <div className={style['gif-transfer-form']}>
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="duration">视频截取时长：</label>
-              <TimePicker id="duration" {...timeModel}></TimePicker>
-            </div>
+            <div className={style['gif-video-status']}>
+              <Text block style={{ marginTop: 5 }}>
+                总帧数：{progress.total}
+              </Text>
+              <Text block style={{ marginTop: 5 }}>
+                已完成：{progress.loaded}
+              </Text>
+              <Text block style={{ marginTop: 5 }}>
+                活动线程： {progress.activeWorkers}
+              </Text>
+              <Text block style={{ marginTop: 5 }}>
+                已编译：{progress.duration}秒
+              </Text>
+              <Text block style={{ marginTop: 5 }}>
+                预计剩余： {progress.surplus}秒
+              </Text>
 
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="scaling">缩放倍数：</label>
-              <InputNumber id="scaling" min={1} {...scalingModel}></InputNumber>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="delay">帧间隔(ms)：</label>
-              <InputNumber
-                id="delay"
-                min={40}
-                max={0xffff * 10}
-                step={10}
-                {...delay}
-              ></InputNumber>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="user-input">允许用户操作：</label>
-              <Switch
-                id="user-input"
-                activeValue={2}
-                inactiveValue={0}
-                {...userInputModel}
-              ></Switch>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="cycles">循环次数(0:无限)：</label>
-              <InputNumber
-                id="cycles"
-                {...cyclesModel}
-                min={0}
-                max={0xffff}
-              ></InputNumber>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="dispoal">帧替换时当前帧：</label>
-              <Select
-                id="dispoal"
-                options={instructOptions}
-                {...disposalMethod}
-              ></Select>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="transparency">透明(背景色)：</label>
-              <Switch
-                id="transparency"
-                disabled
-                activeValue={1}
-                inactiveValue={0}
-                {...transparencyModel}
-              ></Switch>
-            </div>
-
-            <div className={style['gif-transfer-form-item']}>
-              <label htmlFor="transparency-index">透明颜色索引：</label>
-              <InputNumber
-                id="transparency-index"
-                disabled
-                min={0}
-                max={255}
-                {...transparencyIndexModel}
-              ></InputNumber>
+              <Progress
+                style={{ marginTop: 20 }}
+                percentage={progress.percentage}
+              ></Progress>
             </div>
           </div>
+
+          <Configuration
+            ref={configurationRef}
+            showList={[
+              'time',
+              'delay',
+              'cycles',
+              'disposalMethod',
+              'scaling',
+              'userInput'
+            ]}
+          />
         </div>
 
-        <Button style={{ marginLeft: 15 }} type="primary" onClick={handlePlay}>
-          开始转码
-        </Button>
+        <div style={{ marginTop: 10 }}>
+          <Button type="primary" loading={disabled} onClick={handlePlay}>
+            开始转码
+          </Button>
 
-        <p style={{ marginTop: 10 }}>
-          <Text type="info">
-            前端转换较慢，限制 gif 时长为 60
-            秒；色盘在编码时确认，无法提前选择透明索引。
-          </Text>
-        </p>
+          <Button
+            type="success"
+            style={{ marginLeft: 15 }}
+            disabled={download === null}
+            onClick={handleDownload}
+          >
+            下载 GIF
+          </Button>
+
+          <p style={{ marginTop: 10 }}>
+            <Text type="info">
+              前端转换较慢，限制 gif 时长为 60
+              秒；色盘在编码时确认，无法提前选择透明色（PS：显示背景色）。
+            </Text>
+          </p>
+        </div>
       </Card>
 
       <input

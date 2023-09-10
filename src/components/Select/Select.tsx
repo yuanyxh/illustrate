@@ -22,11 +22,11 @@ interface SelectProps extends Props {
 }
 
 const enter: TransitionClass = {
-  active: style['select-options-enter-active']
+  active: 'zoom-in-active'
 };
 
 const leave: TransitionClass = {
-  active: style['select-options-leave-active']
+  active: 'zoom-out-active'
 };
 
 export default function Select(props: SelectProps) {

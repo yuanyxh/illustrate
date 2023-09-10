@@ -81,39 +81,3 @@
   font-weight: 700;
   background-color: var(--fill-color-light);
 }
-
-.select-options-enter-active {
-  animation: zoom-in var(--transition-duration)
-    var(--transition-function-fast-bezier);
-  transform-origin: center top;
-}
-
-.select-options-leave-active {
-  animation: zoom-out var(--transition-duration)
-    var(--transition-function-fast-bezier);
-  transform-origin: center top;
-}
-
-@keyframes zoom-in {
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-}
-
-@keyframes zoom-out {
-  0% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-}

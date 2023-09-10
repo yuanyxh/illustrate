@@ -55,9 +55,7 @@ class GIFByte {
   ) {
     this.writeShort(width);
     this.writeShort(height);
-    this.writeByte(info);
-    this.writeByte(backgroundIndex);
-    this.writeByte(pixelAspectRatio);
+    this.writeBytes([info, backgroundIndex, pixelAspectRatio]);
   }
 
   writeApplicationExtension(Cycles = 0) {
@@ -109,10 +107,6 @@ class GIFByte {
     this.writeByte(info);
   }
 
-  end() {
-    this.writeBytes(END_GIF);
-  }
-
   export() {
     let size = 0;
 
@@ -143,6 +137,12 @@ class GIFByte {
     }
 
     return uint8;
+  }
+
+  end() {
+    this.writeBytes(END_GIF);
+
+    return this.export();
   }
 }
 

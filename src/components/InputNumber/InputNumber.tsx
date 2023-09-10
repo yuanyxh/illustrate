@@ -27,7 +27,8 @@ export default function InputNumber(props: InputNumberProps) {
     max = window.Infinity,
     precision,
     size = 'default',
-    disabled
+    disabled,
+    ...nativeProps
   } = props;
 
   const _change = (e: string) => {
@@ -113,6 +114,7 @@ export default function InputNumber(props: InputNumberProps) {
         size={size}
         disabled={disabled}
         className={style['input-number-wrapper']}
+        {...(nativeProps as object)}
       ></Input>
     </div>
   );

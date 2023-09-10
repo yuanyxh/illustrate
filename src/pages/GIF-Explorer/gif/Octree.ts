@@ -75,7 +75,7 @@ class Octree {
   }
 
   shrink(maxCount: number) {
-    if (this.count <= maxCount) return;
+    if (this.count <= maxCount) return [];
 
     for (let depth = this.maxDepth - 1; depth >= 0; depth--) {
       this.reduceColor(this.root, depth, 0, maxCount);
@@ -161,19 +161,6 @@ class Octree {
       node = node.children[index];
     }
 
-    if (node.color?.normalize) {
-      return node.color;
-    }
-
-    if (node.color) {
-      const { r, g, b } = node.color;
-
-      node.color.r = Math.round(r / node.pixelCount) || 0;
-      node.color.g = Math.round(g / node.pixelCount) || 0;
-      node.color.b = Math.round(b / node.pixelCount) || 0;
-      node.color.normalize = true;
-    }
-
     return node.color;
   }
 
@@ -188,6 +175,15 @@ class Octree {
 
       const { color } = children[i];
       if (color) {
+        if (!color.normalize) {
+          const { r, g, b } = color;
+
+          color.r = Math.round(r / children[i].pixelCount) || 0;
+          color.g = Math.round(g / children[i].pixelCount) || 0;
+          color.b = Math.round(b / children[i].pixelCount) || 0;
+          color.normalize = true;
+        }
+
         colors.push(color);
       }
 

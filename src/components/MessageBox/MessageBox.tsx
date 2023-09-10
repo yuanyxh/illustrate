@@ -59,6 +59,8 @@ export function _MessageBox(props: _MessageBoxProps) {
     ...nativeProps
   } = props;
 
+  appendTo;
+
   const [init, setInit] = useState(true);
   const [visible, setVisible] = useState(false);
   const [action, setAction] = useState<Action>('close');

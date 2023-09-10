@@ -1,7 +1,7 @@
 import { MAX_CODE_SIZE } from './config';
-import Octree from './Octree';
 import Trie from './Trie';
 import GIFByte from './GIFByte';
+import bulidColor from './bulidColor';
 import type { ImageOptions, ColorObject } from '../types';
 
 const _self = self as unknown as Worker;
@@ -28,20 +28,17 @@ function encoder(e: MessageEvent<ImageOptions>) {
   const map = new Map<ColorObject, number>();
   const input: number[] = [];
 
-  const octree = new Octree();
-
+  // const octree = new Octree();
   // console.log('start', self.performance.now());
-
   // 八叉树颜色量化
-  for (let i = 0; i < pixels.length; i += 4) {
-    octree.insertColor({ r: pixels[i], g: pixels[i + 1], b: pixels[i + 2] });
-  }
-
+  // for (let i = 0; i < pixels.length; i += 4) {
+  //   octree.insertColor({ r: pixels[i], g: pixels[i + 1], b: pixels[i + 2] });
+  // }
   // 减色至 256 色
-  octree.shrink(256);
+  // octree.shrink(256);
 
   // 获取颜色列表
-  const colorList = octree.collectColor();
+  const { colorList, octree } = bulidColor(pixels);
 
   // 颜色转换为调色盘中颜色的索引
   for (let i = 0; i < pixels.length; i += 4) {
@@ -84,7 +81,11 @@ function encoder(e: MessageEvent<ImageOptions>) {
   while (localColorTable.length > 1 << lzwMiniCodeSize) lzwMiniCodeSize++;
 
   // 填充色盘, 防止色盘大小错误
-  for (let i = 0; i < (1 << lzwMiniCodeSize) - localColorTable.length; i++) {
+  for (
+    let i = 0, len = localColorTable.length;
+    i < (1 << lzwMiniCodeSize) - len;
+    i++
+  ) {
     localColorTable.push([0, 0, 0]);
   }
 
@@ -237,11 +238,9 @@ function encoder(e: MessageEvent<ImageOptions>) {
 
   const image = out.export();
 
-  _self.postMessage(image);
+  _self.postMessage({ index: options.index, data: image });
 
   // console.log('end', self.performance.now());
 }
 
 _self.addEventListener('message', encoder);
-
-export {};

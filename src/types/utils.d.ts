@@ -21,3 +21,18 @@ declare type Polling = <T extends Fn>(
 declare type OrdinaryObject = {
   [key: string | symbol]: unknown;
 };
+
+declare interface CreateCanvasContextOptions {
+  width?: number;
+  height?: number;
+  willReadFrequently?: boolean;
+}
+
+declare interface CreateCanvasContextResult {
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+}
+
+declare type CreateCanvasContext = (
+  options?: CreateCanvasContextOptions
+) => CreateCanvasContextResult;

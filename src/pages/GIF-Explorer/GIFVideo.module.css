@@ -8,7 +8,6 @@
   margin-bottom: 20px;
   min-height: 200px;
   padding: 5px;
-  width: 40%;
   border: var(--border);
   border-color: var(--color-primary);
   border-radius: var(--border-radius-base);
@@ -22,6 +21,10 @@
   align-items: center;
 }
 
+.gif-video-disabled {
+  cursor: not-allowed;
+}
+
 .icon-upload {
   font-size: 50px;
 }
@@ -31,20 +34,10 @@
   cursor: pointer;
 }
 
-.gif-transfer-form {
-  margin-left: 30px;
+.gif-video-disabled > .gif-video {
+  cursor: not-allowed;
 }
 
-.gif-transfer-form-item {
-  display: flex;
-  align-items: center;
-  column-gap: 20px;
-  margin-bottom: 20px;
-}
-
-.gif-transfer-form-item > label {
-  flex-shrink: 0;
-  font-weight: 600;
-  width: 105px;
-  white-space: nowrap;
+.gif-video-status {
+  margin-top: 20px;
 }

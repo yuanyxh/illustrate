@@ -193,7 +193,9 @@ export default function Upload(props: Readonly<UploadProps>) {
 
   let defaultSlot: Children, tipsSlot: Children;
 
-  if (isArray(children) || isValidElement(children)) defaultSlot = children;
+  if (isArray(children) || isValidElement(children)) {
+    defaultSlot = children;
+  }
 
   if (isNameSlot(children)) {
     const { default: defaultElement, tips } = children;

@@ -9,7 +9,7 @@ import style from './Main.module.css';
 export default memo(function Main() {
   return (
     <main className={style.main}>
-      <Suspense fallback={<Loading delay={150} />}>
+      <Suspense fallback={<Loading style={{ height: '100vh' }} delay={150} />}>
         <Outlet />
       </Suspense>
     </main>
