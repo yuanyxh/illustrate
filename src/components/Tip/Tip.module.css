@@ -1,0 +1,81 @@
+.tip {
+  --tip-background-color: var(--fill-color-extra-light);
+  --tip-border-left-color: var(--border-color);
+
+  position: relative;
+  margin: 20px 0;
+  padding: 8px 16px;
+  background-color: var(--tip-background-color);
+  border-radius: 4px;
+  border-left: 5px solid var(--tip-border-left-color);
+}
+
+.tip-primary {
+  --tip-background-color: var(--color-primary-light-9);
+  --tip-border-left-color: var(--color-primary);
+}
+
+.tip-success {
+  --tip-background-color: var(--color-success-light-9);
+  --tip-border-left-color: var(--color-success-dark-2);
+}
+
+.tip-info {
+  --tip-background-color: var(--color-info-light-9);
+  --tip-border-left-color: var(--color-info);
+}
+
+.tip-warning {
+  --tip-background-color: var(--color-warning-light-9);
+  --tip-border-left-color: var(--color-warning);
+}
+
+.tip-danger {
+  --tip-background-color: var(--color-danger-light-9);
+  --tip-border-left-color: var(--color-danger);
+}
+
+.tip-title {
+  margin: 1rem 0;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-primary);
+  line-height: 1.7;
+}
+
+.tip-desc {
+  font-size: var(--font-size-base);
+  color: var(--text-color);
+  word-break: break-all;
+}
+
+.tip-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tip-close i {
+  font-size: var(--font-size-small);
+  color: var(--text-color);
+}
+
+.tip-leave {
+  animation: leave var(--transition-duration-fast);
+  transform-origin: top center;
+}
+
+@keyframes leave {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

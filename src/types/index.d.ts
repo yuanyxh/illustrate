@@ -19,6 +19,9 @@ declare interface ChildProps<T = HTMLElement> extends CommonProps<T> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare type Fn = (...args: unknown[]) => any;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare type ComponentElement = (...args: any[]) => JSX.Element;
+
 declare module '*.worker.ts' {
   // You need to change `Worker`, if you specified a different value for the `workerType` option
   class WebpackWorker extends Worker {

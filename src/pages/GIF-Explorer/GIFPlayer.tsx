@@ -192,6 +192,12 @@ export default function GIFPlayer() {
     if (files[0].type.includes('image/gif')) {
       window.clearTimeout(timer);
 
+      if (drawRef.current && context) {
+        context.clearRect(0, 0, drawRef.current.width, drawRef.current.height);
+        drawRef.current.width = 0;
+        drawRef.current.height = 0;
+      }
+
       setFile(files[0]);
       setPattern(null);
       setFrames(null);

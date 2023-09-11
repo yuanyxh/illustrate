@@ -4,6 +4,7 @@ import Upload from '@/components/Upload/Upload';
 import Button from '@/components/Button/Button';
 import Text from '@/components/Text/Text';
 import Card from '@/components/Card/Card';
+import ExtraInformation from '@/components/ExtraInformation/ExtraInformation';
 import UploadList from './UploadList';
 import UploadImage from './UploadImage';
 import type { UploadFile, TransformResponse } from '@/components/Upload/types';
@@ -35,6 +36,41 @@ export default function UploadFile() {
 
   return (
     <div className={style['upload-file']}>
+      <ExtraInformation
+        platform={{
+          blog: {
+            title: 'upload 组件封装',
+            url: 'https://yuanyxh.com/posts/produce/upload%20%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85.html'
+          },
+          juejin: { url: 'https://juejin.cn/post/7228565447946928188' },
+          zhihu: { url: 'https://zhuanlan.zhihu.com/p/626339323' },
+          csdn: {
+            url: 'https://blog.csdn.net/yuanfgbb/article/details/132398327?spm=1001.2014.3001.5502'
+          }
+        }}
+      />
+
+      <Text block style={{ marginBottom: 15 }} type="info" size="large">
+        文件上传涉及服务器，本页仅用于调试，可 clone{' '}
+        <a
+          href="https://github.com/yuanyxh/services"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <Button
+            style={{
+              fontSize: 'var(--font-size-extra-large)',
+              verticalAlign: 'revert'
+            }}
+            link
+            type="primary"
+          >
+            web-server
+          </Button>
+        </a>{' '}
+        以启动本地服务器
+      </Text>
+
       <Card className={style['upload-card']} shadow="never">
         <Upload
           {...filesModel}

@@ -49,10 +49,12 @@
   position: absolute;
   top: 100%;
   width: 100%;
+  max-height: 200px;
   border: var(--border);
   border-top: 0;
   background-color: var(--bg-color);
-  z-index: 3;
+  z-index: var(--z-index-useful);
+  overflow-y: auto;
 }
 
 .search-result-item {

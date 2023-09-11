@@ -1,6 +1,10 @@
 .pdf-parser {
-  padding: 30px;
+  padding: 20px;
   height: inherit;
+}
+
+html[screen='small'] .pdf-parser {
+  padding: 10px;
 }
 
 .desc {
@@ -17,6 +21,10 @@
   min-height: calc(100vh - 80px - 60px);
   border: var(--border);
   border-radius: var(--border-radius-base);
+}
+
+html[screen='small'] .drawing-board {
+  width: 100%;
 }
 
 .page {

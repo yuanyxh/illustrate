@@ -1,5 +1,11 @@
 .layout {
+  --navbar-height: 2.3rem;
+
   min-height: 100vh;
+}
+
+html[screen='small'] .layout {
+  --navbar-height: 2.6rem;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import Button from '@/components/Button/Button';
-import Wrapper from './Wrapper';
+import ScreenBoundary from '@/components/ScreenBoundary/ScreenBoundary';
 import Input from '@/components/Input/Input';
+import Wrapper from './Wrapper';
 import style from './VisualEdit.module.css';
 
 // --title: 可视化编辑--
@@ -98,101 +99,103 @@ export default function VisualEdit() {
   };
 
   return (
-    <div
-      className={style['visual-edit']}
-      onClick={click}
-      onContextMenu={() => setShowMenu(false)}
-    >
+    <ScreenBoundary>
       <div
-        ref={visual}
-        className={style.visual}
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={drop}
-        onDragEnter={dragenter}
-        onDragLeave={dragleave}
-        onContextMenu={contextmenu}
-      ></div>
-      <div className={style.edit}>
-        {isEdit ? (
-          <div className={style.adjustment}>
-            <div className={style.back} onClick={() => setIsEdit(false)}>
-              返回
-            </div>
-            <h3 className={style.title}>编辑</h3>
-            <div className={style.row}>
-              <span className={style.name}>width</span>
-              <input
-                className={style.number}
-                type="number"
-                onChange={createChange('width')}
-              />
-            </div>
-            <div className={style.row}>
-              <span className={style.name}>height</span>
-              <input
-                className={style.number}
-                type="number"
-                onChange={createChange('height')}
-              />
-            </div>
-            <div className={style.row}>
-              <span className={style.name}>background-color</span>
-              <input
-                className={style.color}
-                type="color"
-                onChange={createChange('background-color')}
-              />
-            </div>
+        className={style['visual-edit']}
+        onClick={click}
+        onContextMenu={() => setShowMenu(false)}
+      >
+        <div
+          ref={visual}
+          className={style.visual}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={drop}
+          onDragEnter={dragenter}
+          onDragLeave={dragleave}
+          onContextMenu={contextmenu}
+        ></div>
+        <div className={style.edit}>
+          {isEdit ? (
+            <div className={style.adjustment}>
+              <div className={style.back} onClick={() => setIsEdit(false)}>
+                返回
+              </div>
+              <h3 className={style.title}>编辑</h3>
+              <div className={style.row}>
+                <span className={style.name}>width</span>
+                <input
+                  className={style.number}
+                  type="number"
+                  onChange={createChange('width')}
+                />
+              </div>
+              <div className={style.row}>
+                <span className={style.name}>height</span>
+                <input
+                  className={style.number}
+                  type="number"
+                  onChange={createChange('height')}
+                />
+              </div>
+              <div className={style.row}>
+                <span className={style.name}>background-color</span>
+                <input
+                  className={style.color}
+                  type="color"
+                  onChange={createChange('background-color')}
+                />
+              </div>
 
-            <div className={style.row}>
-              <textarea
-                className={style.custom}
-                cols={50}
-                rows={10}
-                placeholder="自定义样式"
-                onBlur={blur}
-              ></textarea>
+              <div className={style.row}>
+                <textarea
+                  className={style.custom}
+                  cols={50}
+                  rows={10}
+                  placeholder="自定义样式"
+                  onBlur={blur}
+                ></textarea>
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className={style.component}>
-            <h3 className={style.title}>组件</h3>
-            <div className={style.row}>
-              <span className={style.name}>盒子</span>
-              <Wrapper dragstart={dragstart}></Wrapper>
+          ) : (
+            <div className={style.component}>
+              <h3 className={style.title}>组件</h3>
+              <div className={style.row}>
+                <span className={style.name}>盒子</span>
+                <Wrapper dragstart={dragstart}></Wrapper>
+              </div>
+              <div className={style.row}>
+                <span className={style.name}>输入框</span>
+                <Input
+                  value=""
+                  change={() => {
+                    /*  */
+                  }}
+                  onDragStart={dragstart}
+                ></Input>
+              </div>
+              <div className={style.row}>
+                <span className={style.name}>按钮</span>
+                <Button onDragStart={dragstart}>default</Button>
+              </div>
             </div>
-            <div className={style.row}>
-              <span className={style.name}>输入框</span>
-              <Input
-                value=""
-                change={() => {
-                  /*  */
-                }}
-                onDragStart={dragstart}
-              ></Input>
-            </div>
-            <div className={style.row}>
-              <span className={style.name}>按钮</span>
-              <Button onDragStart={dragstart}>default</Button>
-            </div>
-          </div>
+          )}
+        </div>
+
+        {showMenu && (
+          <ul
+            className={style.menu}
+            style={{
+              position: 'absolute',
+              left: position.x + 'px',
+              top: position.y + 'px'
+            }}
+          >
+            <li className={style['menu-item']} onClick={edit}>
+              编辑
+            </li>
+          </ul>
         )}
       </div>
-
-      {showMenu && (
-        <ul
-          className={style.menu}
-          style={{
-            position: 'absolute',
-            left: position.x + 'px',
-            top: position.y + 'px'
-          }}
-        >
-          <li className={style['menu-item']} onClick={edit}>
-            编辑
-          </li>
-        </ul>
-      )}
-    </div>
+    </ScreenBoundary>
   );
 }

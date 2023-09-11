@@ -386,6 +386,7 @@ export default function GIFPicture() {
       <div className={style['form']}>
         <Configuration
           ref={configurationRef}
+          className={style['gif-picture-config']}
           showList={[
             'cycles',
             'delay',

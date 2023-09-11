@@ -18,7 +18,14 @@
 
 .operator {
   display: flex;
+  justify-content: center;
   align-items: center;
   column-gap: 5px;
   margin-top: 20px;
+}
+
+html[screen='small'] .operator {
+  width: 100%;
+  flex-wrap: wrap;
+  row-gap: 12px;
 }

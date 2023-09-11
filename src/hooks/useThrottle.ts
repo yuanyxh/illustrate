@@ -21,7 +21,9 @@ export const useThrottle = <T extends (...anys: any[]) => any>(
     const { delay = 50, deps = [] } = options || {};
 
     const throttleFn = useCallback((...anys: Parameters<T>) => {
-      if (identify) return;
+      if (identify) {
+        window.clearTimeout(identify);
+      }
 
       identify = window.setTimeout(() => {
         fn.apply(this, anys);
