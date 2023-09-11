@@ -2,12 +2,30 @@
   display: flex;
 }
 
+html[screen='small'] .gif-picture {
+  display: block;
+}
+
 .drawing-board-container {
   margin-right: 20px;
 }
 
+html[screen='small'] .drawing-board-container {
+  margin-right: 0;
+  width: 100%;
+}
+
 .drawing-board {
   touch-action: none;
+}
+
+html[screen='small'] .drawing-board {
+  width: 100% !important;
+  height: 300px;
+}
+
+html[screen='small'] .gif-picture-config {
+  margin-top: 20px;
 }
 
 .opterator {

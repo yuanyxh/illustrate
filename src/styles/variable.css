@@ -72,6 +72,7 @@
   --box-shadow-lighter: 0px 0px 6px rgba(0 0 0 / 12%);
   --box-shadow-dark: 0px 16px 48px 16px rgba(0 0 0 / 8%),
     0px 12px 32px rgba(0 0 0 / 12%), 0px 8px 16px -8px rgba(0 0 0 16%);
+  --text-color: var(--text-color-primary);
   --text-color-primary: #303133;
   --text-color-regular: #606266;
   --text-color-secondary: #909399;
@@ -118,6 +119,11 @@
   --overlay-color-lighter: rgba(0 0 0 / 50%);
   --mask-color: rgba(255 255 255 / 90%);
   --mask-color-extra-light: rgba(255 255 255 / 30%);
+  --z-index-slight: -1;
+  --z-index-normal: 1;
+  --z-index-useful: 2;
+  --z-index-important: 3;
+  --z-index-highest: 10;
 }
 
 @supports (width: stretch) {

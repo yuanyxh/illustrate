@@ -22,13 +22,15 @@ export default function Base64() {
   return (
     <div className={style['base64']}>
       <section className={style['wrapper']}>
-        <Input
-          type="textarea"
-          className={style['text']}
-          {...textModel}
-          resize={false}
-          placeholder="明文输入或输出"
-        />
+        <div className={style['text']}>
+          <Input
+            type="textarea"
+            style={{ height: '100%' }}
+            {...textModel}
+            resize={false}
+            placeholder="明文输入或输出"
+          />
+        </div>
 
         <div className={style['operator']}>
           <Button type="primary" block onClick={encrypt}>
@@ -38,13 +40,15 @@ export default function Base64() {
           <Button onClick={decrypt}>base64 解码</Button>
         </div>
 
-        <Input
-          type="textarea"
-          className={style['text']}
-          {...encryptModel}
-          resize={false}
-          placeholder="密文输入或输出"
-        />
+        <div className={style['text']}>
+          <Input
+            type="textarea"
+            style={{ height: '100%' }}
+            {...encryptModel}
+            resize={false}
+            placeholder="密文输入或输出"
+          />
+        </div>
       </section>
     </div>
   );

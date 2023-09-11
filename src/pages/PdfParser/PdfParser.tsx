@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { forEach } from '@/utils';
+import ExtraInformation from '@/components/ExtraInformation/ExtraInformation';
 import pdfParser from './lib/PDFParser';
 import Button from '@/components/Button/Button';
 import Text from '@/components/Text/Text';
@@ -74,6 +75,20 @@ export default function PdfParser() {
   return (
     <>
       <div className={style['pdf-parser']}>
+        <ExtraInformation
+          platform={{
+            blog: {
+              title: '解锁 PDF 文件：使用 JavaScript 和 Canvas 渲染 PDF 内容',
+              url: 'https://yuanyxh.com/posts/produce/%E8%A7%A3%E9%94%81%20PDF%20%E6%96%87%E4%BB%B6%EF%BC%9A%E4%BD%BF%E7%94%A8%20JavaScript%20%E5%92%8C%20Canvas%20%E6%B8%B2%E6%9F%93%20PDF%20%E5%86%85%E5%AE%B9.html'
+            },
+            juejin: { url: 'https://juejin.cn/post/7236028062872207420' },
+            zhihu: { url: 'https://zhuanlan.zhihu.com/p/631442533' },
+            csdn: {
+              url: 'https://blog.csdn.net/yuanfgbb/article/details/132398359?spm=1001.2014.3001.5502'
+            }
+          }}
+        />
+
         <Button type="primary" onClick={clickHandle}>
           上传解析 PDF
         </Button>

@@ -26,7 +26,7 @@
   border-radius: 4px;
   font-size: 0.8em;
   background-color: #fff;
-  z-index: 1;
+  z-index: var(--z-index-useful);
 }
 
 .menu-item {

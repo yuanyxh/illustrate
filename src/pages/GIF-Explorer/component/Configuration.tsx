@@ -5,7 +5,7 @@ import React, {
   useRef,
   useMemo
 } from 'react';
-import { isRenderElement } from '@/utils';
+import { isRenderElement, composeClass } from '@/utils';
 import { useModel, useTransition } from '@/hooks';
 import InputNumber from '@/components/InputNumber/InputNumber';
 import Select from '@/components/Select/Select';
@@ -57,7 +57,7 @@ export default forwardRef(function Configuration(
   props: ConfigurationProps,
   ref: React.ForwardedRef<Options>
 ) {
-  const { showList, perfix = '' } = props;
+  const { showList, perfix = '', className = '', ...nativeProps } = props;
 
   const colorRef = useRef<HTMLInputElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -173,7 +173,10 @@ export default forwardRef(function Configuration(
   };
 
   return (
-    <div className={style['gif-transfer-form']}>
+    <div
+      className={composeClass(style['gif-transfer-form'], className)}
+      {...nativeProps}
+    >
       {isRenderElement(showList.includes('time')) && (
         <div className={style['gif-transfer-form-item']}>
           <label htmlFor={perfix + 'duration'}>视频截取时长：</label>

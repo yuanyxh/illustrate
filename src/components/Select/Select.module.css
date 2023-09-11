@@ -44,7 +44,7 @@
   display: none;
   position: absolute;
   top: 110%;
-  background-color: #fff;
+  background-color: var(--bg-color);
   border: 1px solid var(--border-color-light);
   box-shadow: var(--box-shadow-light);
   border-radius: var(--border-radius-base);
@@ -53,7 +53,7 @@
   line-height: 20px;
   width: 100%;
   word-wrap: break-word;
-  z-index: 10;
+  z-index: var(--z-index-useful);
 }
 
 .select-options-item {

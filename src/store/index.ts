@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import screenReducer from './module/screen';
+import colorSchemeReducer from './module/colorScheme';
 import type { TypedUseSelectorHook } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
-    screen: screenReducer
+    screen: screenReducer,
+    colorScheme: colorSchemeReducer
   }
 });
 

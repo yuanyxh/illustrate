@@ -230,7 +230,7 @@ export default function GIFVideo() {
     <>
       <Card shadow="never">
         <div className={style['gif-transfer']}>
-          <div style={{ width: '40%' }}>
+          <div className={style['gif-transfer-render']}>
             <div
               className={videoContinerClass}
               onDragOver={(e) => {
@@ -292,6 +292,7 @@ export default function GIFVideo() {
 
           <Configuration
             ref={configurationRef}
+            className={style['gif-video-config']}
             showList={[
               'time',
               'delay',

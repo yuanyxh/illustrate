@@ -1,0 +1,23 @@
+.screen-boundary {
+  margin: 10px;
+  margin-top: 50px;
+}
+
+.title {
+  padding: 10px;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-primary);
+  color: var(--color-warning);
+}
+
+.desc {
+  margin-top: 15px;
+  font-size: var(--font-size-large);
+  line-height: var(--font-line-height-primary);
+  color: var(--text-color-regular);
+}
+
+.footer {
+  margin-top: 15px;
+  text-align: end;
+}

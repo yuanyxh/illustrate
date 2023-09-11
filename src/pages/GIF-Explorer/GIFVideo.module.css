@@ -3,6 +3,10 @@
   align-items: flex-start;
 }
 
+html[screen='small'] .gif-transfer {
+  display: block;
+}
+
 .gif-video-container {
   position: relative;
   margin-bottom: 20px;
@@ -12,6 +16,27 @@
   border-color: var(--color-primary);
   border-radius: var(--border-radius-base);
   cursor: pointer;
+}
+
+html[screen='small'] .gif-video-container {
+  width: 100%;
+}
+
+.gif-transfer-render {
+  width: 40%;
+}
+
+html[screen='small'] .gif-transfer-render {
+  width: 100%;
+}
+
+.gif-video-config {
+  margin-left: 30px;
+}
+
+html[screen='small'] .gif-video-config {
+  margin-left: 0;
+  margin-top: 20px;
 }
 
 .gif-video-upload {

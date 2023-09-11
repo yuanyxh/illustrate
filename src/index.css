@@ -3,7 +3,11 @@
 @import url('./styles/theme.css');
 @import url('./styles/preset.css');
 @import url('./styles//animation.css');
-@import url('//at.alicdn.com/t/c/font_3329662_ezmhfqkr8te.css');
+@import url('//at.alicdn.com/t/c/font_3329662_ymvhmdawcgf.css');
+
+html {
+  color-scheme: light;
+}
 
 body {
   margin: 0;
@@ -13,9 +17,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #333;
+  color: var(--text-color);
   font-size: var(--font-size-base);
-  background-color: var(--background-color);
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-duration-fast);
 }
 
 code {

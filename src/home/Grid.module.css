@@ -16,6 +16,7 @@
   margin: 5px 0;
   font-weight: var(--font-weight-primary);
   line-height: 1.2em;
+  color: var(--text-color);
 }
 
 @media screen and (max-width: 1920px) {

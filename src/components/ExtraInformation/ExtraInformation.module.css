@@ -1,0 +1,34 @@
+.extra-information {
+  margin: 10px 0;
+  padding: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius-base);
+}
+
+.title {
+  font-size: calc(var(--font-size-base) * 1.1);
+  font-weight: var(--font-weight-primary);
+  color: var(--text-color);
+}
+
+.wrapper,
+.other {
+  margin-top: 10px;
+}
+
+.other {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.platform {
+  color: var(--color-info);
+}
+
+.platform-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 10px;
+}

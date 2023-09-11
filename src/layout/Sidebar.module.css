@@ -1,24 +1,29 @@
 .sidebar {
   position: fixed;
-  top: 0;
+  top: var(--navbar-height);
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: calc(var(--z-index-highest) + var(--z-index-important));
   padding: 20px 5px;
   width: var(--sidebar-width);
-  background-color: var(--color-white);
-  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%);
-  transition: transform 0.4s ease;
+  transition: transform var(--transition-duration);
+  border-right: var(--border);
+  background-color: var(--bg-color);
+  overscroll-behavior: contain;
+}
+
+html[screen='small'] .sidebar {
+  top: 0;
 }
 
 .visible-side {
   transform: translateX(0) !important;
-  box-shadow: 2px 0 8px 0 rgba(0 0 0 / 10%) !important;
 }
 
 .link {
   display: block;
   padding: 10px 14px;
+  color: var(--text-color);
   border-radius: var(--border-radius-base);
 }
 
