@@ -102,6 +102,7 @@ export interface GIFPattern {
   };
   frames: {
     index: number;
+    cursor: number;
     data?: ImageData;
     offsetLeft: number;
     offsetTop: number;
@@ -122,6 +123,7 @@ export interface GIFPattern {
   globalColorTable?: number[][];
   applicationExtension?: {
     id: number;
+    cursor: number;
     application: string;
     loop: number;
   };
@@ -134,6 +136,7 @@ export interface GIFPattern {
   };
   plainTextExtension?: {
     index: number;
+    cursor: number;
     offsetLeft: number;
     offsetTop: number;
     gridWidth: number;
@@ -147,6 +150,7 @@ export interface GIFPattern {
   }[];
   commentExtension?: {
     index: number;
+    cursor: number;
     comments: string;
   }[];
 }

@@ -38,7 +38,7 @@
 .mask {
   position: fixed;
   inset: 0;
-  z-index: var(--z-index-highest);
+  z-index: calc(var(--z-index-important) + var(--z-index-useful));
   background-color: hsla(0deg 100% 0% / 50%);
   backdrop-filter: blur(5px);
   opacity: 0;
