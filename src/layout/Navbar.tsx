@@ -34,7 +34,11 @@ export default function Navbar({ toggle }: Readonly<NavbarProps>) {
         ) : (
           <Link style={{ height: '100%' }} to={'/'}>
             <h1 className={style['logo-container']} title="yuanyxh">
-              <img className={style['logo']} src="/logo.png" alt="logo" />
+              <img
+                className={style['logo']}
+                src="/illustrate/logo.png"
+                alt="logo"
+              />
 
               <Text className={style['logo-text']} block size="large">
                 yuanyxh
