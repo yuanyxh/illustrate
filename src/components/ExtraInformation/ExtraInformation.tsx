@@ -55,25 +55,5 @@ export default function ExtraInformation(props: ExtraInformationProps) {
         }
       }}
     </Tip>
-
-    // <div className={style['extra-information']}>
-    //   <h1 className={style['title']}>案例相关链接：</h1>
-
-    //   {/* <div className={style['wrapper']}>
-    //     {Object.keys(platform).map((key) => (
-    //       <div key={key} className={style['group']}>
-    //         <span className={style['platform']}>
-    //           {Platform[key as keyof typeof Platform]}：
-    //         </span>
-
-    //         {platform[key as keyof typeof Platform]?.map(({ title, url }) => (
-    //           <Link key={url} to={url} target="_blank">
-    //             <Text type="primary">{title}</Text>
-    //           </Link>
-    //         ))}
-    //       </div>
-    //     ))}
-    //   </div> */}
-    // </div>
   );
 }

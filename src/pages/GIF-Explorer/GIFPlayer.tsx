@@ -132,6 +132,7 @@ export default function GIFPlayer() {
           setCursor(0);
           setViews((prev) => ++prev);
         } else {
+          setPlay(false);
           window.clearTimeout(timer);
         }
       } else {

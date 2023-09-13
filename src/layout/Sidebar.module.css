@@ -3,7 +3,7 @@
   top: var(--navbar-height);
   bottom: 0;
   left: 0;
-  z-index: calc(var(--z-index-highest) + var(--z-index-important));
+  z-index: calc(var(--z-index-important) + var(--z-index-important));
   padding: 20px 5px;
   width: var(--sidebar-width);
   transition: transform var(--transition-duration);

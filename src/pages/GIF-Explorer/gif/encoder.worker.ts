@@ -118,7 +118,7 @@ function encoder(e: MessageEvent<ImageOptions>) {
 
   // 初始化可变代码大小、前缀、当前输入 k
   let codeSize = lzwMiniCodeSize + 1;
-  let perfix: number[] = [];
+  let prefix: number[] = [];
   let k: number[] = [];
 
   // 初始化输入长度、当前索引 point
@@ -160,7 +160,7 @@ function encoder(e: MessageEvent<ImageOptions>) {
   set(clearCode);
 
   // 取第一个输入作为初始化的当前前缀
-  perfix = [input[point++]];
+  prefix = [input[point++]];
 
   // 初始化查找表
   for (let i = 0; i <= eoiCode; i++) trie.insert([i]);
@@ -171,12 +171,12 @@ function encoder(e: MessageEvent<ImageOptions>) {
     k = [input[point++]];
 
     // 查找表中查找 前缀 + k
-    const current = perfix.concat(k);
+    const current = prefix.concat(k);
     const result = trie.search(current);
 
     // 找到则 前缀 = 前缀 + k
     if (result) {
-      perfix = current;
+      prefix = current;
       k = [];
 
       continue;
@@ -186,13 +186,13 @@ function encoder(e: MessageEvent<ImageOptions>) {
     trie.insert(current);
 
     // 获取前缀对应的码
-    const perfixCode = trie.search(perfix);
+    const prefixCode = trie.search(prefix);
 
     // 添加至码表
-    perfixCode && set(perfixCode.code);
+    prefixCode && set(prefixCode.code);
 
     // 前缀 = k
-    perfix = k;
+    prefix = k;
     // k 重置
     k = [];
 
@@ -216,7 +216,7 @@ function encoder(e: MessageEvent<ImageOptions>) {
   }
 
   // 已完成输出最后的码
-  const val = trie.search(perfix);
+  const val = trie.search(prefix);
   val && set(val.code);
 
   // 输出信息结束码

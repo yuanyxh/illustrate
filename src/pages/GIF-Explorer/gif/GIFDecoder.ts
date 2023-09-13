@@ -220,6 +220,7 @@ class GIFDecoder {
   }
 
   private parseApplicationExtension(bytes: Uint8Array) {
+    const cursor = this.cursor;
     this.cursor += APPLICATION_EXTENSION.length;
 
     const len = bytes[this.cursor++];
@@ -233,6 +234,7 @@ class GIFDecoder {
 
     this.pattern.applicationExtension = {
       id,
+      cursor,
       application,
       loop
     };
@@ -279,6 +281,8 @@ class GIFDecoder {
   }
 
   private parsePlainTextExtension(bytes: Uint8Array) {
+    const cursor = this.cursor;
+
     this.cursor += PLAIN_TEXT_EXTENSION.length;
     this.cursor++;
 
@@ -307,6 +311,7 @@ class GIFDecoder {
 
     this.pattern.plainTextExtension.push({
       index: this.index++,
+      cursor: cursor,
       offsetLeft,
       offsetTop,
       gridWidth,
@@ -326,6 +331,8 @@ class GIFDecoder {
   }
 
   private parseCommentExtension(bytes: Uint8Array) {
+    const cursor = this.cursor;
+
     this.cursor += COMMENT_EXTENSION.length;
 
     const blocks = this.parseSubBlocks(bytes);
@@ -342,10 +349,16 @@ class GIFDecoder {
       this.pattern.commentExtension = [];
     }
 
-    this.pattern.commentExtension.push({ index: this.index++, comments });
+    this.pattern.commentExtension.push({
+      index: this.index++,
+      cursor: cursor,
+      comments
+    });
   }
 
   private parseImage(bytes: Uint8Array) {
+    const cursor = this.cursor;
+
     const offsetLeft = this.parseShort(bytes);
     const offsetTop = this.parseShort(bytes);
     const width = this.parseShort(bytes);
@@ -374,6 +387,7 @@ class GIFDecoder {
 
     this.pattern.frames.push({
       index: this.index++,
+      cursor: cursor,
       offsetLeft,
       offsetTop,
       width,
