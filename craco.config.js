@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-
 const path = require('path');
 
 const { loaderByName, getLoader, addBeforeLoader } = require('@craco/craco');
 
 module.exports = {
+  devServer: {
+    https: true
+  },
   webpack: {
     alias: {
       '@': path.resolve(__dirname, 'src')

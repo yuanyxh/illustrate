@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "node ./bundleRoute.js && prettier --write ./src/router/index.tsx && craco start",
     "new": "node ./bundleRoute.js && prettier --write ./src/router/index.tsx && craco start",
     "build": "craco build",
     "test": "craco test",

@@ -129,3 +129,16 @@ declare interface Window {
     options?: SaveFilePickerOptions
   ): Promise<FileSystemFileHandle>;
 }
+
+declare type StartViewTransitionCallback = () => unknown;
+
+declare interface ViewTranstion {
+  updateCallbackDone: Promise<void>;
+  ready: Promise<void>;
+  finished: Promise<void>;
+  skipTransition(): undefined;
+}
+
+declare interface Document {
+  startViewTransition(cb: StartViewTransitionCallback): ViewTranstion;
+}

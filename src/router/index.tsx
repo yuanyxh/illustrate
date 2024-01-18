@@ -10,6 +10,7 @@ const FileSystemAccess = lazy(
   () => import('@/pages/FileSystemAccess/FileSystemAccess')
 );
 const GIFExplorer = lazy(() => import('@/pages/GIF-Explorer/GIF-Explorer'));
+const GitGetInfo = lazy(() => import('@/pages/Git-Get-Info/Git-Get-Info'));
 const PdfParser = lazy(() => import('@/pages/PdfParser/PdfParser'));
 const Test = lazy(() => import('@/pages/Test/Test'));
 const UploadFile = lazy(() => import('@/pages/UploadFile/UploadFile'));
@@ -48,6 +49,12 @@ export const routes: Route.CustomRouteObject[] = [
             title: 'GIF 编解码',
             image: '',
             element: <GIFExplorer />
+          },
+          {
+            path: 'git-get-info',
+            title: '解析 Git 仓库信息',
+            image: '',
+            element: <GitGetInfo />
           },
           {
             path: 'pdf-parser',
